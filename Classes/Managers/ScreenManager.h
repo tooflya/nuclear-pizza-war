@@ -77,6 +77,8 @@ class ScreenManager
 
 		Screen* mScreens[4];
 
+		int mCurrentScreenIndex;
+
 		// ===========================================================
 		// Constructors
 		// ===========================================================

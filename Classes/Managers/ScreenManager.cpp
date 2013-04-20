@@ -58,6 +58,8 @@ void ScreenManager::generate()
 
 void ScreenManager::set(float pAnimationTime, int pAction, int pIndex)
 {
+	this->mCurrentScreenIndex = pIndex;
+	
 	CCTransitionScene* transition = CCTransitionFade::create(pAnimationTime, this->mScreens[pIndex]);
 
 	switch(pAction)

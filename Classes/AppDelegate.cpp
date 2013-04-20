@@ -79,7 +79,14 @@ void AppDelegate::applicationDidEnterBackground()
 
 	SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
 
-	((Level*) AppDelegate::screens->mScreens[0])->mPauseButton->onTouch(NULL, NULL); // TODO: Make sure that level scene is currently running.
+	#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+
+	if(screens->mCurrentScreenIndex == 0)
+	{
+		((Level*) AppDelegate::screens->mScreens[0])->mPauseButton->onTouch(NULL, NULL);
+	}
+
+	#endif
 }
 
 void AppDelegate::applicationWillEnterForeground()
