@@ -1,4 +1,1 @@
-nuclear-pizza-war
-=================
-
-This is a repository that contains the code of the beautiful game "Nuclear Pizza War" written using Cocos2d-x C++ Framework!
+We are very grateful to the developers of the "Nuclear Pizza War" and we want to rewrite this great game with [Cocos2d-x C++ Framework](https://github.com/cocos2d/cocos2d-x) to support a variety of desktop and, above all, mobile platforms.
