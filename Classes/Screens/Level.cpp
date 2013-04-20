@@ -719,7 +719,7 @@ void Level::checkCollisions(float pDeltaTime)
 
 		if(this->mHero->collideWith(pickup, Utils::coord(4.0f)))
 		{
-			pickup->follow(this->mHero->getCenterX(), this->mHero->getCenterY());
+			pickup->follow(this->mHero->getCenterX(), this->mHero->getCenterY(), pDeltaTime);
 
 			if(this->mHero->collideWith(pickup))
 			{
