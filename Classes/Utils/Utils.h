@@ -76,6 +76,8 @@ class Utils
 
 		static float Pi;
 
+		static float MILLISECONDS;
+
 		// ===========================================================
 		// Fields
 		// ===========================================================
@@ -89,8 +91,6 @@ class Utils
 		// ===========================================================
 
 		static CCPoint vectorNormalize(float pVectorX, float pVectorY, float pMultipleFactor);
-
-		static long millisecondNow();
 
 		static float coord(float pCoordinate);
 

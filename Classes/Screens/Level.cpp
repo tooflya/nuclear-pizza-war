@@ -1334,26 +1334,6 @@ void Level::updateShake(float pDeltaTime)
 // Virtual Methods
 // ===========================================================
 
-void Level::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
-{
-	
-}
-
-void Level::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
-{
-
-}
-
-void Level::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
-{
-	
-}
-
-void Level::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent)
-{
-	ccTouchesEnded(pTouches, pEvent);
-}
-
 bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 {
 	if(this->mPause) return false;
@@ -1373,7 +1353,7 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 			// Fly
 			if(true) // TODO: this->mHero->isCanFly()
 			{
-				if(Utils::millisecondNow() - this->mLastTimeTapLeft < 20.0f)
+				if(Utils::MILLISECONDS - this->mLastTimeTapLeft < 1.5f)
 				{
 					if(this->mHero->getZ() > Options::MIN_Z)
 					{
@@ -1395,8 +1375,10 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 						return true;
 					}
 				}
-
-				this->mLastTimeTapLeft = Utils::millisecondNow();
+				else
+				{
+					this->mLastTimeTapLeft = Utils::MILLISECONDS;
+				}
 			}
 		}
 		else
@@ -1407,14 +1389,14 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 			// Laser
 			if(ENTITIES > 0)
 			{
-				if(Utils::millisecondNow() - this->mLastTimeTapRight < 20.0f)
+				if(Utils::MILLISECONDS - this->mLastTimeTapRight < 0.7f)
 				{
 					this->mHero->laser();
 
-					this->mLastTimeTapRight = Utils::millisecondNow();
+					this->mLastTimeTapRight = 0;
 				}
 
-				this->mLastTimeTapRight = Utils::millisecondNow();
+				this->mLastTimeTapRight = Utils::MILLISECONDS;
 			}
 
 			this->mHero->mIsShouldFire = true;
@@ -1474,6 +1456,8 @@ void Level::ccTouchMoved(CCTouch* touch, CCEvent* event)
 			this->mHero->setFireCoordinates(x, y);
 		}
 	}
+
+						this->mLastTimeTapLeft = 0;
 }
 
 void Level::update(float pDeltaTime)
@@ -1481,6 +1465,8 @@ void Level::update(float pDeltaTime)
 	if(this->mPause) return;
 
 	CCScene::update(pDeltaTime);
+
+	Utils::MILLISECONDS += pDeltaTime;
 
 	float potencialX = -this->mHero->getCenterX() + Options::CAMERA_CENTER_X;
 	float potencialY = -this->mHero->getCenterY() + Options::CAMERA_CENTER_Y + this->mHero->getZ();

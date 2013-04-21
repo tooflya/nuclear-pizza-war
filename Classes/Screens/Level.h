@@ -254,11 +254,6 @@ class Level : public Screen
 		void ccTouchMoved(CCTouch* touch, CCEvent* event);
 		void ccTouchEnded(CCTouch* touch, CCEvent* event);
 
-   		void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-   		void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-   		void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-    	void ccTouchesCancelled(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-
 		virtual	void update(float pDeltaTime);
 		virtual void draw();
 

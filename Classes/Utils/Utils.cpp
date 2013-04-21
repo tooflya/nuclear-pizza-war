@@ -15,6 +15,8 @@
 
 float Utils::Pi = atan(1.0) * 4;
 
+float Utils::MILLISECONDS = 10.0f;
+
 // ===========================================================
 // Fields
 // ===========================================================
@@ -58,13 +60,6 @@ CCPoint Utils::vectorNormalize(float pVectorX, float pVectorY, float pMultipleFa
 	float y = pVectorY / sqrt(pVectorX * pVectorX + pVectorY * pVectorY) * pMultipleFactor;
 
 	return ccp(x, y);
-}
-
-long Utils::millisecondNow()
-{
-    struct cc_timeval now;
-    CCTime::gettimeofdayCocos2d(&now, NULL);
-    return (now.tv_sec * 1000 + now.tv_sec / 1000);
 }
 
 bool Utils::isOnPizza(Entity* pEntity)
