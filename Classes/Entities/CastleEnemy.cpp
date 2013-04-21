@@ -143,20 +143,20 @@ void CastleEnemy::update(float pDeltaTime)
 	switch(Options::FORTIFICATION_LEVEL)
 	{
 		case 0:
-			magnet = 50.0f;
-		break;
-		case 1:
-			magnet = 60.0f;
-		break;
-		case 2:
 			magnet = 70.0f;
 		break;
-		case 3:
+		case 1:
 			magnet = 80.0f;
+		break;
+		case 2:
+			magnet = 90.0f;
+		break;
+		case 3:
+			magnet = 100.0f;
 		break;
 	}
 
-	if(this->circlesCollideCoordinatesWith(this->getCenterX(), this->getCenterY(), Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y, Utils::coord((magnet)))) // TODO: Some problem here with small resolutions.
+	if(this->circlesCollideCoordinatesWith(this->getCenterX(), this->getCenterY(), Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y, Utils::coord(magnet)))
 	{
 		this->onCollide();
 	}

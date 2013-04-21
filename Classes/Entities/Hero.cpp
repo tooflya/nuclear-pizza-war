@@ -96,6 +96,11 @@ void Hero::reset()
 	this->mShockwaveScale = 1.5f;
 	
 	this->mBulletsManager->changeTexture(this->mBulletsTexture0);
+
+	this->mIsOutOfTop = false;
+	this->mFall = false;
+
+	this->setZOrder(5);
 }
 
 void Hero::laser()
