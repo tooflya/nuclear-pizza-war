@@ -1456,8 +1456,6 @@ void Level::ccTouchMoved(CCTouch* touch, CCEvent* event)
 			this->mHero->setFireCoordinates(x, y);
 		}
 	}
-
-						this->mLastTimeTapLeft = 0;
 }
 
 void Level::update(float pDeltaTime)
