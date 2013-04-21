@@ -1210,8 +1210,7 @@ UpgradeManager::UpgradeManager(Level* pWorld)
 	ccLanguageType currentLanguageType = CCApplication::sharedApplication()->getCurrentLanguage();
     switch (currentLanguageType)
     {
-    	//case kLanguageRussian:
-    	default:
+    	case kLanguageRussian:
     		FIRE_DAMAGE_TEXT1 = "Урон стрельбы: 0 / 3";
     		FIRE_DAMAGE_TEXT2 = "Урон стрельбы: %d / %d";
     		FIRE_DAMAGE_TEXT3 = "Урон стрельбы: Макс.";
