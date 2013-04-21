@@ -1389,7 +1389,7 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 			// Laser
 			if(ENTITIES > 0)
 			{
-				if(Utils::MILLISECONDS - this->mLastTimeTapRight < 0.7f)
+				if(Utils::MILLISECONDS - this->mLastTimeTapRight < 1.5f)
 				{
 					this->mHero->laser();
 
@@ -1708,23 +1708,24 @@ void Level::update(float pDeltaTime)
 
 	if(this->mHero->mShouldLaserFire)
 	{
-		this->renderLaserBeam(0, this->mHero->getCenterX(), this->mHero->getCenterY() + this->mHero->getZ(), this->mLaserVectorX, this->mLaserVectorY);
+		if(this->mLaserVectorX != 0 && this->mLaserVectorY != 0)
+		{
+			this->renderLaserBeam(0, this->mHero->getCenterX(), this->mHero->getCenterY() + this->mHero->getZ(), this->mLaserVectorX, this->mLaserVectorY);
+		}
 	}
 	else
 	{
 		this->mLaser1->destroy();
 		this->mLaser2->destroy();
+
+		this->mLaserVectorX = 0;
+		this->mLaserVectorY = 0;
 	}
 
 	if(ENTITIES <= 0)
 	{
 		this->mHero->mShouldLaserFire = false;
 	}
-	
-	/*this->mHero->mShouldLaserFire = true;
-	this->mHero->mLaserVectorX = this->mCastle->getCenterX();
-	this->mHero->mLaserVectorY = this->mCastle->getCenterY();
-	this->renderLaserBeam(0, this->mHero->getCenterX(), this->mHero->getCenterY() + this->mHero->getZ(), this->mCastle->getCenterX(), this->mCastle->getCenterY());*/
 }
 
 void Level::onEnter()
