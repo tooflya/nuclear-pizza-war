@@ -39,8 +39,6 @@
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<dict>
-		<key>accelerometer</key>
-		<true/>
 		<key>opengles-1</key>
 		<true/>
 	</dict>
