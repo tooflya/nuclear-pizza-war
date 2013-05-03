@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>NuclearPizzaWar</string>
+	<string>Nuclear Pizza War</string>
 	<key>CFBundleExecutable</key>
 	<string>NuclearPizzaWar</string>
 	<key>CFBundleIconFile</key>
@@ -55,13 +55,13 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>NuclearPizzaWar</string>
+	<string>Nuclear Pizza War</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>AAPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>AAPL</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>

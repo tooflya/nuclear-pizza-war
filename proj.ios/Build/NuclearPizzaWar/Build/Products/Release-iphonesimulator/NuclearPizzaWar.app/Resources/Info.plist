@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>NuclearPizzaWar</string>
+	<string>Nuclear Pizza War</string>
 	<key>CFBundleExecutable</key>
 	<string>NuclearPizzaWar</string>
 	<key>CFBundleIconFile</key>
@@ -18,28 +18,64 @@
 		<string>Icon-Small-50.png</string>
 		<string>Icon-Small.png</string>
 		<string>Icon-Small@2x.png</string>
+		<string>Icon-57.png</string>
+		<string>Icon-114.png</string>
+		<string>Icon-144.png</string>
+		<string>Icon-57.png</string>
+		<string>Icon-114.png</string>
+		<string>Icon-57.png</string>
+		<string>Icon-144.png</string>
+		<string>Icon-72.png</string>
 	</array>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>Icon.png</string>
+				<string>Icon@2x.png</string>
+				<string>Icon-72.png</string>
+				<string>Icon-Small-50.png</string>
+				<string>Icon-Small.png</string>
+				<string>Icon-Small@2x.png</string>
+				<string>Icon-57.png</string>
+				<string>Icon-114.png</string>
+				<string>Icon-144.png</string>
+				<string>Icon-57.png</string>
+				<string>Icon-114.png</string>
+				<string>Icon-57.png</string>
+				<string>Icon-144.png</string>
+				<string>Icon-72.png</string>
+			</array>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.tooflya.nuclearpizzawar</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>NuclearPizzaWar</string>
+	<string>Nuclear Pizza War</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>AAPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>AAPL</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<false/>
-	<key>UIPrerenderedIcon</key>
-	<false/>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>UIStatusBarHidden~ipad</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
