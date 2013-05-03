@@ -34,7 +34,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 	CCDirector* director 	= CCDirector::sharedDirector();
 	CCEGLView*  EGLView 	= CCEGLView::sharedOpenGLView();
 	CCSize 	screenSize 		= EGLView->getFrameSize();
-
+    
 	director->setOpenGLView(EGLView);
 	director->setContentScaleFactor(designResolutionSize.height / screenSize.height);
 
@@ -58,7 +58,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 	director->setAlphaBlending(false);
 	director->setDepthTest(false);
-	director->setDisplayStats(false);
+	director->setDisplayStats(true);
 
 	director->setProjection(kCCDirectorProjection2D);
 

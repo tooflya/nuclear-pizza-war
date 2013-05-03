@@ -1,0 +1,25 @@
+dependencies: \
+  /Users/igor/Development/cocos2d-x/projects/nuclear-pizza-war/proj.ios/NuclearPizzaWar/libs/cocos2dx/textures/CCTextureAtlas.cpp \
+  /Users/igor/Development/cocos2d-x/projects/nuclear-pizza-war/proj.ios/NuclearPizzaWar/libs/cocos2dx/textures/CCTextureAtlas.h \
+  /Users/igor/Development/cocos2d-x/projects/nuclear-pizza-war/proj.ios/NuclearPizzaWar/libs/cocos2dx/include/ccTypes.h \
+  NuclearPizzaWar/libs/cocos2dx/cocoa/CCGeometry.h \
+  NuclearPizzaWar/libs/cocos2dx/platform/CCPlatformMacros.h \
+  /Users/igor/Development/cocos2d-x/projects/nuclear-pizza-war/proj.ios/NuclearPizzaWar/libs/cocos2dx/include/ccConfig.h \
+  NuclearPizzaWar/libs/cocos2dx/platform/CCPlatformConfig.h \
+  /Users/igor/Development/cocos2d-x/projects/nuclear-pizza-war/proj.ios/NuclearPizzaWar/libs/cocos2dx/platform/ios/CCPlatformDefine.h \
+  NuclearPizzaWar/libs/cocos2dx/cocoa/CCObject.h \
+  /Users/igor/Development/cocos2d-x/projects/nuclear-pizza-war/proj.ios/NuclearPizzaWar/libs/cocos2dx/platform/ios/CCGL.h \
+  /Users/igor/Development/cocos2d-x/projects/nuclear-pizza-war/proj.ios/NuclearPizzaWar/libs/cocos2dx/textures/CCTextureCache.h \
+  NuclearPizzaWar/libs/cocos2dx/cocoa/CCDictionary.h \
+  NuclearPizzaWar/libs/cocos2dx/support/data_support/uthash.h \
+  NuclearPizzaWar/libs/cocos2dx/cocoa/CCArray.h \
+  NuclearPizzaWar/libs/cocos2dx/support/data_support/ccCArray.h \
+  /Users/igor/Development/cocos2d-x/projects/nuclear-pizza-war/proj.ios/NuclearPizzaWar/libs/cocos2dx/include/ccMacros.h \
+  NuclearPizzaWar/libs/cocos2dx/platform/CCCommon.h \
+  /Users/igor/Development/cocos2d-x/projects/nuclear-pizza-war/proj.ios/NuclearPizzaWar/libs/cocos2dx/platform/ios/CCStdC.h \
+  NuclearPizzaWar/libs/cocos2dx/cocoa/CCString.h \
+  NuclearPizzaWar/libs/cocos2dx/textures/CCTexture2D.h \
+  NuclearPizzaWar/libs/cocos2dx/shaders/CCGLProgram.h \
+  NuclearPizzaWar/libs/cocos2dx/shaders/ccGLStateCache.h \
+  NuclearPizzaWar/libs/cocos2dx/support/CCNotificationCenter.h \
+  /Users/igor/Development/cocos2d-x/projects/nuclear-pizza-war/proj.ios/NuclearPizzaWar/libs/cocos2dx/include/CCEventType.h
