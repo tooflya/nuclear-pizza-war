@@ -18,10 +18,10 @@ Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizon
 
 		this->mAnimationFrameSide = 0;
 
-		this->mShockwave = new Entity("actors/shockwave.png");
+		this->mShockwave = new Entity("shockwave.png");
 		this->mShockwave->setScale(0);
 
-		this->mShadow = new Entity("actors/shadow.png");
+		this->mShadow = new Entity("shadow.png");
 		this->mShadow->setIsShadow();
 
 		this->mEngineParticlesAnimationTime = 0.3f;
@@ -31,10 +31,10 @@ Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizon
 
 		this->mEngineParticles = new EntityManager(5, new EngineParticle());
 
-		this->mBulletsTexture0 = new Texture("actors/bullet.png", 1, 1);
-		this->mBulletsTexture1 = new Texture("actors/bullet1.png", 1, 1);
-		this->mBulletsTexture2 = new Texture("actors/bullet2.png", 1, 1); 
-		this->mBulletsTexture3 = new Texture("actors/bullet3.png", 1, 1); 
+		this->mBulletsTexture0 = new Texture("bullet.png", 1, 1);
+		this->mBulletsTexture1 = new Texture("bullet1.png", 1, 1);
+		this->mBulletsTexture2 = new Texture("bullet2.png", 1, 1); 
+		this->mBulletsTexture3 = new Texture("bullet3.png", 1, 1); 
 
 		this->reset();
 	}

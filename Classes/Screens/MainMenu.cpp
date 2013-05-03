@@ -38,8 +38,8 @@ MainMenu::MainMenu()
 {
 	new BackgroundStarsManager(this);
 
-	this->mBackground = new Entity("gui/splash.png");
-	this->mPlayButton = new PlayButton("gui/button_start.png");
+	this->mBackground = new Entity("splash.png");
+	this->mPlayButton = new PlayButton("button_start.png");
 
 	this->mBackground->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y);
 	this->mPlayButton->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(150));

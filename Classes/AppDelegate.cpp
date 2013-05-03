@@ -39,7 +39,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 	director->setContentScaleFactor(designResolutionSize.height / screenSize.height);
 
 	vector <string> searchPath;
-
+    
 	searchPath.push_back(resources800x600.directory);
 
 	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPath);
@@ -58,7 +58,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 	director->setAlphaBlending(false);
 	director->setDepthTest(false);
-	director->setDisplayStats(true);
+	director->setDisplayStats(false);
 
 	director->setProjection(kCCDirectorProjection2D);
 

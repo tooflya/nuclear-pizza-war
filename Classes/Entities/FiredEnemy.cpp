@@ -12,7 +12,7 @@
 // ===========================================================
 
 FiredEnemy::FiredEnemy(Entity* pTargetEntity, EntityManager* pBullets) :
-	BaseEnemy("actors/alien3.png", 8, 1)
+	BaseEnemy("alien3.png", 8, 1)
 	{
 		this->mTargetEntity = pTargetEntity;
 		this->mBullets = pBullets;

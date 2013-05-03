@@ -20,7 +20,7 @@ class Hero : public BarEntity
 	{
 		public:
 		EngineParticle() :
-			Entity("particles/engine.png", 4, 1)
+			Entity("engine.png", 4, 1)
 			{
 			}
 

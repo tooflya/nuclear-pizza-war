@@ -16,7 +16,7 @@ class PauseButton : public Entity
 
 	public:
 		PauseButton(Level* pWorld) :
-			Entity("gui/pause_button.png")
+			Entity("pause_button.png")
 			{
 				this->mWorld = pWorld;
 
@@ -160,13 +160,13 @@ Level::Level()
 
 	new BackgroundStarsManager(this->mMainLayer, true);
 
-	this->mBackground = new Entity("pizzarelated/pizza_big.png");
+	this->mBackground = new Entity("pizza_big.png");
 	this->mBackground->setIgnoreSorting(true);
 
 	this->generatePizzaDecorations();
 
-	this->mLaser1 = new Entity("actors/laser.png", 1, 4);
-	this->mLaser2 = new Entity("actors/laser.png", 1, 4);
+	this->mLaser1 = new Entity("laser.png", 1, 4);
+	this->mLaser2 = new Entity("laser.png", 1, 4);
 	this->mLaser1->animate(0.1f);
 	this->mLaser2->animate(0.1f);
 	this->mLaser1->setIgnoreSorting(true);
@@ -175,10 +175,10 @@ Level::Level()
 	this->mCastleBullets = new EntityManager(5, new BaseBullet(), this->mUnitsLayer, 5);
 	this->mCastle = new Castle(this->mCastleBullets);
 	this->mPickups = new EntityManager(25, new Pickup(), this->mUnitsLayer, 5);
-	this->mWealth = new WealthManager(25, new Entity("actors/pickups.png", 1, 3), this->mStaticLayer, 2);
+	this->mWealth = new WealthManager(25, new Entity("pickups.png", 1, 3), this->mStaticLayer, 2);
 	this->mBaseBubbles = new EntityManager(5, new Bubble(), this->mUnitsLayer, 3);
 	this->mBaseBullets = new EntityManager(50, new BaseBullet(), this->mUnitsLayer, 5);
-	this->mHero = new Hero("actors/player1_1.png", this->mBaseBullets, 4, 5);
+	this->mHero = new Hero("player1_1.png", this->mBaseBullets, 4, 5);
 	this->mEnemyBullets = new EntityManager(25, new EnemyBullet(), this->mUnitsLayer, 5);
 	this->mEnemies1 = new EntityManager(20, new FollowEnemy(this->mHero), this->mUnitsLayer, 5);
 	this->mEnemies2 = new EntityManager(20, new CastleEnemy(this->mCastle), this->mUnitsLayer, 5);
@@ -554,14 +554,14 @@ void Level::finishLevel()
 
 void Level::generatePizzaDecorations()
 {
-	CCSpriteBatchNode* spriteBatch = CCSpriteBatchNode::create("pizzarelated/decorations.png", 75);
+	CCSpriteBatchNode* spriteBatch = CCSpriteBatchNode::create("decorations.png", 75);
 
 	float cx = this->mBackground->getWidth() / 2;
 	float cy = this->mBackground->getHeight() / 2;
 
 	float radius = this->mBackground->getWidth() * 0.40f;
 
-	Entity* decorationsSource = new Entity("pizzarelated/decorations.png", 2, 2);
+	Entity* decorationsSource = new Entity("decorations.png", 2, 2);
 
 	CCArray* decorations = CCArray::create();
 

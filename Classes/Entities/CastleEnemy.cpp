@@ -12,7 +12,7 @@
 // ===========================================================
 
 CastleEnemy::CastleEnemy(Castle* pCastle) :
-	BaseEnemy("actors/alien2.png", 8, 1)
+	BaseEnemy("alien2.png", 8, 1)
 	{
 		this->setAsCollidable();
 		
@@ -27,7 +27,7 @@ CastleEnemy::CastleEnemy(Castle* pCastle) :
 
 		// Shockwave
 
-		this->mShockwave = new Entity("actors/alien_shockwave.png");
+		this->mShockwave = new Entity("alien_shockwave.png");
 		this->mShockwave->setIgnoreSorting(true);
 
 		//

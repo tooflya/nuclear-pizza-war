@@ -76,7 +76,7 @@ bool Bubble::onCollide()
 
 Entity* Bubble::deepCopy()
 {
-	return new Bubble("actors/bubble.png", 9, 1);
+	return new Bubble("bubble.png", 9, 1);
 }
 
 #endif

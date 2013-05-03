@@ -30,7 +30,7 @@
 						this->mWorld = pWorld;
 						this->mManager = pManager;
 	
-						this->mWealth = new EntityManager(10, new Entity("actors/pickups.png", 1, 3), this);
+						this->mWealth = new EntityManager(10, new Entity("pickups.png", 1, 3), this);
 
 						this->mCoinsNeed = new int[3];
 
@@ -138,7 +138,7 @@
 		{
 			public:
 				DamageButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_fire_damage_level.png", pWorld, pManager)
+				UpgradeButton("shopicons_fire_damage_level.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
@@ -219,7 +219,7 @@
 		{
 			public:
 				RateButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_firerate.png", pWorld, pManager)
+				UpgradeButton("shopicons_firerate.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 5;
@@ -310,7 +310,7 @@
 		{
 			public:
 				SpeedButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_speed.png", pWorld, pManager)
+				UpgradeButton("shopicons_speed.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 5;
@@ -401,7 +401,7 @@
 		{
 			public:
 				RegenerationButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_regenerate.png", pWorld, pManager)
+				UpgradeButton("shopicons_regenerate.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 5;
@@ -492,7 +492,7 @@
 		{
 			public:
 				HealthButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_health.png", pWorld, pManager)
+				UpgradeButton("shopicons_health.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
@@ -573,7 +573,7 @@
 		{
 			public:
 				BeamButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_count.png", pWorld, pManager)
+				UpgradeButton("shopicons_count.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
@@ -654,7 +654,7 @@
 		{
 			public:
 				ShockwaveButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_nova.png", pWorld, pManager)
+				UpgradeButton("shopicons_nova.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
@@ -735,7 +735,7 @@
 		{
 			public:
 				JetpackButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_jetpack.png", pWorld, pManager)
+				UpgradeButton("shopicons_jetpack.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 2;
@@ -811,7 +811,7 @@
 		{
 			public:
 				FortificationButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_base_walls.png", pWorld, pManager)
+				UpgradeButton("shopicons_base_walls.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 12;
 					this->mMaxIndex = 23;
@@ -896,7 +896,7 @@
 		{
 			public:
 				BlasterButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_base_shot.png", pWorld, pManager)
+				UpgradeButton("shopicons_base_shot.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 5;
@@ -987,7 +987,7 @@
 		{
 			public:
 				NovaButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_base_blast.png", pWorld, pManager)
+				UpgradeButton("shopicons_base_blast.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
@@ -1068,7 +1068,7 @@
 		{
 			public:
 				SpidersButton(Level* pWorld, UpgradeManager* pManager) :
-				UpgradeButton("gui/shopicons_base_spider.png", pWorld, pManager)
+				UpgradeButton("shopicons_base_spider.png", pWorld, pManager)
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
@@ -1263,8 +1263,8 @@ UpgradeManager::UpgradeManager(Level* pWorld)
 
 	this->mWorld = pWorld;
 
-	Entity* holder1 = new Entity("gui/holder1.png");
-	Entity* holder2 = new Entity("gui/holder1.png");
+	Entity* holder1 = new Entity("holder1.png");
+	Entity* holder2 = new Entity("holder1.png");
 
 	holder1->create()->setCenterPosition(Options::CAMERA_CENTER_X - holder1->getWidth() / 2 - Utils::coord(50), Options::CAMERA_CENTER_Y);
 	holder2->create()->setCenterPosition(Options::CAMERA_CENTER_X + holder2->getWidth() / 2 + Utils::coord(50), Options::CAMERA_CENTER_Y);
@@ -1274,7 +1274,7 @@ UpgradeManager::UpgradeManager(Level* pWorld)
 
 	for(int i = 0; i < 8; i++)
 	{
-		Entity* holder = new Entity("gui/holder2.png");
+		Entity* holder = new Entity("holder2.png");
 		UpgradeButton* icon;
 
 		switch(i)
@@ -1322,7 +1322,7 @@ UpgradeManager::UpgradeManager(Level* pWorld)
 
 	for(int i = 0; i < 4; i++)
 	{
-		Entity* holder = new Entity("gui/holder2.png");
+		Entity* holder = new Entity("holder2.png");
 		UpgradeButton* icon;
 
 		switch(i)

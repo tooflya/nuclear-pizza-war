@@ -12,9 +12,9 @@
 // ===========================================================
 
 BigEnemy::BigEnemy(EntityManager* pBullets) :
-	BaseEnemy("actors/alien4.png", 4, 1)
+	BaseEnemy("alien4.png", 4, 1)
 	{
-		this->mShadow = new Entity("actors/largeshadow.png");
+		this->mShadow = new Entity("largeshadow.png");
 		this->mShadow->setIsShadow();
 
 		this->mBullets = pBullets;

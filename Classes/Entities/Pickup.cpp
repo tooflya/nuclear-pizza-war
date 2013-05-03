@@ -11,7 +11,7 @@ void Pickup::constructor()
 {
 	this->setAsCollidable();
 
-	this->mShadow = new Entity("actors/shadow.png");
+	this->mShadow = new Entity("shadow.png");
 	this->mShadow->setIsShadow();
 
 	this->mAnimationTime = 2.0f;
@@ -98,7 +98,7 @@ bool Pickup::destroy()
 
 Pickup* Pickup::deepCopy()
 {
-	return new Pickup("actors/pickups.png", 1, 3);
+	return new Pickup("pickups.png", 1, 3);
 }
 
 void Pickup::follow(float pVectorX, float pVectorY, float pDeltaTime)

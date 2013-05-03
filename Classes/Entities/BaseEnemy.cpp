@@ -16,7 +16,7 @@ BaseEnemy::BaseEnemy(Hero* pHero, EntityManager* pBullets)
 BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pVerticalFramesCount) :
 	BarEntity(pszFileName, pHorizontalFramesCount, pVerticalFramesCount)
 	{
-		this->mShadow = new Entity("actors/shadow.png");
+		this->mShadow = new Entity("shadow.png");
 		this->mShadow->setIsShadow();
 
 		this->mShootPadding = 0;
