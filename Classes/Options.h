@@ -87,6 +87,8 @@ class Options
 		static bool SOUND_ENABLE;
 
 		static bool UNPUCKING;
+    
+        static const char* SPECIAL_FONT;
 
 		// ===========================================================
 		// Fields

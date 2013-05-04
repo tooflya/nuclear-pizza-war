@@ -51,7 +51,7 @@ int Level::ENTITIES = 0;
 
 int* Level::COINS = new int[3];
 
-const char* Level::LABELS_FONT = "Fonts/Franchise-Bold.ttf";
+const char* Level::LABELS_FONT = Options::SPECIAL_FONT;
 
 const char* Level::PREPARE_FOR_BATTLE_TEXT = "Prepare for Battle";
 const char* Level::LEVEL_NUMBER_TEXT = "Level %d %s";

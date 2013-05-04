@@ -37,6 +37,16 @@ bool Options::SOUND_ENABLE = false;
 
 bool Options::UNPUCKING = true;
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+
+const char* Options::SPECIAL_FONT = "Franchise";
+
+#else
+
+const char* Options::SPECIAL_FONT = "Fonts/Franchise.ttf";
+
+#endif
+
 // ===========================================================
 // Fields
 // ===========================================================
