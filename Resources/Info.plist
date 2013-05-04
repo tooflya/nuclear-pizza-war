@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Nuclear Pizza War</string>
+	<string>Pizza War</string>
 	<key>CFBundleExecutable</key>
 	<string>NuclearPizzaWar</string>
 	<key>CFBundleIconFile</key>
@@ -66,6 +66,8 @@
 	<string>AAPL</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<false/>
 	<key>UIPrerenderedIcon</key>
