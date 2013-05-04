@@ -96,9 +96,17 @@
 		<data>
 		E8VD8bwYK+TDHztfCM0g/r+TXy4=
 		</data>
+		<key>ai_death.wav</key>
+		<data>
+		nQsHGT6AhUXFTgiMLjCGQdHkEmI=
+		</data>
 		<key>ai_voice.ogg</key>
 		<data>
 		FMJv647TTJawTlSWBqZC95PcTk8=
+		</data>
+		<key>ai_voice.wav</key>
+		<data>
+		KobL3rJrhPvYqJnOq3y/lpazF3A=
 		</data>
 		<key>alien1.png</key>
 		<data>
@@ -132,9 +140,17 @@
 		<data>
 		3g6zHYFrKqV+iOLzzMQ2pDzsZ9M=
 		</data>
+		<key>alien_suicide.wav</key>
+		<data>
+		6d7u2LwVxD1oWQYpb+RfOqQB7HM=
+		</data>
 		<key>alien_warning.ogg</key>
 		<data>
 		kCxcz417uDzpg5kvu+xsnNTRHTA=
+		</data>
+		<key>alien_warning.wav</key>
+		<data>
+		eBsULVlD8I1FdR/O2nT7K7Hluyk=
 		</data>
 		<key>alienbullet.png</key>
 		<data>
@@ -143,6 +159,10 @@
 		<key>alienshot.ogg</key>
 		<data>
 		L59KVnkDF7z4uCn++3fKxxDdEQo=
+		</data>
+		<key>alienshot.wav</key>
+		<data>
+		6w+f0nbcn5G754pNwca7UzlPaNo=
 		</data>
 		<key>ansjovalienbotslice.png</key>
 		<data>
@@ -156,17 +176,33 @@
 		<data>
 		yic11fAjkTRSQ74s4m9lro4ImcA=
 		</data>
+		<key>basedamage.wav</key>
+		<data>
+		5fvyVJoT6aWXAqA/QiG5OPFNTLk=
+		</data>
 		<key>baseshot.ogg</key>
 		<data>
 		hAhfxDSkKxXOkCiBATbqt1climU=
+		</data>
+		<key>baseshot.wav</key>
+		<data>
+		BwbMI+CvDVpIqadM9l3jg9lqDnA=
 		</data>
 		<key>beam.ogg</key>
 		<data>
 		jsXv4ECttnt7q9JjAZETXE2O6aQ=
 		</data>
+		<key>beam.wav</key>
+		<data>
+		GAtzY7PhbvPLX04mHsRLR1SiCuE=
+		</data>
 		<key>big_explosion.ogg</key>
 		<data>
 		7+LnJOqOoNlvq3WRvo2EU1PDmAg=
+		</data>
+		<key>big_explosion.wav</key>
+		<data>
+		DYBNiP53aq6wwlTHCn20t/3ZKhQ=
 		</data>
 		<key>bubble.png</key>
 		<data>
@@ -212,13 +248,25 @@
 		<data>
 		MfuIULnMYINpompEQYkBnlabv+k=
 		</data>
+		<key>cheesy_land.wav</key>
+		<data>
+		gfs3l5akOvFVcqv2hrQLI9Jb8Vk=
+		</data>
 		<key>cheesy_land2.ogg</key>
 		<data>
 		wsqm4SKDiehyy9CNYP1hBHHTvsY=
 		</data>
+		<key>cheesy_land2.wav</key>
+		<data>
+		Xu/2+cCbf+zBttwNHS7K4r1avuE=
+		</data>
 		<key>coin.ogg</key>
 		<data>
 		axwWF2VJWLfNmzZCG8PTYP6T76Q=
+		</data>
+		<key>coin.wav</key>
+		<data>
+		TnlfEv9mwfeUDQ3aBCvRybsKvK4=
 		</data>
 		<key>cyborghippo.png</key>
 		<data>
@@ -255,6 +303,10 @@
 		<key>health.ogg</key>
 		<data>
 		VEuN/JLSKQkwiBfoFqHxUqTHcow=
+		</data>
+		<key>health.wav</key>
+		<data>
+		jR2MpkZIslouG1wDG9oraHNRPTk=
 		</data>
 		<key>holder1.png</key>
 		<data>
@@ -296,6 +348,10 @@
 		<data>
 		xTFD1+bYzAa+3PPtstMZzpxz5cw=
 		</data>
+		<key>jetpack_fail.wav</key>
+		<data>
+		QB3A56hGZhOqzOnF4sgHSqMuzS4=
+		</data>
 		<key>largeshadow.png</key>
 		<data>
 		0LGx9F7TpMycfFy8obD3IRTJeh8=
@@ -307,6 +363,10 @@
 		<key>mus_fast02.ogg</key>
 		<data>
 		0sDPhIp1QttU0dHcmmFU45dbbdg=
+		</data>
+		<key>mus_fast02.wav</key>
+		<data>
+		580sdGENBMZv3JIbh3xAABjcHmc=
 		</data>
 		<key>nova.png</key>
 		<data>
@@ -336,6 +396,10 @@
 		<data>
 		vFzGEyVDFoo1X4GO5UJg6MwhbZw=
 		</data>
+		<key>pizzaplop.wav</key>
+		<data>
+		h6bmLCkZuMk71TkjrsJ2iYIDt30=
+		</data>
 		<key>player1_1.png</key>
 		<data>
 		4MRJeQegL7qiisar+QbFCpe03gA=
@@ -344,25 +408,49 @@
 		<data>
 		mQOGiKZhBKM7YyorDP0waG98As0=
 		</data>
+		<key>player_accelerating.wav</key>
+		<data>
+		L+xQVSxjq/w9VY+urTTaeSWctW4=
+		</data>
 		<key>player_death.ogg</key>
 		<data>
 		VhDbsEtMDeqqCjw1cKJfPPqWA3k=
+		</data>
+		<key>player_death.wav</key>
+		<data>
+		MSYsIsnlcMJMixLDCOjK/yGj+zk=
 		</data>
 		<key>player_gethit.ogg</key>
 		<data>
 		HwGvCk5oNUn0YBnBU2ov7XoJJrc=
 		</data>
+		<key>player_gethit.wav</key>
+		<data>
+		Dmjcf/yWNaHfNtFw53HszuZqPm0=
+		</data>
 		<key>player_jetpack.ogg</key>
 		<data>
 		KPnlwyxG+Zu9o1bi2eSoNWIP52A=
+		</data>
+		<key>player_jetpack.wav</key>
+		<data>
+		7h1LSX5o0F4Q6tWNdZz7bbY7POI=
 		</data>
 		<key>powerup_1.ogg</key>
 		<data>
 		DujT6QFUx1G4xHmYpHPguMwFMlw=
 		</data>
+		<key>powerup_1.wav</key>
+		<data>
+		AHNSprDo4m0rWxOz61eNhtbBVHM=
+		</data>
 		<key>powerup_2.ogg</key>
 		<data>
 		AqBQgdb13NDdVSB365YhOhxFYUc=
+		</data>
+		<key>powerup_2.wav</key>
+		<data>
+		SHGsjV+xZuYyDcBgqmZC2s/EZG4=
 		</data>
 		<key>shadow.png</key>
 		<data>
@@ -424,21 +512,41 @@
 		<data>
 		pTwajoWMAjA2xn3BvwPTKXgRvwU=
 		</data>
+		<key>shot.wav</key>
+		<data>
+		Nz2bEKo90WCS/d0arn9Xz2cD35Q=
+		</data>
 		<key>shot2.ogg</key>
 		<data>
 		jWfGAp+r4X2nefNt+emqT+/0fl4=
+		</data>
+		<key>shot2.wav</key>
+		<data>
+		sgHCEOEaXjSxQyETkQz0X5+MTrA=
 		</data>
 		<key>shot_land.ogg</key>
 		<data>
 		9piDWcW+3w97OnaJqt0I4v2JcmM=
 		</data>
+		<key>shot_land.wav</key>
+		<data>
+		NEi96oxp6raGxMBdSXWQJRKOlTE=
+		</data>
 		<key>slice_approaching.ogg</key>
 		<data>
 		fFegvlmmclUZil4B2odaNyfUm6Q=
 		</data>
+		<key>slice_approaching.wav</key>
+		<data>
+		XXirUX8YhkLj1yH7n3fL1PuOamQ=
+		</data>
 		<key>slice_docking.ogg</key>
 		<data>
 		twqJhtm4pp9/Wtx8iipUYhiX5HQ=
+		</data>
+		<key>slice_docking.wav</key>
+		<data>
+		TCSqrt4HUi7Ta3756tZ54BahyU0=
 		</data>
 		<key>smallshadow.png</key>
 		<data>
@@ -452,6 +560,10 @@
 		<data>
 		L/IIsy7PYvosVZCY5Ydu5ADYSio=
 		</data>
+		<key>spider_talk.wav</key>
+		<data>
+		fOI7h4AmuIxA8ZcVM0EQtGblBeo=
+		</data>
 		<key>splash.png</key>
 		<data>
 		sDoGPJPw6ZI7u7wXGRBUCLGCZdM=
@@ -464,9 +576,17 @@
 		<data>
 		YirKUUbNqg3FSm9ihOB8tXkNQbg=
 		</data>
+		<key>start_level.wav</key>
+		<data>
+		fcOzMob+C2c0fj/t7RA8eaU9i3U=
+		</data>
 		<key>upgrade.ogg</key>
 		<data>
 		x5oEStIbDVH+2vC6fA8nyQNoffU=
+		</data>
+		<key>upgrade.wav</key>
+		<data>
+		CHkyWqORHvaBJh60YbgyMz+WDd0=
 		</data>
 		<key>victory.png</key>
 		<data>

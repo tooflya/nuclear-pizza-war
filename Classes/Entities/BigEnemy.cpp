@@ -92,7 +92,7 @@ void BigEnemy::update(float pDeltaTime)
 			((BaseBullet*) this->mBullets->create())->fire(this->getCenterX(), this->getCenterY(), this->getCenterX() + x, this->getCenterY() + y);
 		}
 
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alienshot.ogg");
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_SHOT);
 	}
 }
 

@@ -60,7 +60,7 @@ bool CastleEnemy::onCollide()
 		this->mShockwave->setScale(0);
 		this->mShockwave->create()->runAction(CCScaleTo::create(this->mShockwaveTime, 1.5f));
 
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alien_warning.ogg");
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_WARNING);
 
 		this->removeHealth(20);
 	}
@@ -91,7 +91,7 @@ bool CastleEnemy::destroy()
 
 void CastleEnemy::death()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alien_suicide.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_SUICIDE);
 
 	this->destroy();
 }

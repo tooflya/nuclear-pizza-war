@@ -102,7 +102,7 @@ void FiredEnemy::update(float pDeltaTime)
 			bullet->setFirePadding(-Utils::coord(30), -Utils::coord(30));
 		}
 
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alienshot.ogg");
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_SHOT);
 	}
 }
 

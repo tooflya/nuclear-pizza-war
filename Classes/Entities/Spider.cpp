@@ -139,7 +139,7 @@ void Spider::update(float pDeltaTime)
 		this->mShockwave->setScale(0);
 		this->mShockwave->create()->runAction(CCScaleTo::create(0.2f, 1.5f));
 
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/spider_talk.ogg");
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_SPIDER_TALK);
 	}
 	else
 	{

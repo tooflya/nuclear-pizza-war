@@ -122,7 +122,7 @@ void Pickup::startDestroy()
 
 	this->runAction(CCFadeTo::create(this->mDeathAnimationTime, 0.0f));
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/health.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_HEALTH);
 }
 
 void Pickup::update(float pDeltaTime)

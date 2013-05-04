@@ -92,7 +92,7 @@
 
 					this->mManager->check();
 
-					CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/upgrade.ogg");
+					CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_UPGRADE);
 				}
 
 				void generateWealth()

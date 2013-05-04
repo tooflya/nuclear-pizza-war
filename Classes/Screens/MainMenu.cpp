@@ -60,7 +60,7 @@ void MainMenu::onEnter()
 {
 	Screen::onEnter();
 	
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Music/mus_fast02.ogg", true); 
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic(Options::SOUND_MAIN_MUSIC, true);
 }
 
 #endif

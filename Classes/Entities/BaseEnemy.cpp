@@ -39,7 +39,7 @@ BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pV
 
 void BaseEnemy::death()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/ai_death.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_AI_DEATH);
 
 	this->destroy();
 }
@@ -203,7 +203,7 @@ void BaseEnemy::fire()
 	bullet->setPower(1);
 	//bullet->fire(this->getCenterX(), this->getCenterY(), this->mHero->getCenterX(), this->mHero->getCenterY());
 	
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alienshot.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_SHOT);
 }
 
 #endif

@@ -532,7 +532,7 @@ void Level::startLevel()
 
 	this->mLevelName->runAction(CCFadeTo::create(3.0f, 255.0f));
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/start_level.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_START_LEVEL);
 
 	this->mLevelStartText->runAction(CCFadeTo::create(1.0f, 0.0f));
 
@@ -838,7 +838,7 @@ void Level::checkCollisions(float pDeltaTime)
 
 					this->mSpidersExplosions->create()->setCenterPosition(spider->getCenterX(), spider->getCenterY());
 
-					CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/big_explosion.ogg");
+					CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_BIG_EXPLOSION);
 				}
 			}
 		}
@@ -862,7 +862,7 @@ void Level::checkCollisions(float pDeltaTime)
 		{
 			enemy->death();
 
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/basedamage.ogg");
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_BASE_DAMAGE);
 
 			this->mHeroExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY() + Utils::coord(50));
 
@@ -1889,7 +1889,7 @@ void Level::draw()
 
 void Level::renderLaserBeam(float angle, float sx, float sy, float ex, float ey)
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/beam.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_BEAM);
 
 	sy -= 10;
 	//sx -= 10;

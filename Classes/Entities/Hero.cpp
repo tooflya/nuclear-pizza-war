@@ -115,7 +115,7 @@ void Hero::startFly()
 {
 	this->mIsFly = true;
 	
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/player_accelerating.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_PLAYER_ACCELERATING);
 }
 
 void Hero::endFly()
@@ -252,11 +252,11 @@ void Hero::fire(float pVectorX, float pVectorY)
 
 		if(this->mBulletsPower < 30)
 		{
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/shot.ogg");
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_SHOT);
 		}
 		else
 		{
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/shot2.ogg");
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_SHOT2);
 		}
 	}
 }
@@ -302,7 +302,7 @@ bool Hero::destroy()
 
 	this->mShadow->destroy();
 	
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/player_death.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_PLAYER_DEATH);
 
 	return false;
 }
@@ -503,7 +503,7 @@ void Hero::update(float pDeltaTime)
 				this->mFlyDownSpeed = 0;
 				this->mShockwaveTimeElapsed = 0;
 			
-				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/jetpack_fail.ogg");
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_JETPACK_FAIL);
 			}
 		}
 	}

@@ -183,7 +183,7 @@ void Castle::fire(BaseEnemy* pEnemy)
 
 	bullet->fire(this->getCenterX(), this->getCenterY() + Utils::coord(50), pEnemy->getCenterX(), pEnemy->getCenterY());
 	
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/shot.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_SHOT);
 }
 
 // ===========================================================
@@ -217,7 +217,7 @@ void Castle::update(float pDeltaTime)
 		this->mShockwave->setScale(0);
 		this->mShockwave->create()->runAction(CCScaleTo::create(0.2f, 5.0f));
 	
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/baseshot.ogg");
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_BASE_SHOT);
 
 		this->mShouldShoot = false;
 	}
