@@ -84,7 +84,10 @@ void AppDelegate::applicationDidEnterBackground()
 
 	if(screens->mCurrentScreenIndex == 0)
 	{
-		((Level*) AppDelegate::screens->mScreens[0])->mPauseButton->onTouch(NULL, NULL);
+        if(!((Level*) AppDelegate::screens->mScreens[0])->mPause)
+        {
+            ((Level*) AppDelegate::screens->mScreens[0])->mPauseButton->onTouch(NULL, NULL);
+        }
 	}
 
 	#endif
