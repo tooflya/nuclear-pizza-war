@@ -1881,8 +1881,6 @@ void Level::onEnter()
 
 	this->mTextSeconds = 0;
 
-	this->mCurrentLevel = 0;
-
 	this->mHero->reset();
 	this->mCastle->reset();
 

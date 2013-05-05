@@ -531,11 +531,11 @@ void Hero::update(int type, int level)
 				break;
 				case 2:
 					this->mBulletsManager->changeTexture(this->mBulletsTexture2);
-					this->mBulletsPower = 30;
+					this->mBulletsPower = 28;
 				break;
 				case 3:
 					this->mBulletsManager->changeTexture(this->mBulletsTexture3);
-					this->mBulletsPower = 35;
+					this->mBulletsPower = 31;
 				break;
 			}
 		break;
@@ -549,7 +549,6 @@ void Hero::update(int type, int level)
 				case 2:
 					this->mIsDoubleFire = true;
 					this->setMaxFireTime(0.35f);
-					this->mBulletsPower -= 10;
 				break;
 				case 3:
 					this->setMaxFireTime(0.30f);
@@ -557,12 +556,10 @@ void Hero::update(int type, int level)
 				case 4:
 					this->mIsTripleFire = true;
 					this->setMaxFireTime(0.25f);
-					this->mBulletsPower -= 10;
 				break;
 				case 5:
 					this->mIsQuadrupleFire = true;
 					this->setMaxFireTime(0.20f);
-					this->mBulletsPower -= 10;
 				break;
 			}
 		break;
@@ -660,7 +657,7 @@ void Hero::update(int type, int level)
 			}
 		break;
 
-		case 7:
+		case 7: // Beam Ammo
 			switch(level)
 			{
 				case 1:

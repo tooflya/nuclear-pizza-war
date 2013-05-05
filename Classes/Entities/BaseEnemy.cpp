@@ -26,6 +26,9 @@ BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pV
 
 		this->setAnimationStartTimeout(Utils::randomf(0.0f, 1.5f));
 		this->animate(0.1f);
+        
+		this->mTalkTime = Utils::randomf(1.0f, 15.0f);
+		this->mTalkTimeElapsed = 0;
 
 		this->resumeSchedulerAndActions();
 	}
@@ -157,6 +160,15 @@ void BaseEnemy::update(float pDeltaTime)
 	}
 
 	BarEntity::update(pDeltaTime);
+    
+	this->mTalkTimeElapsed += pDeltaTime;
+    
+	if(this->mTalkTimeElapsed >= this->mTalkTime)
+	{
+		this->mTalkTimeElapsed -= this->mTalkTime;
+        
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_AI_VOICE);
+    }
 
 	float x;
 	float y;
