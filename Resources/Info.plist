@@ -72,7 +72,7 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Franchise.ttf</string>
+		<string>Fonts/Franchise.ttf</string>
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>

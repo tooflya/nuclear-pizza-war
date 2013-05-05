@@ -642,21 +642,21 @@ void Level::checkCollisions(float pDeltaTime)
 
 		for(int j = 0; j < this->mEnemies2->getCount(); j++)
 		{
-			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies1->objectAtIndex(j);
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies2->objectAtIndex(j);
 
 			Utils::obstacle(enemy, bubble, 17, 50);
 		}
 
 		for(int j = 0; j < this->mEnemies3->getCount(); j++)
 		{
-			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies1->objectAtIndex(j);
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies3->objectAtIndex(j);
 
 			Utils::obstacle(enemy, bubble, 17, 50);
 		}
 
 		for(int j = 0; j < this->mEnemies4->getCount(); j++)
 		{
-			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies1->objectAtIndex(j);
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(j);
 
 			Utils::obstacle(enemy, bubble, 17, 50);
 		}
@@ -1617,9 +1617,12 @@ void Level::update(float pDeltaTime)
 		{
 			this->mUpgradeLevelStartTimeElapsed -= this->mUpgradeLevelStartTime;
 
-			char text[512];
-			sprintf(text, LEVEL_BEGIN_TEXT, this->mCurrentLevel + 1, this->mTextSeconds);
-			this->mLevelStartText->setString(text);
+            if(this->mCurrentLevel < 25)
+            {
+                char text[512];
+                sprintf(text, LEVEL_BEGIN_TEXT, this->mCurrentLevel + 1, this->mTextSeconds);
+                this->mLevelStartText->setString(text);
+            }
 
 			this->mTextSeconds--;
 		}
