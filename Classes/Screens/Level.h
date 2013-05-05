@@ -74,6 +74,24 @@ class Level : public Screen
 		// Constants
 		// ===========================================================
 
+		static const char* LABELS_FONT;
+
+		static const char* PREPARE_FOR_BATTLE_TEXT;
+		static const char* LEVEL_NUMBER_TEXT;
+		static const char* WEALTH_TEXT;
+		static const char* LOW_HEALTH_TEXT;
+		static const char* LEVEL_BEGIN_TEXT;
+		static const char* LEVEL_CLEARED_TEXT;
+		static const char* WIN_TEXT;
+		static const char* LARGE_INVASION_TEXT;
+		static const char* BEWARE_TEXT;
+		static const char* PATIENCE_TEXT;
+		static const char* THE_ELITE_TEXT;
+		static const char* NUKES_TEXT;
+		static const char* THE_HORDE_TEXT;
+		static const char* DEATH_TEXT;
+		static const char* ALTERLIFE_TEXT;
+
 		// ===========================================================
 		// Fields
 		// ===========================================================
@@ -253,11 +271,6 @@ class Level : public Screen
 		bool ccTouchBegan(CCTouch* touch, CCEvent* event);
 		void ccTouchMoved(CCTouch* touch, CCEvent* event);
 		void ccTouchEnded(CCTouch* touch, CCEvent* event);
-
-   		void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-   		void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-   		void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-    	void ccTouchesCancelled(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 
 		virtual	void update(float pDeltaTime);
 		virtual void draw();

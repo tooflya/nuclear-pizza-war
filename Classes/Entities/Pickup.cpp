@@ -11,7 +11,7 @@ void Pickup::constructor()
 {
 	this->setAsCollidable();
 
-	this->mShadow = new Entity("actors/shadow.png");
+	this->mShadow = new Entity("shadow.png");
 	this->mShadow->setIsShadow();
 
 	this->mAnimationTime = 2.0f;
@@ -59,6 +59,8 @@ void Pickup::reset()
 	this->mIsAnimationReverse = false;
 	this->mIsMustDestroy = false;
 
+	this->setSpeed(40.0f);
+
 	this->setScale(0.0f);
 	this->setOpacity(255.0f);
 
@@ -96,17 +98,17 @@ bool Pickup::destroy()
 
 Pickup* Pickup::deepCopy()
 {
-	return new Pickup("actors/pickups.png", 1, 3);
+	return new Pickup("pickups.png", 1, 3);
 }
 
-void Pickup::follow(float pVectorX, float pVectorY)
+void Pickup::follow(float pVectorX, float pVectorY, float pDeltaTime)
 {
 	if(this->mCenterX == 0 && this->mCenterY == 0) return;
 
 	float vectorX = pVectorX- this->getCenterX();
 	float vectorY = pVectorY - this->getCenterY();
 
-	CCPoint vector = Utils::vectorNormalize(vectorX, vectorY, 1.0f);
+	CCPoint vector = Utils::vectorNormalize(vectorX, vectorY, this->getSpeed(pDeltaTime));
 
 	this->setCenterPosition(this->mCenterX + vector.x, this->mCenterY + vector.y + Utils::coord(this->mPaddingY));
 
@@ -120,7 +122,7 @@ void Pickup::startDestroy()
 
 	this->runAction(CCFadeTo::create(this->mDeathAnimationTime, 0.0f));
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/health.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_HEALTH);
 }
 
 void Pickup::update(float pDeltaTime)

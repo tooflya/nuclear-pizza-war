@@ -23,7 +23,7 @@ GameOver::GameOver()
 {
 	this->setRegisterAsTouchable(true);
 
-	this->mBackground = new Entity("gui/game_over.png");
+	this->mBackground = new Entity("game_over.png");
 
 	this->mBackground->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y);
 

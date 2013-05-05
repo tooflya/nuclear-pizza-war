@@ -85,6 +85,54 @@ class UpgradeManager : public CCLayer
 		// Constants
 		// ===========================================================
 
+		static const char* FIRE_DAMAGE_TEXT1;
+		static const char* FIRE_DAMAGE_TEXT2;
+		static const char* FIRE_DAMAGE_TEXT3;
+
+    	static const char* FIRE_RATE_TEXT1;
+    	static const char* FIRE_RATE_TEXT2;
+    	static const char* FIRE_RATE_TEXT3;
+
+    	static const char* SPEED_TEXT1;
+    	static const char* SPEED_TEXT2;
+    	static const char* SPEED_TEXT3;
+
+    	static const char* REGENERATION_TEXT1;
+    	static const char* REGENERATION_TEXT2;
+    	static const char* REGENERATION_TEXT3;
+
+    	static const char* HEALTH_TEXT1;
+    	static const char* HEALTH_TEXT2;
+    	static const char* HEALTH_TEXT3;
+
+    	static const char* BEEM_TEXT1;
+    	static const char* BEEM_TEXT2;
+    	static const char* BEEM_TEXT3;
+
+    	static const char* SHOCKWAVE_TEXT1;
+    	static const char* SHOCKWAVE_TEXT2;
+    	static const char* SHOCKWAVE_TEXT3;
+
+    	static const char* JETPACK_TEXT1;
+    	static const char* JETPACK_TEXT2;
+    	static const char* JETPACK_TEXT3;
+
+    	static const char* FORTIFICATION_TEXT1;
+    	static const char* FORTIFICATION_TEXT2;
+    	static const char* FORTIFICATION_TEXT3;
+
+		static const char* TOWER_BLASTER_TEXT1;
+		static const char* TOWER_BLASTER_TEXT2;
+		static const char* TOWER_BLASTER_TEXT3;
+
+		static const char* NOVA_DEFENCE_TEXT1;
+		static const char* NOVA_DEFENCE_TEXT2;
+		static const char* NOVA_DEFENCE_TEXT3;
+
+		static const char* DEFENCE_SPIDERS_TEXT1;
+		static const char* DEFENCE_SPIDERS_TEXT2;
+		static const char* DEFENCE_SPIDERS_TEXT3;
+
 		// ===========================================================
 		// Fields
 		// ===========================================================

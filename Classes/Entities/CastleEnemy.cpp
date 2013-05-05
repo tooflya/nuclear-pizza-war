@@ -12,7 +12,7 @@
 // ===========================================================
 
 CastleEnemy::CastleEnemy(Castle* pCastle) :
-	BaseEnemy("actors/alien2.png", 8, 1)
+	BaseEnemy("alien2.png", 8, 1)
 	{
 		this->setAsCollidable();
 		
@@ -27,7 +27,7 @@ CastleEnemy::CastleEnemy(Castle* pCastle) :
 
 		// Shockwave
 
-		this->mShockwave = new Entity("actors/alien_shockwave.png");
+		this->mShockwave = new Entity("alien_shockwave.png");
 		this->mShockwave->setIgnoreSorting(true);
 
 		//
@@ -60,7 +60,7 @@ bool CastleEnemy::onCollide()
 		this->mShockwave->setScale(0);
 		this->mShockwave->create()->runAction(CCScaleTo::create(this->mShockwaveTime, 1.5f));
 
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alien_warning.ogg");
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_WARNING);
 
 		this->removeHealth(20);
 	}
@@ -91,7 +91,7 @@ bool CastleEnemy::destroy()
 
 void CastleEnemy::death()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alien_suicide.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_SUICIDE);
 
 	this->destroy();
 }
@@ -143,20 +143,20 @@ void CastleEnemy::update(float pDeltaTime)
 	switch(Options::FORTIFICATION_LEVEL)
 	{
 		case 0:
-			magnet = 50.0f;
-		break;
-		case 1:
-			magnet = 60.0f;
-		break;
-		case 2:
 			magnet = 70.0f;
 		break;
-		case 3:
+		case 1:
 			magnet = 80.0f;
+		break;
+		case 2:
+			magnet = 90.0f;
+		break;
+		case 3:
+			magnet = 100.0f;
 		break;
 	}
 
-	if(this->circlesCollideCoordinatesWith(this->getCenterX(), this->getCenterY(), Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y, Utils::coord((magnet)))) // TODO: Some problem here with small resolutions.
+	if(this->circlesCollideCoordinatesWith(this->getCenterX(), this->getCenterY(), Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y, Utils::coord(magnet)))
 	{
 		this->onCollide();
 	}

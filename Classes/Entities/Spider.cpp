@@ -20,9 +20,9 @@
 // ===========================================================
 
 Spider::Spider() :
-	Entity("actors/spider.png", 4, 1)
+	Entity("spider.png", 4, 1)
 	{
-		this->mShadow = new Entity("actors/smallshadow.png");
+		this->mShadow = new Entity("smallshadow.png");
 		this->mShadow->setIsShadow();
 
 		this->mVectorX = 0;
@@ -33,7 +33,7 @@ Spider::Spider() :
 
 		this->setSpeed(50);
 
-		this->mShockwave = new Entity("actors/shockwave.png");
+		this->mShockwave = new Entity("shockwave.png");
 
 		this->animate(0.1f);
 
@@ -139,7 +139,7 @@ void Spider::update(float pDeltaTime)
 		this->mShockwave->setScale(0);
 		this->mShockwave->create()->runAction(CCScaleTo::create(0.2f, 1.5f));
 
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/spider_talk.ogg");
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_SPIDER_TALK);
 	}
 	else
 	{

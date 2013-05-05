@@ -12,7 +12,7 @@
 // ===========================================================
 
 FollowEnemy::FollowEnemy(Entity* pFollowEntity) :
-	BaseEnemy("actors/alien1.png", 8, 1)
+	BaseEnemy("alien1.png", 8, 1)
 	{
 		this->mFollowEntity = pFollowEntity;
 		

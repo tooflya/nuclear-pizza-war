@@ -34,12 +34,12 @@ bool AppDelegate::applicationDidFinishLaunching()
 	CCDirector* director 	= CCDirector::sharedDirector();
 	CCEGLView*  EGLView 	= CCEGLView::sharedOpenGLView();
 	CCSize 	screenSize 		= EGLView->getFrameSize();
-
+    
 	director->setOpenGLView(EGLView);
 	director->setContentScaleFactor(designResolutionSize.height / screenSize.height);
 
 	vector <string> searchPath;
-
+    
 	searchPath.push_back(resources800x600.directory);
 
 	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPath);
@@ -75,16 +75,29 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 void AppDelegate::applicationDidEnterBackground()
 {
+    CCDirector::sharedDirector()->stopAnimation();
 	CCDirector::sharedDirector()->pause();
 
 	SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
 
-	((Level*) AppDelegate::screens->mScreens[0])->mPauseButton->onTouch(NULL, NULL); // TODO: Make sure that level scene is currently running.
+	#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+
+	if(screens->mCurrentScreenIndex == 0)
+	{
+        if(!((Level*) AppDelegate::screens->mScreens[0])->mPause)
+        {
+            ((Level*) AppDelegate::screens->mScreens[0])->mPauseButton->onTouch(NULL, NULL);
+        }
+	}
+
+	#endif
 }
 
 void AppDelegate::applicationWillEnterForeground()
 {
-	CCDirector::sharedDirector()->resume();
+    CCDirector::sharedDirector()->stopAnimation();
+    CCDirector::sharedDirector()->resume();
+    CCDirector::sharedDirector()->startAnimation();
 
 	SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 }

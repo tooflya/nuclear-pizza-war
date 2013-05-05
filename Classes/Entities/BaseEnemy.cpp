@@ -16,7 +16,7 @@ BaseEnemy::BaseEnemy(Hero* pHero, EntityManager* pBullets)
 BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pVerticalFramesCount) :
 	BarEntity(pszFileName, pHorizontalFramesCount, pVerticalFramesCount)
 	{
-		this->mShadow = new Entity("actors/shadow.png");
+		this->mShadow = new Entity("shadow.png");
 		this->mShadow->setIsShadow();
 
 		this->mShootPadding = 0;
@@ -26,6 +26,9 @@ BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pV
 
 		this->setAnimationStartTimeout(Utils::randomf(0.0f, 1.5f));
 		this->animate(0.1f);
+        
+		this->mTalkTime = Utils::randomf(1.0f, 15.0f);
+		this->mTalkTimeElapsed = 0;
 
 		this->resumeSchedulerAndActions();
 	}
@@ -39,7 +42,7 @@ BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pV
 
 void BaseEnemy::death()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/ai_death.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_AI_DEATH);
 
 	this->destroy();
 }
@@ -157,6 +160,15 @@ void BaseEnemy::update(float pDeltaTime)
 	}
 
 	BarEntity::update(pDeltaTime);
+    
+	this->mTalkTimeElapsed += pDeltaTime;
+    
+	if(this->mTalkTimeElapsed >= this->mTalkTime)
+	{
+		this->mTalkTimeElapsed -= this->mTalkTime;
+        
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_AI_VOICE);
+    }
 
 	float x;
 	float y;
@@ -203,7 +215,7 @@ void BaseEnemy::fire()
 	bullet->setPower(1);
 	//bullet->fire(this->getCenterX(), this->getCenterY(), this->mHero->getCenterX(), this->mHero->getCenterY());
 	
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alienshot.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_SHOT);
 }
 
 #endif
