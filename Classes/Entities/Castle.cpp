@@ -66,14 +66,22 @@ Castle::Castle(EntityManager* pBullets) :
 void Castle::reset()
 {
 	this->mFortification = 12;
-
+    
 	this->setHealth(100.0f);
 	this->setFireTime(1000.0f);
+
+	this->setMaxHealth(100.0f);
+	this->setMaxFireTime(1.0f);
+    
+    this->mShockwaveTime = 30000.0f;
+    this->mShockwaveTimeElapsed = 0;
 
 	this->mCastleWall1->setIgnoreSorting(true);
 	this->mCastleWall2->setIgnoreSorting(true);
 	this->mCastleWall3->setIgnoreSorting(true);
-
+    
+	this->mCastleWall1->setVisible(true);
+	this->mCastleWall2->setVisible(true);
 	this->mCastleWall3->setVisible(false);
 
 	Options::FORTIFICATION_LEVEL = 2;

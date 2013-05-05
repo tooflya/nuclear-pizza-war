@@ -1146,8 +1146,21 @@ void Level::checkCollisions(float pDeltaTime)
 
 			if(enemy->collideWith(bullet))
 			{
-				enemy->onCollide(bullet);
 				bullet->destroy();
+                
+                if(enemy->onCollide(bullet))
+                {
+                    if(Utils::probably(30))
+                    {
+                        this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    }
+                    
+                    this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+                    this->shake(0.5f, 4.0f);
+                    
+                    ENTITIES--;
+                }
 			}
 		}
 
@@ -1157,8 +1170,21 @@ void Level::checkCollisions(float pDeltaTime)
 
 			if(enemy->collideWith(bullet))
 			{
-				enemy->onCollide(bullet);
 				bullet->destroy();
+                
+                if(enemy->onCollide(bullet))
+                {
+                    if(Utils::probably(30))
+                    {
+                        this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    }
+                    
+                    this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+                    this->shake(0.5f, 4.0f);
+                    
+                    ENTITIES--;
+                }
 			}
 		}
 		
@@ -1168,8 +1194,21 @@ void Level::checkCollisions(float pDeltaTime)
 
 			if(enemy->collideWith(bullet))
 			{
-				enemy->onCollide(bullet);
 				bullet->destroy();
+                
+                if(enemy->onCollide(bullet))
+                {
+                    if(Utils::probably(30))
+                    {
+                        this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    }
+                    
+                    this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+                    this->shake(0.5f, 4.0f);
+                    
+                    ENTITIES--;
+                }
 			}
 		}
 		
@@ -1179,8 +1218,21 @@ void Level::checkCollisions(float pDeltaTime)
 
 			if(enemy->collideWith(bullet))
 			{
-				enemy->onCollide(bullet);
 				bullet->destroy();
+                
+                if(enemy->onCollide(bullet))
+                {
+                    if(Utils::probably(30))
+                    {
+                        this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    }
+                    
+                    this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+                    this->shake(0.5f, 4.0f);
+                    
+                    ENTITIES--;
+                }
 			}
 		}
 	}
