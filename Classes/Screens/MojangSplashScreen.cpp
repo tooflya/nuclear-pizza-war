@@ -1,7 +1,7 @@
-#ifndef CONST_SPLASHSCREEN
-#define CONST_SPLASHSCREEN
+#ifndef CONST_MOJANGSPLASHSCREEN
+#define CONST_MOJANGSPLASHSCREEN
 
-#include "SplashScreen.h"
+#include "MojangSplashScreen.h"
 #include "AppDelegate.h"
 
 // ===========================================================
@@ -20,9 +20,9 @@
 // Constructors
 // ===========================================================
 
-SplashScreen::SplashScreen()
+MojangSplashScreen::MojangSplashScreen()
 {
-	this->mBackground = new Entity("cyborghippo.png");
+	this->mBackground = new Entity("mojang.png");
 
 	this->mBackground->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y);
 
@@ -42,11 +42,11 @@ SplashScreen::SplashScreen()
 // Virtual Methods
 // ===========================================================
 
-void SplashScreen::onTouch(CCTouch* touch, CCEvent* event)
+void MojangSplashScreen::onTouch(CCTouch* touch, CCEvent* event)
 {
 }
 
-void SplashScreen::update(float pDeltaTime)
+void MojangSplashScreen::update(float pDeltaTime)
 {
 	this->mShowtimeElapsed += pDeltaTime;
 
@@ -54,7 +54,7 @@ void SplashScreen::update(float pDeltaTime)
 	{
 		this->mShowtimeElapsed = 0;
 
-		AppDelegate::screens->set(1.0f, 0, 4);
+		AppDelegate::screens->set(1.0f, 0, 3);
 	}
 }
 

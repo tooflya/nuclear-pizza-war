@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7801E6F41736CA9C00407E8C /* diamond_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7801E6F31736CA9C00407E8C /* diamond_icon.png */; };
+		7801E6F71736CAE200407E8C /* MojangSplashScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7801E6F51736CAE200407E8C /* MojangSplashScreen.cpp */; };
+		7801E6F91736CAF000407E8C /* mojang.png in Resources */ = {isa = PBXBuildFile; fileRef = 7801E6F81736CAF000407E8C /* mojang.png */; };
 		7811503517329E3D00B4D17B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7811503417329E3D00B4D17B /* QuartzCore.framework */; };
 		7811503717329E3D00B4D17B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7811503617329E3D00B4D17B /* OpenGLES.framework */; };
 		7811503917329E3D00B4D17B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7811503817329E3D00B4D17B /* OpenAL.framework */; };
@@ -320,6 +323,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7801E6F31736CA9C00407E8C /* diamond_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_icon.png; sourceTree = "<group>"; };
+		7801E6F51736CAE200407E8C /* MojangSplashScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MojangSplashScreen.cpp; sourceTree = "<group>"; };
+		7801E6F61736CAE200407E8C /* MojangSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojangSplashScreen.h; sourceTree = "<group>"; };
+		7801E6F81736CAF000407E8C /* mojang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mojang.png; sourceTree = "<group>"; };
 		7811503117329E3D00B4D17B /* NuclearPizzaWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NuclearPizzaWar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7811503417329E3D00B4D17B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7811503617329E3D00B4D17B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2312,6 +2319,8 @@
 		781153F717329EFE00B4D17B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				7801E6F51736CAE200407E8C /* MojangSplashScreen.cpp */,
+				7801E6F61736CAE200407E8C /* MojangSplashScreen.h */,
 				781153F817329EFE00B4D17B /* GameOver.cpp */,
 				781153F917329EFE00B4D17B /* GameOver.h */,
 				781153FA17329EFE00B4D17B /* GameWon.cpp */,
@@ -2385,6 +2394,7 @@
 		787BC6DE173683350048D2A5 /* 800x600 */ = {
 			isa = PBXGroup;
 			children = (
+				7801E6F81736CAF000407E8C /* mojang.png */,
 				787BC6DF173683350048D2A5 /* actors */,
 				787BC701173683360048D2A5 /* bg */,
 				787BC703173683360048D2A5 /* cyborghippo.png */,
@@ -2398,6 +2408,7 @@
 		787BC6DF173683350048D2A5 /* actors */ = {
 			isa = PBXGroup;
 			children = (
+				7801E6F31736CA9C00407E8C /* diamond_icon.png */,
 				787BC6E0173683350048D2A5 /* alien1.png */,
 				787BC6E1173683350048D2A5 /* alien2.png */,
 				787BC6E2173683350048D2A5 /* alien3.png */,
@@ -2735,6 +2746,8 @@
 				787BC8421736836E0048D2A5 /* Default-Landscape@2x~ipad.png in Resources */,
 				787BC844173683770048D2A5 /* Default-Portrait~ipad.png in Resources */,
 				787BC8461736837A0048D2A5 /* Default-Portrait@2x~ipad.png in Resources */,
+				7801E6F41736CA9C00407E8C /* diamond_icon.png in Resources */,
+				7801E6F91736CAF000407E8C /* mojang.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2925,6 +2938,7 @@
 				7811543717329EFE00B4D17B /* Utils.cpp in Sources */,
 				787BC699173682E50048D2A5 /* Diamond.cpp in Sources */,
 				787BC84C1736BBCB0048D2A5 /* MineEnemy.cpp in Sources */,
+				7801E6F71736CAE200407E8C /* MojangSplashScreen.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

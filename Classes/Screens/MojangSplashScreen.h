@@ -1,17 +1,13 @@
-#ifndef CONST_SCREENMANAGER_H
-#define CONST_SCREENMANAGER_H
+#ifndef CONST_MOJANGSPLASHSCREEN_H
+#define CONST_MOJANGSPLASHSCREEN_H
 
 #include "cocos2d.h"
 
-#include "MainMenu.h"
-#include "Level.h"
-#include "GameOver.h"
-#include "GameWon.h"
-#include "MojangSplashScreen.h"
+#include "Screen.h"
 
 using namespace cocos2d;
 
-class ScreenManager
+class MojangSplashScreen : public Screen
 {
 	protected:
 		// ===========================================================
@@ -51,6 +47,11 @@ class ScreenManager
 		// Fields
 		// ===========================================================
 
+		Entity* mBackground;
+
+		float mShowtime;
+		float mShowtimeElapsed;
+
 		// ===========================================================
 		// Constructors
 		// ===========================================================
@@ -76,27 +77,22 @@ class ScreenManager
 		// Fields
 		// ===========================================================
 
-		Screen* mScreens[5];
-
-		int mCurrentScreenIndex;
-
 		// ===========================================================
 		// Constructors
 		// ===========================================================
 
-		ScreenManager();
+		MojangSplashScreen();
 
 		// ===========================================================
 		// Methods
 		// ===========================================================
-
-		void generate();
-		
-		void set(float pAnimationTime, int pAction, int pIndex);
 		
 		// ===========================================================
 		// Virtual Methods
 		// ===========================================================
+
+		virtual void onTouch(CCTouch* touch, CCEvent* event);
+		virtual void update(float pDeltaTime);
 };
 
 #endif

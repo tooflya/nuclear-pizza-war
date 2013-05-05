@@ -190,7 +190,7 @@ Level::Level()
 	this->mSpiders = new EntityManager(5, new Spider(), this->mUnitsLayer, 3);
     
     Entity* diamondIcon = new Entity("diamond_icon.png");
-    diamondIcon->create()->setCenterPosition(Utils::coord(24), Options::CAMERA_HEIGHT - Utils::coord(24));
+    diamondIcon->create()->setCenterPosition(Utils::coord(24), Options::CAMERA_HEIGHT - Utils::coord(22));
     this->mStaticLayer->addChild(diamondIcon);
 
 	this->mPauseButton = new PauseButton(this);
@@ -214,7 +214,7 @@ Level::Level()
 
     char text[256];
     sprintf(text, "x %d", CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds"));
-    this->mDiamondCounterText = CCLabelTTF::create(text, LABELS_FONT, Utils::coord(14));
+    this->mDiamondCounterText = CCLabelTTF::create(text, LABELS_FONT, Utils::coord(18));
 	this->mPrepareToBattle = CCLabelTTF::create(PREPARE_FOR_BATTLE_TEXT, LABELS_FONT, Utils::coord(65));
 	this->mLevelName = CCLabelTTF::create(LEVEL_NUMBER_TEXT, LABELS_FONT, Utils::coord(48));
 	this->mWealthText = CCLabelTTF::create(WEALTH_TEXT, LABELS_FONT, Utils::coord(18));
