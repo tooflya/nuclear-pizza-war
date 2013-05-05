@@ -131,6 +131,10 @@
 		782F45401734004A004D8444 /* Icon-96.png in Resources */ = {isa = PBXBuildFile; fileRef = 782F44981734004A004D8444 /* Icon-96.png */; };
 		782F45411734004A004D8444 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 782F44991734004A004D8444 /* Info.plist */; };
 		782F456317340A40004D8444 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 782F456217340A40004D8444 /* Icon.icns */; };
+		787BC69317367FE80048D2A5 /* pickup_gem_diamond_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 787BC69217367FE80048D2A5 /* pickup_gem_diamond_24.png */; };
+		787BC696173680930048D2A5 /* Diamond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 787BC694173680930048D2A5 /* Diamond.cpp */; };
+		787BC8491736ADCA0048D2A5 /* MineEnemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 787BC8471736ADCA0048D2A5 /* MineEnemy.cpp */; };
+		787BC84E1736C0480048D2A5 /* diamond_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 787BC84D1736C0480048D2A5 /* diamond_icon.png */; };
 		78DA14A71733EA360005B6D2 /* CDAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DA14441733EA350005B6D2 /* CDAudioManager.m */; };
 		78DA14A81733EA360005B6D2 /* CDOpenALSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DA14471733EA350005B6D2 /* CDOpenALSupport.m */; };
 		78DA14A91733EA360005B6D2 /* CDXMacOSXSupport.mm in Sources */ = {isa = PBXBuildFile; fileRef = 78DA14491733EA350005B6D2 /* CDXMacOSXSupport.mm */; };
@@ -329,6 +333,12 @@
 		782F44981734004A004D8444 /* Icon-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-96.png"; sourceTree = "<group>"; };
 		782F44991734004A004D8444 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		782F456217340A40004D8444 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
+		787BC69217367FE80048D2A5 /* pickup_gem_diamond_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickup_gem_diamond_24.png; sourceTree = "<group>"; };
+		787BC694173680930048D2A5 /* Diamond.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Diamond.cpp; sourceTree = "<group>"; };
+		787BC695173680930048D2A5 /* Diamond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Diamond.h; sourceTree = "<group>"; };
+		787BC8471736ADCA0048D2A5 /* MineEnemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MineEnemy.cpp; sourceTree = "<group>"; };
+		787BC8481736ADCA0048D2A5 /* MineEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineEnemy.h; sourceTree = "<group>"; };
+		787BC84D1736C0480048D2A5 /* diamond_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_icon.png; sourceTree = "<group>"; };
 		78DA142F1733EA350005B6D2 /* Export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Export.h; sourceTree = "<group>"; };
 		78DA14301733EA350005B6D2 /* SimpleAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAudioEngine.h; sourceTree = "<group>"; };
 		78DA14431733EA350005B6D2 /* CDAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDAudioManager.h; sourceTree = "<group>"; };
@@ -570,6 +580,8 @@
 		782F44461734004A004D8444 /* actors */ = {
 			isa = PBXGroup;
 			children = (
+				787BC84D1736C0480048D2A5 /* diamond_icon.png */,
+				787BC69217367FE80048D2A5 /* pickup_gem_diamond_24.png */,
 				782F44471734004A004D8444 /* alien1.png */,
 				782F44481734004A004D8444 /* alien2.png */,
 				782F44491734004A004D8444 /* alien3.png */,
@@ -806,6 +818,10 @@
 		78DA14D11733EA510005B6D2 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				787BC8471736ADCA0048D2A5 /* MineEnemy.cpp */,
+				787BC8481736ADCA0048D2A5 /* MineEnemy.h */,
+				787BC694173680930048D2A5 /* Diamond.cpp */,
+				787BC695173680930048D2A5 /* Diamond.h */,
 				78DA14D21733EA510005B6D2 /* BarEntity.cpp */,
 				78DA14D31733EA510005B6D2 /* BarEntity.h */,
 				78DA14D41733EA510005B6D2 /* BaseBullet.cpp */,
@@ -1101,6 +1117,8 @@
 				78235CFB173556DA00E9DE78 /* spider_talk.wav in Resources */,
 				78235CFC173556DA00E9DE78 /* start_level.wav in Resources */,
 				78235CFD173556DA00E9DE78 /* upgrade.wav in Resources */,
+				787BC69317367FE80048D2A5 /* pickup_gem_diamond_24.png in Resources */,
+				787BC84E1736C0480048D2A5 /* diamond_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1161,6 +1179,8 @@
 				78DA154C1733EA510005B6D2 /* Joystick.cpp in Sources */,
 				78DA154D1733EA510005B6D2 /* Touchable.cpp in Sources */,
 				78DA154E1733EA510005B6D2 /* Utils.cpp in Sources */,
+				787BC696173680930048D2A5 /* Diamond.cpp in Sources */,
+				787BC8491736ADCA0048D2A5 /* MineEnemy.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -209,6 +209,8 @@ class Entity : public CCSprite, public Touchable
 		void setFinishFrame(int pFinishFrame);
 
 		void setAnimationStartTimeout(float pSecodsTimeout);
+    
+        void setAnimationReverse(bool pReverse);
 
 		virtual void onAnimationStart();
 		virtual void onAnimationEnd();

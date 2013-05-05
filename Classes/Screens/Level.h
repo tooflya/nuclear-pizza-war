@@ -14,6 +14,7 @@
 #include "SpiderExplosion.h"
 #include "FollowEnemy.h"
 #include "FiredEnemy.h"
+#include "MineEnemy.h"
 #include "CastleEnemy.h"
 #include "BigEnemy.h"
 #include "Pickup.h"
@@ -31,6 +32,7 @@
 #include "WealthManager.h"
 #include "Joystick.h"
 #include "Spider.h"
+#include "Diamond.h"
 
 class UpgradeManager;
 
@@ -149,13 +151,14 @@ class Level : public Screen
 		int mCurrentLevel;
 		int mMaxSpidersCount;
 
-		int mTextSeconds;
+        int mTextSeconds;
 
 		EntityManager* mEnemies1;
 		EntityManager* mEnemies2;
-		EntityManager* mEnemies3;
-		EntityManager* mEnemies4;
-
+        EntityManager* mEnemies3;
+        EntityManager* mEnemies4;
+        EntityManager* mEnemies5;
+    
 		EntityManager* mEnemyBullets;
 
 		EntityManager* mSlices;
@@ -169,8 +172,9 @@ class Level : public Screen
 		CCLabelTTF* mPrepareToBattle;
 		CCLabelTTF* mLevelName;
 		CCLabelTTF* mWealthText;
-		CCLabelTTF* mLowHealthText;
-		CCLabelTTF* mLevelStartText;
+        CCLabelTTF* mLowHealthText;
+        CCLabelTTF* mLevelStartText;
+        CCLabelTTF* mDiamondCounterText;
 
 		Entity* mBackground;
 		Entity* mLaser1;
@@ -232,7 +236,9 @@ class Level : public Screen
 
 		// ===========================================================
 		// Fields
-		// ===========================================================
+        // ===========================================================
+    
+        EntityManager* mDiamonds;
 
 		Entity* mPauseButton;
 

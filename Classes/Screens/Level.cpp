@@ -171,6 +171,8 @@ Level::Level()
 	this->mLaser2->animate(0.1f);
 	this->mLaser1->setIgnoreSorting(true);
 	this->mLaser2->setIgnoreSorting(true);
+    
+    this->mDiamonds = new EntityManager(5, new Diamond(), this->mUnitsLayer, 5);
 
 	this->mCastleBullets = new EntityManager(5, new BaseBullet(), this->mUnitsLayer, 5);
 	this->mCastle = new Castle(this->mCastleBullets);
@@ -184,7 +186,12 @@ Level::Level()
 	this->mEnemies2 = new EntityManager(20, new CastleEnemy(this->mCastle), this->mUnitsLayer, 5);
 	this->mEnemies3 = new EntityManager(20, new FiredEnemy(this->mHero, this->mEnemyBullets), this->mUnitsLayer, 5);
 	this->mEnemies4 = new EntityManager(20, new BigEnemy(this->mEnemyBullets), this->mUnitsLayer, 5);
+	this->mEnemies5 = new EntityManager(20, new MineEnemy(), this->mUnitsLayer, 5);
 	this->mSpiders = new EntityManager(5, new Spider(), this->mUnitsLayer, 3);
+    
+    Entity* diamondIcon = new Entity("diamond_icon.png");
+    diamondIcon->create()->setCenterPosition(Utils::coord(24), Options::CAMERA_HEIGHT - Utils::coord(24));
+    this->mStaticLayer->addChild(diamondIcon);
 
 	this->mPauseButton = new PauseButton(this);
 	this->mPauseButton->create()->setCenterPosition(Options::CAMERA_WIDTH - Utils::coord(50), Options::CAMERA_HEIGHT - Utils::coord(50));
@@ -197,12 +204,17 @@ Level::Level()
 	this->mEnemies->addObject(this->mEnemies2);
 	this->mEnemies->addObject(this->mEnemies3);
 	this->mEnemies->addObject(this->mEnemies4);
+	this->mEnemies->addObject(this->mEnemies5);
 
 	this->mEnemiesGroup->add(this->mEnemies1);
 	this->mEnemiesGroup->add(this->mEnemies2);
 	this->mEnemiesGroup->add(this->mEnemies3);
 	this->mEnemiesGroup->add(this->mEnemies4);
+	this->mEnemiesGroup->add(this->mEnemies5);
 
+    char text[256];
+    sprintf(text, "x %d", CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds"));
+    this->mDiamondCounterText = CCLabelTTF::create(text, LABELS_FONT, Utils::coord(14));
 	this->mPrepareToBattle = CCLabelTTF::create(PREPARE_FOR_BATTLE_TEXT, LABELS_FONT, Utils::coord(65));
 	this->mLevelName = CCLabelTTF::create(LEVEL_NUMBER_TEXT, LABELS_FONT, Utils::coord(48));
 	this->mWealthText = CCLabelTTF::create(WEALTH_TEXT, LABELS_FONT, Utils::coord(18));
@@ -226,7 +238,8 @@ Level::Level()
 	this->mLowHealthText->setColor(ccc3(255.0f, 0.0f, 0.0f));
 	this->mLowHealthText->setOpacity(0);
 	this->mLevelStartText->setOpacity(0);
-
+    this->mDiamondCounterText->setPosition(ccp(Utils::coord(50), Options::CAMERA_HEIGHT - Utils::coord(22)));
+    
 	this->addChild(this->mMainLayer);
 	this->addChild(this->mStaticLayer);
 
@@ -242,6 +255,7 @@ Level::Level()
 	this->mStaticLayer->addChild(this->mLowHealthText, 2);
 	this->mStaticLayer->addChild(this->mLevelStartText, 2);
 	this->mStaticLayer->addChild(this->mPauseButton, 2);
+    this->mStaticLayer->addChild(this->mDiamondCounterText, 2);
 
 	this->mPrepareToBattle->setOpacity(0.0f);
 	this->mLevelName->setOpacity(0.0f);
@@ -277,6 +291,7 @@ void Level::startLevel()
 	this->mEnemies2->clear();
 	this->mEnemies3->clear();
 	this->mEnemies4->clear();
+	this->mEnemies5->clear();
 
 	char level_number_text[256];
 
@@ -287,8 +302,9 @@ void Level::startLevel()
 		case 1:
 			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 1, "");
 			this->mLevelName->setString(level_number_text);
-
+            
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(1, 0, 0)->addEnemy(5, 0, 0));
+			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(1, 4, 0));
 
 			ENTITIES = 6;
 		break;
@@ -653,11 +669,18 @@ void Level::checkCollisions(float pDeltaTime)
 
 			Utils::obstacle(enemy, bubble, 17, 50);
 		}
-
+        
 		for(int j = 0; j < this->mEnemies4->getCount(); j++)
 		{
 			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(j);
-
+            
+			Utils::obstacle(enemy, bubble, 17, 50);
+		}
+        
+		for(int j = 0; j < this->mEnemies5->getCount(); j++)
+		{
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(j);
+            
 			Utils::obstacle(enemy, bubble, 17, 50);
 		}
 	}
@@ -754,11 +777,11 @@ void Level::checkCollisions(float pDeltaTime)
 				}
 			}
 		}
-
+        
 		for(int j = 0; j < this->mEnemies4->getCount(); j++)
 		{
 			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(j);
-
+            
 			if(bullet->collideWith(enemy))
 			{
 				bullet->onCollide();
@@ -769,32 +792,79 @@ void Level::checkCollisions(float pDeltaTime)
 					{
 						this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
 					}
-
+                    
 					this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
-
+                    
 					this->shake(0.5f, 4.0f);
-
+                    
+					ENTITIES--;
+				}
+			}
+		}
+        
+		for(int j = 0; j < this->mEnemies5->getCount(); j++)
+		{
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(j);
+            
+			if(bullet->collideWith(enemy))
+			{
+				bullet->onCollide();
+				
+				if(enemy->onCollide(bullet))
+				{
+					if(Utils::probably(20))
+					{
+						this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+					}
+                    
+					this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+					this->shake(0.5f, 4.0f);
+                    
 					ENTITIES--;
 				}
 			}
 		}
 	}
-
+    
 	for(int i = 0; i < this->mPickups->getCount(); i++)
 	{
 		Pickup* pickup = (Pickup*) this->mPickups->objectAtIndex(i);
-
+        
 		if(pickup->mIsMustDestroy) continue;
-
+        
 		if(this->mHero->collideWith(pickup, Utils::coord(4.0f)))
 		{
 			pickup->follow(this->mHero->getCenterX(), this->mHero->getCenterY(), pDeltaTime);
-
+            
 			if(this->mHero->collideWith(pickup))
 			{
 				pickup->onCollide();
-
+                
 				this->mWealth->add(pickup->getCurrentFrameIndex());
+			}
+		}
+	}
+    
+	for(int i = 0; i < this->mDiamonds->getCount(); i++)
+	{
+		Diamond* pickup = (Diamond*) this->mDiamonds->objectAtIndex(i);
+        
+		if(pickup->mIsMustDestroy) continue;
+        
+		if(this->mHero->collideWith(pickup, Utils::coord(4.0f)))
+		{
+			pickup->follow(this->mHero->getCenterX(), this->mHero->getCenterY(), pDeltaTime);
+            
+			if(this->mHero->collideWith(pickup))
+			{
+				pickup->onCollide();
+                
+                char text[256];
+                sprintf(text, "x %d", CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds") + 1);
+                this->mDiamondCounterText->setString(text);
+                
+                CCUserDefault::sharedUserDefault()->setIntegerForKey("diamonds", CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds") + 1);
 			}
 		}
 	}
@@ -942,47 +1012,93 @@ void Level::checkCollisions(float pDeltaTime)
 			enemiesNearCastleCount++;
 		}
 	}
-
+    
 	for(int i = 0; i < this->mEnemies4->getCount(); i++)
 	{
 		BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(i);
-
+        
 		if(enemy->collideWith(this->mHero))
 		{
 			this->mHero->onCollide(enemy);
 		}
-
+        
 		if(enemy->getHealth() <= 0 && enemy->isVisible())
 		{
 			enemy->death();
-
+            
 			if(Utils::probably(30))
 			{
 				this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
 			}
-
+            
 			this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
-
+            
 			this->shake(0.5f, 4.0f);
-
+            
 			ENTITIES--;
 		}
-
+        
 		for(int j = 0; j < this->mSpiders->getCount(); j++)
 		{
 			Spider* spider = (Spider*) this->mSpiders->objectAtIndex(j);
-
+            
 			if(spider->collideWith(enemy, 2.0f))
 			{
 				spider->follow(enemy->getCenterX(), spider->getCenterY(), pDeltaTime);
-
+                
 				if(spider->collideWith(enemy))
 				{
 					spider->onCollide(enemy);
 				}
 			}
 		}
-
+        
+		if(this->mCastle->collideWith(enemy, 2.0f))
+		{
+			enemiesNearCastleCount++;
+		}
+	}
+    
+	for(int i = 0; i < this->mEnemies5->getCount(); i++)
+	{
+		BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(i);
+        
+		if(enemy->collideWith(this->mHero))
+		{
+			this->mHero->onCollide(enemy);
+		}
+        
+		if(enemy->getHealth() <= 0 && enemy->isVisible())
+		{
+			enemy->death();
+            
+			if(Utils::probably(30))
+			{
+				this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+			}
+            
+			this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+            
+			this->shake(0.5f, 4.0f);
+            
+			ENTITIES--;
+		}
+        
+		for(int j = 0; j < this->mSpiders->getCount(); j++)
+		{
+			Spider* spider = (Spider*) this->mSpiders->objectAtIndex(j);
+            
+			if(spider->collideWith(enemy, 2.0f))
+			{
+				spider->follow(enemy->getCenterX(), spider->getCenterY(), pDeltaTime);
+                
+				if(spider->collideWith(enemy))
+				{
+					spider->onCollide(enemy);
+				}
+			}
+		}
+        
 		if(this->mCastle->collideWith(enemy, 2.0f))
 		{
 			enemiesNearCastleCount++;
@@ -1077,7 +1193,17 @@ void Level::checkCollisions(float pDeltaTime)
 		for(int i = 0; i < this->mEnemies4->getCount(); i++)
 		{
 			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(i);
-
+            
+			if(enemy->collideWith(this->mCastle->mShockwave, 2.0f))
+			{
+				enemy->onCollideC(this->mCastle);
+			}
+		}
+		
+		for(int i = 0; i < this->mEnemies5->getCount(); i++)
+		{
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(i);
+            
 			if(enemy->collideWith(this->mCastle->mShockwave, 2.0f))
 			{
 				enemy->onCollideC(this->mCastle);
@@ -1215,7 +1341,31 @@ void Level::checkCollisions(float pDeltaTime)
 		for(int i = 0; i < this->mEnemies4->getCount(); i++)
 		{
 			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(i);
-
+            
+			if(enemy->collideWith(bullet))
+			{
+				bullet->destroy();
+                
+                if(enemy->onCollide(bullet))
+                {
+                    if(Utils::probably(30))
+                    {
+                        this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    }
+                    
+                    this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+                    this->shake(0.5f, 4.0f);
+                    
+                    ENTITIES--;
+                }
+			}
+		}
+		
+		for(int i = 0; i < this->mEnemies5->getCount(); i++)
+		{
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(i);
+            
 			if(enemy->collideWith(bullet))
 			{
 				bullet->destroy();
@@ -1308,7 +1458,7 @@ void Level::checkCollisions(float pDeltaTime)
 		for(int i = 0; i < this->mEnemies4->getCount(); i++)
 		{
 			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(i);
-
+            
 			if(enemy->collideWith(this->mHero->mShockwave, this->mHero->mShockwaveScale))
 			{
 				if(enemy->onCollide(this->mHero->mShockwaveDamage, enemy->getCenterX()-this->mHero->getCenterX(), enemy->getCenterY()-this->mHero->getCenterY()))
@@ -1317,11 +1467,33 @@ void Level::checkCollisions(float pDeltaTime)
 					{
 						this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
 					}
-
+                    
 					this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
-
+                    
 					this->shake(0.5f, 4.0f);
-
+                    
+					ENTITIES--;
+				}
+			}
+		}
+		
+		for(int i = 0; i < this->mEnemies5->getCount(); i++)
+		{
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(i);
+            
+			if(enemy->collideWith(this->mHero->mShockwave, this->mHero->mShockwaveScale))
+			{
+				if(enemy->onCollide(this->mHero->mShockwaveDamage, enemy->getCenterX()-this->mHero->getCenterX(), enemy->getCenterY()-this->mHero->getCenterY()))
+				{
+					if(Utils::probably(30))
+					{
+						this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+					}
+                    
+					this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+					this->shake(0.5f, 4.0f);
+                    
 					ENTITIES--;
 				}
 			}
@@ -1400,17 +1572,31 @@ BaseEnemy* Level::getClosestEnemy(Entity* mObject)
 			distance = d;
 		}
 	}
-		
+    
 	for(int i = 0; i < this->mEnemies4->getCount(); i++)
 	{
 		BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(i);
-
+        
 		float d = Utils::distance(mObject->getCenterX(), mObject->getCenterY(), enemy->getCenterX(), enemy->getCenterY());
-
+        
 		if(closest == NULL || distance > d)
 		{
 			closest = enemy;
-
+            
+			distance = d;
+		}
+	}
+    
+	for(int i = 0; i < this->mEnemies5->getCount(); i++)
+	{
+		BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(i);
+        
+		float d = Utils::distance(mObject->getCenterX(), mObject->getCenterY(), enemy->getCenterX(), enemy->getCenterY());
+        
+		if(closest == NULL || distance > d)
+		{
+			closest = enemy;
+            
 			distance = d;
 		}
 	}
@@ -1888,6 +2074,9 @@ void Level::onEnter()
 	this->mEnemies2->clear();
 	this->mEnemies3->clear();
 	this->mEnemies4->clear();
+	this->mEnemies5->clear();
+    
+    this->mDiamonds->clear();
 
 	this->mBaseBubbles->clear();
 

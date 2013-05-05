@@ -670,6 +670,11 @@ bool Entity::isAnimationRunning()
 	return this->mAnimationRunning;
 }
 
+void Entity::setAnimationReverse(bool pReverse)
+{
+    this->mIsAnimationReverseNeed = pReverse;
+}
+
 /**
  *
  * Checing for touch detector
@@ -772,6 +777,30 @@ void Entity::update(float pDeltaTime)
 			if(this->mAnimationTimeElapsed >= this->mAnimationTime)
 			{
 				this->mAnimationTimeElapsed -= this->mAnimationTime;
+                
+                if(this->mIsAnimationReverseNeed)
+                {
+                    if(this->mIsAnimationReverse)
+                    {
+                        this->previousFrameIndex();
+                        
+                        if(this->getCurrentFrameIndex() <= 0)
+                        {
+                            this->mIsAnimationReverse = false;
+                        }
+                    }
+                    else
+                    {
+                        this->nextFrameIndex();
+                        
+                        if(this->getCurrentFrameIndex() >= this->mFramesCount - 1)
+                        {
+                            this->mIsAnimationReverse = true;
+                        }
+                    }
+                    
+                    return;
+                }
 
 				if(this->mAnimationStartFrame == -1 && this->mAnimationFinishFrame == -1)
 				{
@@ -786,8 +815,7 @@ void Entity::update(float pDeltaTime)
 							
 						return;
 					}
-
-					if(this->mAnimationRepeatCount > 0 && this->getCurrentFrameIndex() == this->mFramesCount - 1)
+                    if(this->mAnimationRepeatCount > 0 && this->getCurrentFrameIndex() == this->mFramesCount - 1)
 					{
 						this->mAnimationRepeatCount--;
 
@@ -854,15 +882,21 @@ void Entity::update(float pDeltaTime)
 						if(this->mAnimationRepeatCount > 0)
 						{
 							this->mAnimationRepeatCount--;
-
+                            
 							this->mAnimationFramesElapsed = 0;
-
+                            
 							if(this->mAnimationRepeatCount == 0)
 							{
 								this->mAnimationRunning = false;
-
+                                
 								this->onAnimationEnd();
 							}
+						}
+						else
+						{
+							this->mAnimationFramesElapsed = 0;
+                            
+							this->setCurrentFrameIndex(this->mAnimationStartFrame);
 						}
 					}
 				}

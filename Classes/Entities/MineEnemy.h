@@ -1,20 +1,17 @@
-#ifndef CONST_WEALTHMANAGER_H
-#define CONST_WEALTHMANAGER_H
-
-#include <iostream>
-#include <string>
-#include <iterator>
-#include <algorithm>
+#ifndef CONST_MINEENEMY_H
+#define CONST_MINEENEMY_H
 
 #include "cocos2d.h"
 
-#include "BatchEntityManager.h"
+#include "Entity.h"
+#include "EntityManager.h"
+#include "BaseBullet.h"
+
+#include "BaseEnemy.h"
 
 using namespace cocos2d;
 
-class Level;
-
-class WealthManager : public BatchEntityManager
+class MineEnemy : public BaseEnemy
 {
 	protected:
 		// ===========================================================
@@ -53,10 +50,9 @@ class WealthManager : public BatchEntityManager
 		// ===========================================================
 		// Fields
 		// ===========================================================
-    
-        CCLabelTTF* mPackText1;
-        CCLabelTTF* mPackText2;
-        CCLabelTTF* mPackText3;
+
+		float mVectorX;
+		float mVectorY;
 
 		// ===========================================================
 		// Constructors
@@ -66,7 +62,7 @@ class WealthManager : public BatchEntityManager
 		// Methods
 		// ===========================================================
 
-		void update();
+		CCPoint pizzaPositionFromRad(float rad, float distanceFromCenterPercentage);
 		
 		// ===========================================================
 		// Virtual Methods
@@ -85,24 +81,27 @@ class WealthManager : public BatchEntityManager
 		// Fields
 		// ===========================================================
 
+		int mShootsCount;
+
 		// ===========================================================
 		// Constructors
 		// ===========================================================
 
-		WealthManager(int pCreateCount, Entity* pEntity, CCNode* pScreen, int pZOrder);
+		MineEnemy();
 
 		// ===========================================================
 		// Methods
 		// ===========================================================
-
-		void add(int pIndex);
-		void remove(int pIndex);
 		
 		// ===========================================================
 		// Virtual Methods
 		// ===========================================================
-    
-        virtual void clear();
+
+		Entity* deepCopy();
+
+		void move(float pDeltaTime);
+
+		void update(float pDeltaTime);
 };
 
 #endif

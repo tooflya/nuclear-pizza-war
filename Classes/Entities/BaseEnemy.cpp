@@ -3,6 +3,8 @@
 
 #include "BaseEnemy.h"
 
+#include "Level.h"
+
 BaseEnemy::BaseEnemy()
 {
 }
@@ -43,7 +45,44 @@ BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pV
 void BaseEnemy::death()
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_AI_DEATH);
-
+    
+    Level* screen = (Level*) AppDelegate::screens->mScreens[0];
+    
+    if(Utils::probably(10))
+    {
+        bool diamond = false;
+        bool rubin = false;
+        
+        if(true) // Diamonds
+        {
+            diamond = true;
+        }
+        else if(Utils::probably(60)) // Rubins
+        {
+            rubin = true;
+        }
+    
+        for(int i = 0; i < Utils::random(1, 3); i++)
+        {
+            Entity* pickup = screen->mDiamonds->create();
+            
+            pickup->setCenterPosition(this->getCenterX() + Utils::randomf(-35.0f, 35.0f), this->getCenterY() + Utils::randomf(-35.0f, 35.0f));
+            
+            if(diamond)
+            {
+                pickup->animate(0.1f, 0, 13);
+            }
+            else if(rubin)
+            {
+                pickup->animate(0.1f, 16, 20);
+            }
+            else
+            {
+                pickup->animate(0.1f, 30, 34);
+            }
+        }
+    }
+    
 	this->destroy();
 }
 
