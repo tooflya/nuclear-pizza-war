@@ -71,7 +71,7 @@ void Castle::reset()
 	this->setFireTime(1000.0f);
 
 	this->setMaxHealth(100.0f);
-	this->setMaxFireTime(1.0f);
+	this->setMaxFireTime(1000.0f);
     
     this->mShockwaveTime = 30000.0f;
     this->mShockwaveTimeElapsed = 0;
