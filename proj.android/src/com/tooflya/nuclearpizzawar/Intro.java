@@ -1,19 +1,30 @@
 package com.tooflya.nuclearpizzawar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.VideoView;
 
 public class Intro extends Activity {
 
+	@SuppressLint("NewApi")
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.main);
+
+		if (Build.VERSION.SDK_INT >= 11) {
+			try {
+				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+			} catch (Exception ex) {
+			}
+		}
 
 		VideoView videoView = (VideoView) findViewById(R.id.ViewVideo);
 		videoView.setVideoURI(Uri.parse("android.resource://"
