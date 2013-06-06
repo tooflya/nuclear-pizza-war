@@ -238,6 +238,8 @@ class Entity : public CCSprite, public Touchable
 
 		virtual void draw();
 
+		void setRegisterAsTouchable(bool pTouchable);
+
 		/**
 		 *
 		 * Let's take care about object copy

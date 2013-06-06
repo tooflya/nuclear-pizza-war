@@ -20,7 +20,7 @@ class PauseButton : public Entity
 			{
 				this->mWorld = pWorld;
 
-				this->setRegisterAsTouchable(true);
+				//this->setRegisterAsTouchable(true);
 			}
 
 		void onTouch(CCTouch* touch, CCEvent* event)
@@ -2041,6 +2041,8 @@ void Level::update(float pDeltaTime)
 void Level::onEnter()
 {
 	Screen::onEnter();
+
+	this->mPauseButton->setRegisterAsTouchable(true); // Sorry for that but it's bugs of Cocos2d-x :(
 
 	// RESTART
 

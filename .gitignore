@@ -18,3 +18,4 @@ proj.ios/Build
 proj.android/assets
 proj.android/bin
 proj.android/obj
+proj.android/gen

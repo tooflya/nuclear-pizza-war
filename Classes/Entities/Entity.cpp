@@ -683,18 +683,26 @@ void Entity::setAnimationReverse(bool pReverse)
 
 void Entity::onEnter()
 {
-	CCDirector* pDirector = CCDirector::sharedDirector();
-	pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
+	//CCDirector* pDirector = CCDirector::sharedDirector();
+	//pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 
 	CCSprite::onEnter();
 }
 
 void Entity::onExit()
 {
-	CCDirector* pDirector = CCDirector::sharedDirector();
-	pDirector->getTouchDispatcher()->removeDelegate(this);
+	//CCDirector* pDirector = CCDirector::sharedDirector();
+	//pDirector->getTouchDispatcher()->removeDelegate(this);
 
 	CCSprite::onExit();
+}
+
+void Entity::setRegisterAsTouchable(bool pTouchable)
+{
+	Touchable::setRegisterAsTouchable(pTouchable);
+
+	CCDirector* pDirector = CCDirector::sharedDirector();
+	pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 }
 
 bool Entity::ccTouchBegan(CCTouch* touch, CCEvent* event)
