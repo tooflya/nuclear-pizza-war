@@ -38,8 +38,20 @@ MainMenu::MainMenu()
 {
 	new BackgroundStarsManager(this);
 
+	const char* str;
+	ccLanguageType currentLanguageType = CCApplication::sharedApplication()->getCurrentLanguage();
+    switch (currentLanguageType)
+    {
+    	case kLanguageRussian:
+    		str = "button_start_ru.png";
+    	break;
+    	default:
+    		str = "button_start.png";
+    	break;
+    }
+
 	this->mBackground = new Entity("splash.png");
-	this->mPlayButton = new PlayButton("button_start.png");
+	this->mPlayButton = new PlayButton(str);
 
 	this->mBackground->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y);
 	this->mPlayButton->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(150));
