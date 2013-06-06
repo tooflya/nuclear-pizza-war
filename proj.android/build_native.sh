@@ -1,5 +1,5 @@
 APPNAME="NuclearPizzaWar"
-NDK_ROOT="/Users/igor/.android/ndk"
+NDK_ROOT="/home/igor/.android/ndk"
 # options
 
 buildexternalsfromsource=
@@ -37,7 +37,7 @@ fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # ... use paths relative to current directory
-COCOS2DX_ROOT="/Users/igor/Development/cocos2d-x"
+COCOS2DX_ROOT="$DIR/../.."
 APP_ROOT="$DIR/.."
 APP_ANDROID_ROOT="$DIR"
 
