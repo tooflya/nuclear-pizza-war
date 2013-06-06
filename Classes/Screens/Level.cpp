@@ -2114,7 +2114,7 @@ void Level::onEnter()
 
 void Level::onExit()
 {
-	Screen::onExit();
+	CCScene::onExit();
 }
 
 // UPDATES
