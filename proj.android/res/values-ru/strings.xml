@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Nuclear Pizza War</string>
+    <string name="signing_in">Авторизация с помощью Google</string>
+    <string name="signing_out">Выход</string>
+    <string name="unknown_error">По неизвестным причинам авторизация невозможна</string>
 </resources>

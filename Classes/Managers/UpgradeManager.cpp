@@ -1391,6 +1391,11 @@ void UpgradeManager::check()
 	this->mBlasterButton->check();
 	this->mNovaButton->check();
 	this->mSpidersButton->check();
+
+	if(this->mDamageButton->mCurrentIndex >= this->mDamageButton->mMaxIndex && this->mRateButton->mCurrentIndex >= this->mRateButton->mMaxIndex)
+	{
+		unlockAchievement(2);
+	}
 }
 
 // ===========================================================

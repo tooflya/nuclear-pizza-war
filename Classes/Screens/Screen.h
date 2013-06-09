@@ -7,6 +7,8 @@
 #include "Entity.h"
 #include "Options.h"
 
+#include <jni.h>
+
 using namespace cocos2d;
 
 class Screen : public CCScene, public Touchable

@@ -45,9 +45,23 @@ class MainMenu : public Screen
 		// Constants
 		// ===========================================================
 
+		static MainMenu* mObj;
+
+		static const char* MULTIPLAYER_CONNECTION_TEXT0;
+		static const char* MULTIPLAYER_CONNECTION_TEXT1;
+		static const char* MULTIPLAYER_CONNECTION_TEXT2;
+		static const char* MULTIPLAYER_CONNECTION_TEXT3;
+
 		// ===========================================================
 		// Fields
 		// ===========================================================
+
+		int mWaitingForConnectionsTicks;
+
+		float mWaitingForConnectionsTimeElapsed;
+		float mWaitingForConnectionsTotalTimeElapsed;
+
+		bool mWaitingForConnections;
 
 		Entity* mBackground;
 		Entity* mPlayButton;
@@ -76,6 +90,12 @@ class MainMenu : public Screen
 		// ===========================================================
 		// Fields
 		// ===========================================================
+		
+		Entity* mPlayBattleButton;
+		Entity* mAchievementsButton;
+		Entity* mLeaderBoardButton;
+
+		CCLabelTTF* mWaitForBattleCapture;
 
 		// ===========================================================
 		// Constructors
@@ -86,12 +106,27 @@ class MainMenu : public Screen
 		// ===========================================================
 		// Methods
 		// ===========================================================
+
+		static void nativeOnGooglePlusSignInSucceeded();
+		static void nativeOnGooglePlusConnedctedToRoom();
+
+		void startWaitingForBattle();
 		
 		// ===========================================================
 		// Virtual Methods
 		// ===========================================================
 
 		virtual void onEnter();
+		virtual void onEnterTransitionDidFinish();
+
+		virtual void update(float pDeltaTime);
 };
+
+#include <jni.h>
+
+extern "C"
+{
+    extern void onMainMenuStarted();
+}
 
 #endif

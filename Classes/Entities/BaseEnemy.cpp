@@ -84,6 +84,8 @@ void BaseEnemy::death()
     }
     
 	this->destroy();
+
+	unlockAchievement(0);
 }
 
 Entity* BaseEnemy::create()

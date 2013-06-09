@@ -5,10 +5,12 @@
 #include "BaseBullet.h"
 #include "BaseEnemy.h"
 
-Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizontalFramesCount, int pVerticalFramesCount) :
+Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizontalFramesCount, int pVerticalFramesCount, bool pBroadcaster) :
 	BarEntity(pszFileName, pHorizontalFramesCount, pVerticalFramesCount)
 	{
 		this->setAsCollidable();
+
+		this->mBroadcaster = pBroadcaster;
 
 		this->mAnimationTime = 0.1f;
 		this->mAnimationTimeElapsed = 0;
@@ -113,9 +115,16 @@ void Hero::laser()
 
 void Hero::startFly()
 {
+	if(this->mIsFly) return;
+
 	this->mIsFly = true;
 	
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_PLAYER_ACCELERATING);
+	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_PLAYER_ACCELERATING);
+
+	if(AppDelegate::MULTIPLAYER && this->mBroadcaster)
+	{
+		broadcastMessage(0, 0, 0, 0);
+	}
 }
 
 void Hero::endFly()
@@ -124,6 +133,11 @@ void Hero::endFly()
 
 	this->mIsFly = false;
 	this->mFlyDownSpeed = 0;
+
+	if(AppDelegate::MULTIPLAYER && this->mBroadcaster)
+	{
+		broadcastMessage(1, 0, 0, 0);
+	}
 }
 
 bool Hero::isCanFly()
@@ -139,6 +153,11 @@ bool Hero::startFlyDamage()
 
 	this->mIsFly = false;
 	this->mFlyDownSpeed = 20;
+
+	if(AppDelegate::MULTIPLAYER && this->mBroadcaster)
+	{
+		broadcastMessage(2, 0, 0, 0);
+	}
 
 	return true;
 }

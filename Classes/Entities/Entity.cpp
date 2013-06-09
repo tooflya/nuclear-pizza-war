@@ -435,12 +435,24 @@ bool Entity::isIgnoreSorting()
  *
  */
 
+void Entity::onCreate()
+{
+
+}
+
+void Entity::onDestroy()
+{
+
+}
+
 Entity* Entity::create()
 {
 	this->setVisible(true);
 
 	this->mFall = false;
 	this->mIsOutOfTop = false;
+
+	this->onCreate();
 
 	return this;
 }
@@ -460,6 +472,8 @@ bool Entity::destroy(bool pManage)
 			this->mBatchEntityManager->destroy(this->id);
 		}
 	}
+
+	this->onDestroy();
 
 	return false;
 }

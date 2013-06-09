@@ -11,6 +11,8 @@
 // Constants
 // ===========================================================
 
+bool AppDelegate::MULTIPLAYER = false;
+
 ScreenManager* AppDelegate::screens = NULL;
 
 // ===========================================================

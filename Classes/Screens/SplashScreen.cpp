@@ -30,6 +30,8 @@ SplashScreen::SplashScreen()
 
 	// this->setRegisterAsTouchable(true);
 
+	this->mBackground->setOpacity(0);
+
 	this->mShowtime = 1.0f;
 	this->mShowtimeElapsed = 0;
 }
@@ -56,6 +58,13 @@ void SplashScreen::update(float pDeltaTime)
 
 		AppDelegate::screens->set(1.0f, 0, 4);
 	}
+}
+
+void SplashScreen::onEnter()
+{
+	Screen::onEnter();
+
+	this->mBackground->runAction(CCFadeIn::create(0.5f));
 }
 
 #endif

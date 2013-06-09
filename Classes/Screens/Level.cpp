@@ -23,7 +23,7 @@ class PauseButton : public Entity
 				//this->setRegisterAsTouchable(true);
 			}
 
-		void onTouch(CCTouch* touch, CCEvent* event)
+		void cause()
 		{
 			if(this->mWorld->mUpgradeLayer->getParent())
 			{
@@ -41,11 +41,23 @@ class PauseButton : public Entity
 			}
 		}
 
+		void onTouch(CCTouch* touch, CCEvent* event)
+		{
+			this->cause();
+
+			if(AppDelegate::MULTIPLAYER)
+			{
+				broadcastMessage(3, 0, 0, 0);
+			}
+		}
+
 };
 
 // ===========================================================
 // Constants
 // ===========================================================
+
+Level* Level::mObj = NULL;
 
 int Level::ENTITIES = 0;
 
@@ -180,7 +192,8 @@ Level::Level()
 	this->mWealth = new WealthManager(25, new Entity("pickups.png", 1, 3), this->mStaticLayer, 2);
 	this->mBaseBubbles = new EntityManager(5, new Bubble(), this->mUnitsLayer, 3);
 	this->mBaseBullets = new EntityManager(50, new BaseBullet(), this->mUnitsLayer, 5);
-	this->mHero = new Hero("player1_1.png", this->mBaseBullets, 4, 5);
+	this->mHero = new Hero("player1_1.png", this->mBaseBullets, 4, 5, true);
+	this->mHero2 = new Hero("player1_1.png", this->mBaseBullets, 4, 5, false);
 	this->mEnemyBullets = new EntityManager(25, new EnemyBullet(), this->mUnitsLayer, 5);
 	this->mEnemies1 = new EntityManager(20, new FollowEnemy(this->mHero), this->mUnitsLayer, 5);
 	this->mEnemies2 = new EntityManager(20, new CastleEnemy(this->mCastle), this->mUnitsLayer, 5);
@@ -229,6 +242,7 @@ Level::Level()
 	this->mBackground->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y);
 	this->mCastle->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y);
 	this->mHero->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(200));
+	this->mHero2->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(200));
 
 	this->mPrepareToBattle->setPosition(ccp(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y + Utils::coord(200)));
 	this->mLevelName->setPosition(ccp(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(150)));
@@ -248,6 +262,10 @@ Level::Level()
 	this->mUnitsLayer->addChild(this->mHero->mShadow->create(), 4);
 	this->mUnitsLayer->addChild(this->mHero->mShockwave, 4);
 	this->mUnitsLayer->addChild(this->mHero, 5);
+
+	this->mUnitsLayer->addChild(this->mHero2->mShadow->create(), 4);
+	this->mUnitsLayer->addChild(this->mHero2->mShockwave, 4);
+	this->mUnitsLayer->addChild(this->mHero2, 5);
 
 	this->mStaticLayer->addChild(this->mPrepareToBattle, 2);
 	this->mStaticLayer->addChild(this->mLevelName, 2);
@@ -274,6 +292,10 @@ Level::Level()
 	this->mMaxSpidersCount = 0;
 
 	this->mUpgradeLevelStartText = false;
+
+	Level::mObj = this;
+
+	t = 0;
 }
 
 // ===========================================================
@@ -387,6 +409,8 @@ void Level::startLevel()
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 10))->addEnemy(1, 3, 0)->addEnemy(1, 3, 0)->addEnemy(1, 3, 0)->addEnemy(1, 3, 0)->addEnemy(1, 3, 0));
 
 			ENTITIES = 6;
+
+			unlockAchievement(1);
 		break;
 		case 11:
 			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 11, "");
@@ -478,6 +502,8 @@ void Level::startLevel()
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(30, 1, 2));
 
 			ENTITIES = 30;
+
+			unlockAchievement(3);
 		break;
 		case 21:
 			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 21, "");
@@ -536,6 +562,8 @@ void Level::startLevel()
 			ENTITIES = 120;
 		break;
 		case 26:
+			unlockAchievement(4);
+
 			AppDelegate::screens->set(3.0f, 1, 2);
 
 			ENTITIES = 100;
@@ -865,6 +893,8 @@ void Level::checkCollisions(float pDeltaTime)
                 this->mDiamondCounterText->setString(text);
                 
                 CCUserDefault::sharedUserDefault()->setIntegerForKey("diamonds", CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds") + 1);
+
+                updateLeaderBoard(CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds"));
 			}
 		}
 	}
@@ -2036,6 +2066,18 @@ void Level::update(float pDeltaTime)
 	{
 		this->mHero->mShouldLaserFire = false;
 	}
+
+	 // MULTIPLAYER
+
+	if(AppDelegate::MULTIPLAYER)
+	{
+		t+=pDeltaTime;
+
+		if(t >= -1.0f)
+		{
+			t = 0;
+		}
+	}
 }
 
 void Level::onEnter()
@@ -2070,6 +2112,7 @@ void Level::onEnter()
 	this->mTextSeconds = 0;
 
 	this->mHero->reset();
+	this->mCastle->create();
 	this->mCastle->reset();
 
 	this->mEnemies1->clear();
@@ -2175,6 +2218,51 @@ void Level::renderLaserBeam(float angle, float sx, float sy, float ex, float ey)
 	cocosAngle = -1 * angleDegrees;
 
 	this->mLaser2->setRotation(cocosAngle);
+}
+
+void Level::configure()
+{
+	if(AppDelegate::MULTIPLAYER)
+	{
+		this->mHero->create()->setCenterPosition(Options::CAMERA_CENTER_X - Utils::coord(100), Options::CAMERA_CENTER_Y - Utils::coord(200));
+		this->mHero2->create()->setCenterPosition(Options::CAMERA_CENTER_X + Utils::coord(100), Options::CAMERA_CENTER_Y - Utils::coord(200));
+	}
+	else
+	{
+		this->mHero->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(200));
+		this->mHero2->destroy();
+	}
+}
+
+void Level::nativeOnGooglePlusRealtimeMessageReceived(int param1, int param2, int param3, int param4)
+{
+	Level::mObj->onGooglePlusRealtimeMessageReceived(param1, param2, param3, param4);
+}
+
+void Level::onGooglePlusRealtimeMessageReceived(int param1, int param2, int param3, int param4)
+{
+	/*
+	 * 0 - Start jump
+	 * 1 - End jump
+	 * 2 - Start fly damage
+	 * 3 - Cause pause
+	 */
+
+	switch(param1)
+	{
+		case 0:
+			this->mHero2->startFly();
+		break;
+		case 1:
+			this->mHero2->endFly();
+		break;
+		case 2:
+			this->mHero2->startFlyDamage();
+		break;
+		case 3:
+			((PauseButton*) this->mPauseButton)->cause();
+		break;
+	}
 }
 
 #endif

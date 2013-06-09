@@ -234,6 +234,8 @@ class Level : public Screen
 
 		static int* COINS;
 
+		float t;
+
 		// ===========================================================
 		// Fields
         // ===========================================================
@@ -255,6 +257,7 @@ class Level : public Screen
 		WealthManager* mWealth;
 
 		Hero* mHero;
+		Hero* mHero2;
 
 		bool mPause;
 
@@ -268,7 +271,14 @@ class Level : public Screen
 		// Methods
 		// ===========================================================
 
+		static Level* mObj;
+		
+		static void nativeOnGooglePlusRealtimeMessageReceived(int param1, int param2, int param3, int param4);
+		void onGooglePlusRealtimeMessageReceived(int param1, int param2, int param3, int param4);
+
 		void updateSpiders();
+
+		void configure();
 		
 		// ===========================================================
 		// Virtual Methods

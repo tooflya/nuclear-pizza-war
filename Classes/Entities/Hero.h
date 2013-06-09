@@ -98,6 +98,8 @@ class Hero : public BarEntity
 		Texture* mBulletsTexture2;
 		Texture* mBulletsTexture3;
 
+		bool mBroadcaster;
+
 	public:
 		float mShootVectorX;
 		float mShootVectorY;
@@ -122,7 +124,7 @@ class Hero : public BarEntity
 
 		bool mIsShouldFire;
 
-		Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizontalFramesCount, int pVerticalFramesCount);
+		Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizontalFramesCount, int pVerticalFramesCount, bool pBeroadcaster);
 
 		void reset();
 

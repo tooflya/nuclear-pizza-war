@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.VideoView;
 
 public class Intro extends Activity {
@@ -17,6 +18,8 @@ public class Intro extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		
 		setContentView(R.layout.main);
 
 		if (Build.VERSION.SDK_INT >= 11) {
