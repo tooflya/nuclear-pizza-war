@@ -246,30 +246,51 @@ public abstract class BaseGameActivity extends Cocos2dxActivity implements
 	// JNI
 
 	public static void JniOnMainMenuStarted() {
-		activity.onMainMenuStarted();
+		try {
+			activity.onMainMenuStarted();
+		} catch (IllegalStateException ex) {
+		}
 	}
 
 	public static void JniStartWaitingForBattle() {
-		activity.startQuickGame();
+		try {
+			activity.startQuickGame();
+		} catch (IllegalStateException ex) {
+		}
 	}
 
 	public static void JniBroadcastMessage(int param1, int param2, int param3, int param4) {
-		activity.broadcastMessage(param1, param2, param3, param4);
+		try {
+			activity.broadcastMessage(param1, param2, param3, param4);
+		} catch (IllegalStateException ex) {
+		}
 	}
 
 	public static void JniUpdateLeaderBoard(int data) {
-		activity.updateLeaderboard(data);
+		try {
+			activity.updateLeaderboard(data);
+		} catch (IllegalStateException ex) {
+		}
 	}
 
 	public static void JniOpenLeaderBoard() {
-		activity.openLeaderBoard();
+		try {
+			activity.openLeaderBoard();
+		} catch (IllegalStateException ex) {
+		}
 	}
 
 	public static void JniUnlockAchievement(int current) {
-		activity.unlockAchievement(current);
+		try {
+			activity.unlockAchievement(current);
+		} catch (IllegalStateException ex) {
+		}
 	}
 
 	public static void JniOpenAchievementBoard() {
-		activity.openAchievementBoard();
+		try {
+			activity.openAchievementBoard();
+		} catch (IllegalStateException ex) {
+		}
 	}
 }

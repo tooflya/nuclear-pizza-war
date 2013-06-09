@@ -18,6 +18,10 @@ class PlayButton : public Entity
 
 			void onTouch(CCTouch* touch, CCEvent* event)
 			{
+                AppDelegate::MULTIPLAYER = false;
+
+                ((Level*) AppDelegate::screens->mScreens[0])->configure();
+
 				AppDelegate::screens->set(1.0f, 0, 0);
 			}
 };
@@ -38,6 +42,10 @@ class PlayBattleButton : public Entity
 
             void onTouch(CCTouch* touch, CCEvent* event)
             {
+                AppDelegate::MULTIPLAYER = true;
+
+                ((Level*) AppDelegate::screens->mScreens[0])->configure();
+
                 this->mParent->startWaitingForBattle();
             }
 
@@ -171,7 +179,7 @@ MainMenu::MainMenu()
 
 	CCLabelTTF* mVersionLabel1 = CCLabelTTF::create("Nuclear Pizza War", "Arial",  Utils::coord(16));
 	CCLabelTTF* mVersionLabel2 = CCLabelTTF::create("Mojang Inc., Tooflya Inc. - 2013", "Arial",  Utils::coord(16));
-	CCLabelTTF* mVersionLabel3 = CCLabelTTF::create("Current version: 1.1.1 (Alpha)", "Arial",  Utils::coord(16));
+	CCLabelTTF* mVersionLabel3 = CCLabelTTF::create("Current version: 1.1.2 (Alpha)", "Arial",  Utils::coord(16));
 
 	mVersionLabel1->setPosition(ccp(Utils::coord(10) + mVersionLabel1->getContentSize().width / 2, Utils::coord(55)));
 	mVersionLabel2->setPosition(ccp(Utils::coord(10) + mVersionLabel2->getContentSize().width / 2, Utils::coord(35)));
@@ -216,10 +224,6 @@ void MainMenu::nativeOnGooglePlusSignInSucceeded()
 
 void MainMenu::nativeOnGooglePlusConnedctedToRoom()
 {
-    AppDelegate::MULTIPLAYER = true;
-
-    ((Level*) AppDelegate::screens->mScreens[0])->configure();
-
     AppDelegate::screens->set(1.0f, 0, 0);
 }
 
