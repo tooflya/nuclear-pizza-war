@@ -76,8 +76,6 @@ class Utils
 
 		static float Pi;
 
-		static float MILLISECONDS;
-
 		// ===========================================================
 		// Fields
 		// ===========================================================
@@ -105,7 +103,9 @@ class Utils
 		static bool isOnPizza(Entity* pEntity);
 
 		static void obstacle(Entity* pEntity, float pX, float pY, float pMagnet, float pRadius);
-		static void obstacle(Entity* pEntity, Entity* pEntity2, float pMagnet, float pRadius);
+        static void obstacle(Entity* pEntity, Entity* pEntity2, float pMagnet, float pRadius);
+    
+        static long millisecondNow();
 		
 		// ===========================================================
 		// Virtual Methods

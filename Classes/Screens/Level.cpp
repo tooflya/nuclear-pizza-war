@@ -45,10 +45,14 @@ class PauseButton : public Entity
 		{
 			this->cause();
 
+            #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+            
 			if(AppDelegate::MULTIPLAYER)
 			{
 				broadcastMessage(3, 0, 0, 0);
 			}
+            
+            #endif
 		}
 
 };
@@ -326,7 +330,6 @@ void Level::startLevel()
 			this->mLevelName->setString(level_number_text);
             
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(1, 0, 0)->addEnemy(5, 0, 0));
-			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(1, 4, 0));
 
 			ENTITIES = 6;
 		break;
@@ -410,7 +413,11 @@ void Level::startLevel()
 
 			ENTITIES = 6;
 
+            #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+            
 			unlockAchievement(1);
+            
+            #endif
 		break;
 		case 11:
 			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 11, "");
@@ -503,7 +510,11 @@ void Level::startLevel()
 
 			ENTITIES = 30;
 
+            #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+            
 			unlockAchievement(3);
+            
+            #endif
 		break;
 		case 21:
 			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 21, "");
@@ -562,7 +573,11 @@ void Level::startLevel()
 			ENTITIES = 120;
 		break;
 		case 26:
+            #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+            
 			unlockAchievement(4);
+            
+            #endif
 
 			AppDelegate::screens->set(3.0f, 1, 2);
 
@@ -894,7 +909,11 @@ void Level::checkCollisions(float pDeltaTime)
                 
                 CCUserDefault::sharedUserDefault()->setIntegerForKey("diamonds", CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds") + 1);
 
+                #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+                
                 updateLeaderBoard(CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds"));
+                
+                #endif
 			}
 		}
 	}
@@ -1690,7 +1709,7 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 			// Fly
 			if(true) // TODO: this->mHero->isCanFly()
 			{
-				if(Utils::MILLISECONDS - this->mLastTimeTapLeft < 1.5f)
+				if(Utils::millisecondNow() - this->mLastTimeTapLeft < 300)
 				{
 					if(this->mHero->getZ() > Options::MIN_Z)
 					{
@@ -1714,7 +1733,7 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 				}
 				else
 				{
-					this->mLastTimeTapLeft = Utils::MILLISECONDS;
+					this->mLastTimeTapLeft = Utils::millisecondNow();
 				}
 			}
 		}
@@ -1726,14 +1745,14 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 			// Laser
 			if(ENTITIES > 0)
 			{
-				if(Utils::MILLISECONDS - this->mLastTimeTapRight < 1.5f)
+				if(Utils::millisecondNow() - this->mLastTimeTapRight < 300)
 				{
 					this->mHero->laser();
 
 					this->mLastTimeTapRight = 0;
 				}
 
-				this->mLastTimeTapRight = Utils::MILLISECONDS;
+				this->mLastTimeTapRight = Utils::millisecondNow();
 			}
 
 			this->mHero->mIsShouldFire = true;
@@ -1800,8 +1819,6 @@ void Level::update(float pDeltaTime)
 	if(this->mPause) return;
 
 	CCScene::update(pDeltaTime);
-
-	Utils::MILLISECONDS += pDeltaTime;
 
 	float potencialX = -this->mHero->getCenterX() + Options::CAMERA_CENTER_X;
 	float potencialY = -this->mHero->getCenterY() + Options::CAMERA_CENTER_Y + this->mHero->getZ();

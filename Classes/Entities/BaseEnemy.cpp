@@ -84,8 +84,12 @@ void BaseEnemy::death()
     }
     
 	this->destroy();
-
+    
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
 	unlockAchievement(0);
+    
+    #endif
 }
 
 Entity* BaseEnemy::create()

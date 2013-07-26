@@ -1392,10 +1392,14 @@ void UpgradeManager::check()
 	this->mNovaButton->check();
 	this->mSpidersButton->check();
 
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
 	if(this->mDamageButton->mCurrentIndex >= this->mDamageButton->mMaxIndex && this->mRateButton->mCurrentIndex >= this->mRateButton->mMaxIndex)
 	{
 		unlockAchievement(2);
 	}
+    
+    #endif
 }
 
 // ===========================================================

@@ -3,9 +3,9 @@
 
 #include "Screen.h"
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+
 #include "platform/android/jni/JniHelper.h"
-
-
 
 #define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
 #define  CLASS_NAME "com/tooflya/nuclearpizzawar/BaseGameActivity"
@@ -207,6 +207,8 @@ extern "C"
         return 0;
     }
 }
+
+#endif
 
 // ===========================================================
 // Inner Classes

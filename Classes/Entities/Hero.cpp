@@ -121,10 +121,14 @@ void Hero::startFly()
 	
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_PLAYER_ACCELERATING);
 
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
 	if(AppDelegate::MULTIPLAYER && this->mBroadcaster)
 	{
 		broadcastMessage(0, 0, 0, 0);
 	}
+    
+    #endif
 }
 
 void Hero::endFly()
@@ -134,10 +138,14 @@ void Hero::endFly()
 	this->mIsFly = false;
 	this->mFlyDownSpeed = 0;
 
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
 	if(AppDelegate::MULTIPLAYER && this->mBroadcaster)
 	{
 		broadcastMessage(1, 0, 0, 0);
 	}
+    
+    #endif
 }
 
 bool Hero::isCanFly()
@@ -154,10 +162,14 @@ bool Hero::startFlyDamage()
 	this->mIsFly = false;
 	this->mFlyDownSpeed = 20;
 
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
 	if(AppDelegate::MULTIPLAYER && this->mBroadcaster)
 	{
 		broadcastMessage(2, 0, 0, 0);
 	}
+    
+    #endif
 
 	return true;
 }

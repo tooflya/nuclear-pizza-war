@@ -72,7 +72,11 @@ class AchievementsButton : public Entity
 
             void onTouch(CCTouch* touch, CCEvent* event)
             {
+                #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+                
                 openAchievementBoard();
+                
+                #endif
             }
 
             void onCreate()
@@ -98,7 +102,11 @@ class LeaderBoardButton : public Entity
 
             void onTouch(CCTouch* touch, CCEvent* event)
             {
+                #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+                
                 openLeaderBoard();
+                
+                #endif
             }
 
             void onCreate()
@@ -179,7 +187,7 @@ MainMenu::MainMenu()
 
 	CCLabelTTF* mVersionLabel1 = CCLabelTTF::create("Nuclear Pizza War", "Arial",  Utils::coord(16));
 	CCLabelTTF* mVersionLabel2 = CCLabelTTF::create("Mojang Inc., Tooflya Inc. - 2013", "Arial",  Utils::coord(16));
-	CCLabelTTF* mVersionLabel3 = CCLabelTTF::create("Current version: 1.1.2 (Alpha)", "Arial",  Utils::coord(16));
+	CCLabelTTF* mVersionLabel3 = CCLabelTTF::create("Current version: 1.1.3 (Alpha)", "Arial",  Utils::coord(16));
 
 	mVersionLabel1->setPosition(ccp(Utils::coord(10) + mVersionLabel1->getContentSize().width / 2, Utils::coord(55)));
 	mVersionLabel2->setPosition(ccp(Utils::coord(10) + mVersionLabel2->getContentSize().width / 2, Utils::coord(35)));
@@ -212,7 +220,11 @@ void MainMenu::startWaitingForBattle()
 
     this->mWaitingForConnections = true;
 
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
     GooglePlusstartWaitingForBattle();
+    
+    #endif
 }
 
 void MainMenu::nativeOnGooglePlusSignInSucceeded()
@@ -298,7 +310,11 @@ void MainMenu::onEnterTransitionDidFinish()
 {
     Screen::onEnterTransitionDidFinish();
 
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
     onMainMenuStarted();
+    
+    #endif
 }
 
 #endif
