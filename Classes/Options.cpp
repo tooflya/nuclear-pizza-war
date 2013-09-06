@@ -37,7 +37,7 @@ bool Options::SOUND_ENABLE = false;
 
 bool Options::UNPUCKING = true;
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
 const char* Options::SPECIAL_FONT = "Franchise";
 
@@ -47,7 +47,8 @@ const char* Options::SPECIAL_FONT = "Fonts/Franchise.ttf";
 
 #endif
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFROM == CC_PLATFORM_MAC)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+
 const char* Options::SOUND_MAIN_MUSIC = "mus_fast02.wav";
 const char* Options::SOUND_AI_DEATH = "ai_death.wav";
 const char* Options::SOUND_AI_VOICE = "ai_voice.wav";
@@ -78,37 +79,40 @@ const char* Options::SOUND_SLICE_DOCKING = "slice_docking.wav";
 const char* Options::SOUND_SPIDER_TALK = "spider_talk.wav";
 const char* Options::SOUND_START_LEVEL = "start_level.wav";
 const char* Options::SOUND_UPGRADE = "upgrade.wav";
+
 #else
-const char* Options::SOUND_MAIN_MUSIC = "mus_fast02.ogg";
-const char* Options::SOUND_AI_DEATH = "ai_death.ogg";
-const char* Options::SOUND_AI_VOICE = "ai_voice.ogg";
-const char* Options::SOUND_ALIEN_SUICIDE = "alien_suicide.ogg";
-const char* Options::SOUND_ALIEN_WARNING = "alien_warning.ogg";
-const char* Options::SOUND_ALIEN_SHOT = "alienshot.ogg";
-const char* Options::SOUND_BASE_DAMAGE = "basedamage.ogg";
-const char* Options::SOUND_BASE_SHOT = "baseshot.ogg";
-const char* Options::SOUND_BEAM = "beam.ogg";
-const char* Options::SOUND_BIG_EXPLOSION = "big_explosion.ogg";
-const char* Options::SOUND_CHEESIE_LAND = "cheesy_land.ogg";
-const char* Options::SOUND_CHEESIE_LAND2 = "cheesy_land2.ogg";
-const char* Options::SOUND_COIN = "coin.ogg";
-const char* Options::SOUND_HEALTH = "health.ogg";
-const char* Options::SOUND_JETPACK_FAIL = "jetpack_fail.ogg";
-const char* Options::SOUND_PIZZAPLOP = "pizzaplop.ogg";
-const char* Options::SOUND_PLAYER_ACCELERATING = "player_accelerating.ogg";
-const char* Options::SOUND_PLAYER_DEATH = "player_death.ogg";
-const char* Options::SOUND_PLAYER_GETHIT = "player_gethit.ogg";
-const char* Options::SOUND_PLAYER_JETPACK = "player_jetpack.ogg";
-const char* Options::SOUND_POWERUP1 = "powerup_1.ogg";
-const char* Options::SOUND_POWERUP2 = "powerup_2.ogg";
-const char* Options::SOUND_SHOT_LAND = "shot_land.ogg";
-const char* Options::SOUND_SHOT = "shot.ogg";
-const char* Options::SOUND_SHOT2 = "shot2.ogg";
-const char* Options::SOUND_SLICE_APPROACHING = "slice_approaching.ogg";
-const char* Options::SOUND_SLICE_DOCKING = "slice_docking.ogg";
-const char* Options::SOUND_SPIDER_TALK = "spider_talk.ogg";
-const char* Options::SOUND_START_LEVEL = "start_level.ogg";
-const char* Options::SOUND_UPGRADE = "upgrade.ogg";
+
+const char* Options::SOUND_MAIN_MUSIC = "Music/mus_fast02.ogg";
+const char* Options::SOUND_AI_DEATH = "Sound/ai_death.ogg";
+const char* Options::SOUND_AI_VOICE = "Sound/ai_voice.ogg";
+const char* Options::SOUND_ALIEN_SUICIDE = "Sound/alien_suicide.ogg";
+const char* Options::SOUND_ALIEN_WARNING = "Sound/alien_warning.ogg";
+const char* Options::SOUND_ALIEN_SHOT = "Sound/alienshot.ogg";
+const char* Options::SOUND_BASE_DAMAGE = "Sound/basedamage.ogg";
+const char* Options::SOUND_BASE_SHOT = "Sound/baseshot.ogg";
+const char* Options::SOUND_BEAM = "Sound/beam.ogg";
+const char* Options::SOUND_BIG_EXPLOSION = "Sound/big_explosion.ogg";
+const char* Options::SOUND_CHEESIE_LAND = "Sound/cheesy_land.ogg";
+const char* Options::SOUND_CHEESIE_LAND2 = "Sound/cheesy_land2.ogg";
+const char* Options::SOUND_COIN = "Sound/coin.ogg";
+const char* Options::SOUND_HEALTH = "Sound/health.ogg";
+const char* Options::SOUND_JETPACK_FAIL = "Sound/jetpack_fail.ogg";
+const char* Options::SOUND_PIZZAPLOP = "Sound/pizzaplop.ogg";
+const char* Options::SOUND_PLAYER_ACCELERATING = "Sound/player_accelerating.ogg";
+const char* Options::SOUND_PLAYER_DEATH = "Sound/player_death.ogg";
+const char* Options::SOUND_PLAYER_GETHIT = "Sound/player_gethit.ogg";
+const char* Options::SOUND_PLAYER_JETPACK = "Sound/player_jetpack.ogg";
+const char* Options::SOUND_POWERUP1 = "Sound/powerup_1.ogg";
+const char* Options::SOUND_POWERUP2 = "Sound/powerup_2.ogg";
+const char* Options::SOUND_SHOT_LAND = "Sound/shot_land.ogg";
+const char* Options::SOUND_SHOT = "Sound/shot.ogg";
+const char* Options::SOUND_SHOT2 = "Sound/shot2.ogg";
+const char* Options::SOUND_SLICE_APPROACHING = "Sound/slice_approaching.ogg";
+const char* Options::SOUND_SLICE_DOCKING = "Sound/slice_docking.ogg";
+const char* Options::SOUND_SPIDER_TALK = "Sound/spider_talk.ogg";
+const char* Options::SOUND_START_LEVEL = "Sound/start_level.ogg";
+const char* Options::SOUND_UPGRADE = "Sound/upgrade.ogg";
+
 #endif
 
 // ===========================================================
