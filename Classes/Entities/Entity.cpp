@@ -115,7 +115,7 @@ void Entity::constructor(const char* pszFileName, int pHorizontalFramesCount, in
 	this->mIsOutOfTop = false;
 
 	this->scheduleUpdate();
-
+	this->getTexture()->setAntiAliasTexParameters();
 	this->retain();
 	this->release();
 
