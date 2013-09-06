@@ -401,7 +401,7 @@ void Entity::setSpeed(float pSpeed)
 
 float Entity::getSpeed(float pDeltaTime)
 {
-	return this->mSpeed * pDeltaTime;
+	return this->mSpeed * pDeltaTime / CCDirector::sharedDirector()->getContentScaleFactor();
 }
 
 bool Entity::hasShadow()
