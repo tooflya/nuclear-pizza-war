@@ -32,8 +32,6 @@ LayerManager::LayerManager()
 
 void LayerManager::sortChildrenByYPosition() // TODO: Code refactoring.
 {
-	long time = Utils::millisecondNow();
-
 	int length = this->getChildren()->count();
 	int i;
 

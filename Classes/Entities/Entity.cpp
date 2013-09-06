@@ -115,7 +115,7 @@ void Entity::constructor(const char* pszFileName, int pHorizontalFramesCount, in
 	this->mIsOutOfTop = false;
 
 	this->scheduleUpdate();
-
+	this->getTexture()->setAntiAliasTexParameters();
 	this->retain();
 	this->release();
 
@@ -401,7 +401,7 @@ void Entity::setSpeed(float pSpeed)
 
 float Entity::getSpeed(float pDeltaTime)
 {
-	return this->mSpeed * pDeltaTime;
+	return this->mSpeed * pDeltaTime / CCDirector::sharedDirector()->getContentScaleFactor();
 }
 
 bool Entity::hasShadow()
@@ -435,12 +435,24 @@ bool Entity::isIgnoreSorting()
  *
  */
 
+void Entity::onCreate()
+{
+
+}
+
+void Entity::onDestroy()
+{
+
+}
+
 Entity* Entity::create()
 {
 	this->setVisible(true);
 
 	this->mFall = false;
 	this->mIsOutOfTop = false;
+
+	this->onCreate();
 
 	return this;
 }
@@ -460,6 +472,8 @@ bool Entity::destroy(bool pManage)
 			this->mBatchEntityManager->destroy(this->id);
 		}
 	}
+
+	this->onDestroy();
 
 	return false;
 }
@@ -670,6 +684,11 @@ bool Entity::isAnimationRunning()
 	return this->mAnimationRunning;
 }
 
+void Entity::setAnimationReverse(bool pReverse)
+{
+    this->mIsAnimationReverseNeed = pReverse;
+}
+
 /**
  *
  * Checing for touch detector
@@ -678,18 +697,26 @@ bool Entity::isAnimationRunning()
 
 void Entity::onEnter()
 {
-	CCDirector* pDirector = CCDirector::sharedDirector();
-	pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
+	//CCDirector* pDirector = CCDirector::sharedDirector();
+	//pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 
 	CCSprite::onEnter();
 }
 
 void Entity::onExit()
 {
-	CCDirector* pDirector = CCDirector::sharedDirector();
-	pDirector->getTouchDispatcher()->removeDelegate(this);
+	//CCDirector* pDirector = CCDirector::sharedDirector();
+	//pDirector->getTouchDispatcher()->removeDelegate(this);
 
 	CCSprite::onExit();
+}
+
+void Entity::setRegisterAsTouchable(bool pTouchable)
+{
+	Touchable::setRegisterAsTouchable(pTouchable);
+
+	CCDirector* pDirector = CCDirector::sharedDirector();
+	pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 }
 
 bool Entity::ccTouchBegan(CCTouch* touch, CCEvent* event)
@@ -772,6 +799,30 @@ void Entity::update(float pDeltaTime)
 			if(this->mAnimationTimeElapsed >= this->mAnimationTime)
 			{
 				this->mAnimationTimeElapsed -= this->mAnimationTime;
+                
+                if(this->mIsAnimationReverseNeed)
+                {
+                    if(this->mIsAnimationReverse)
+                    {
+                        this->previousFrameIndex();
+                        
+                        if(this->getCurrentFrameIndex() <= 0)
+                        {
+                            this->mIsAnimationReverse = false;
+                        }
+                    }
+                    else
+                    {
+                        this->nextFrameIndex();
+                        
+                        if(this->getCurrentFrameIndex() >= this->mFramesCount - 1)
+                        {
+                            this->mIsAnimationReverse = true;
+                        }
+                    }
+                    
+                    return;
+                }
 
 				if(this->mAnimationStartFrame == -1 && this->mAnimationFinishFrame == -1)
 				{
@@ -786,8 +837,7 @@ void Entity::update(float pDeltaTime)
 							
 						return;
 					}
-
-					if(this->mAnimationRepeatCount > 0 && this->getCurrentFrameIndex() == this->mFramesCount - 1)
+                    if(this->mAnimationRepeatCount > 0 && this->getCurrentFrameIndex() == this->mFramesCount - 1)
 					{
 						this->mAnimationRepeatCount--;
 
@@ -854,15 +904,21 @@ void Entity::update(float pDeltaTime)
 						if(this->mAnimationRepeatCount > 0)
 						{
 							this->mAnimationRepeatCount--;
-
+                            
 							this->mAnimationFramesElapsed = 0;
-
+                            
 							if(this->mAnimationRepeatCount == 0)
 							{
 								this->mAnimationRunning = false;
-
+                                
 								this->onAnimationEnd();
 							}
+						}
+						else
+						{
+							this->mAnimationFramesElapsed = 0;
+                            
+							this->setCurrentFrameIndex(this->mAnimationStartFrame);
 						}
 					}
 				}

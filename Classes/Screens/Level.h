@@ -14,6 +14,7 @@
 #include "SpiderExplosion.h"
 #include "FollowEnemy.h"
 #include "FiredEnemy.h"
+#include "MineEnemy.h"
 #include "CastleEnemy.h"
 #include "BigEnemy.h"
 #include "Pickup.h"
@@ -31,6 +32,7 @@
 #include "WealthManager.h"
 #include "Joystick.h"
 #include "Spider.h"
+#include "Diamond.h"
 
 class UpgradeManager;
 
@@ -73,6 +75,24 @@ class Level : public Screen
 		// ===========================================================
 		// Constants
 		// ===========================================================
+
+		static const char* LABELS_FONT;
+
+		static const char* PREPARE_FOR_BATTLE_TEXT;
+		static const char* LEVEL_NUMBER_TEXT;
+		static const char* WEALTH_TEXT;
+		static const char* LOW_HEALTH_TEXT;
+		static const char* LEVEL_BEGIN_TEXT;
+		static const char* LEVEL_CLEARED_TEXT;
+		static const char* WIN_TEXT;
+		static const char* LARGE_INVASION_TEXT;
+		static const char* BEWARE_TEXT;
+		static const char* PATIENCE_TEXT;
+		static const char* THE_ELITE_TEXT;
+		static const char* NUKES_TEXT;
+		static const char* THE_HORDE_TEXT;
+		static const char* DEATH_TEXT;
+		static const char* ALTERLIFE_TEXT;
 
 		// ===========================================================
 		// Fields
@@ -131,13 +151,14 @@ class Level : public Screen
 		int mCurrentLevel;
 		int mMaxSpidersCount;
 
-		int mTextSeconds;
+        int mTextSeconds;
 
 		EntityManager* mEnemies1;
 		EntityManager* mEnemies2;
-		EntityManager* mEnemies3;
-		EntityManager* mEnemies4;
-
+        EntityManager* mEnemies3;
+        EntityManager* mEnemies4;
+        EntityManager* mEnemies5;
+    
 		EntityManager* mEnemyBullets;
 
 		EntityManager* mSlices;
@@ -151,8 +172,9 @@ class Level : public Screen
 		CCLabelTTF* mPrepareToBattle;
 		CCLabelTTF* mLevelName;
 		CCLabelTTF* mWealthText;
-		CCLabelTTF* mLowHealthText;
-		CCLabelTTF* mLevelStartText;
+        CCLabelTTF* mLowHealthText;
+        CCLabelTTF* mLevelStartText;
+        CCLabelTTF* mDiamondCounterText;
 
 		Entity* mBackground;
 		Entity* mLaser1;
@@ -212,9 +234,13 @@ class Level : public Screen
 
 		static int* COINS;
 
+		float t;
+
 		// ===========================================================
 		// Fields
-		// ===========================================================
+        // ===========================================================
+    
+        EntityManager* mDiamonds;
 
 		Entity* mPauseButton;
 
@@ -231,6 +257,7 @@ class Level : public Screen
 		WealthManager* mWealth;
 
 		Hero* mHero;
+		Hero* mHero2;
 
 		bool mPause;
 
@@ -244,7 +271,14 @@ class Level : public Screen
 		// Methods
 		// ===========================================================
 
+		static Level* mObj;
+		
+		static void nativeOnGooglePlusRealtimeMessageReceived(int param1, int param2, int param3, int param4);
+		void onGooglePlusRealtimeMessageReceived(int param1, int param2, int param3, int param4);
+
 		void updateSpiders();
+
+		void configure();
 		
 		// ===========================================================
 		// Virtual Methods
@@ -253,11 +287,6 @@ class Level : public Screen
 		bool ccTouchBegan(CCTouch* touch, CCEvent* event);
 		void ccTouchMoved(CCTouch* touch, CCEvent* event);
 		void ccTouchEnded(CCTouch* touch, CCEvent* event);
-
-   		void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-   		void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-   		void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-    	void ccTouchesCancelled(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 
 		virtual	void update(float pDeltaTime);
 		virtual void draw();

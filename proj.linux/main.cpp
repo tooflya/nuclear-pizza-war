@@ -1,5 +1,3 @@
-#include "main.h"
-
 #include "AppDelegate.h"
 #include "cocos2d.h"
 
@@ -12,11 +10,11 @@ USING_NS_CC;
 
 int main(int argc, char **argv)
 {
-	AppDelegate app;
+    AppDelegate app;
 
-	CCEGLView* eglView = CCEGLView::sharedOpenGLView();
+    CCEGLView* eglView = CCEGLView::sharedOpenGLView();
 
-	eglView->setFrameSize(1280, 720);
+    eglView->setFrameSize(1280, 720);
 
-	return CCApplication::sharedApplication()->run();
+    return CCApplication::sharedApplication()->run();
 }

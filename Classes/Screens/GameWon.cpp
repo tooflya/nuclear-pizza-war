@@ -23,7 +23,7 @@ GameWon::GameWon()
 {
 	this->setRegisterAsTouchable(true);
 
-	this->mBackground = new Entity("gui/victory.png");
+	this->mBackground = new Entity("victory.png");
 
 	this->mBackground->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y);
 

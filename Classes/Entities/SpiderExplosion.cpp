@@ -15,7 +15,7 @@ SpiderExplosion::SpiderExplosion(const char* pszFileName, int pHorizontalFramesC
 
 SpiderExplosion* SpiderExplosion::deepCopy()
 {
-	return new SpiderExplosion("actors/explosion1.png", 10, 1);
+	return new SpiderExplosion("explosion1.png", 10, 1);
 }
 
 Entity* SpiderExplosion::create()

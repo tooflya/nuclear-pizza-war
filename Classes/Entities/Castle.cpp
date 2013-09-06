@@ -21,7 +21,7 @@
 // ===========================================================
 
 Castle::Castle(EntityManager* pBullets) :
-	BarEntity("actors/artichoke.png", 8, 1)
+	BarEntity("artichoke.png", 8, 1)
 	{
 		this->mFortification = 12;
 
@@ -36,11 +36,11 @@ Castle::Castle(EntityManager* pBullets) :
 		this->setHealth(100.0f);
 		this->setFireTime(1000.0f);
 
-		this->mShockwave = new Entity("actors/shockwave.png");
+		this->mShockwave = new Entity("shockwave.png");
 
-		this->mCastleWall1 = new Entity("actors/wall1.png");
-		this->mCastleWall2 = new Entity("actors/wall2.png");
-		this->mCastleWall3 = new Entity("actors/wall3.png");
+		this->mCastleWall1 = new Entity("wall1.png");
+		this->mCastleWall2 = new Entity("wall2.png");
+		this->mCastleWall3 = new Entity("wall3.png");
 
 		this->mCastleWall1->create()->setCenterPosition(Options::CAMERA_CENTER_X - Utils::coord(3), Options::CAMERA_CENTER_Y - Utils::coord(36));
 		this->mCastleWall2->create()->setCenterPosition(Options::CAMERA_CENTER_X - Utils::coord(3), Options::CAMERA_CENTER_Y - Utils::coord(36));
@@ -66,14 +66,22 @@ Castle::Castle(EntityManager* pBullets) :
 void Castle::reset()
 {
 	this->mFortification = 12;
-
+    
 	this->setHealth(100.0f);
 	this->setFireTime(1000.0f);
+
+	this->setMaxHealth(100.0f);
+	this->setMaxFireTime(1000.0f);
+    
+    this->mShockwaveTime = 30000.0f;
+    this->mShockwaveTimeElapsed = 0;
 
 	this->mCastleWall1->setIgnoreSorting(true);
 	this->mCastleWall2->setIgnoreSorting(true);
 	this->mCastleWall3->setIgnoreSorting(true);
-
+    
+	this->mCastleWall1->setVisible(true);
+	this->mCastleWall2->setVisible(true);
 	this->mCastleWall3->setVisible(false);
 
 	Options::FORTIFICATION_LEVEL = 2;
@@ -183,7 +191,7 @@ void Castle::fire(BaseEnemy* pEnemy)
 
 	bullet->fire(this->getCenterX(), this->getCenterY() + Utils::coord(50), pEnemy->getCenterX(), pEnemy->getCenterY());
 	
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/shot.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_SHOT);
 }
 
 // ===========================================================
@@ -217,7 +225,7 @@ void Castle::update(float pDeltaTime)
 		this->mShockwave->setScale(0);
 		this->mShockwave->create()->runAction(CCScaleTo::create(0.2f, 5.0f));
 	
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/baseshot.ogg");
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_BASE_SHOT);
 
 		this->mShouldShoot = false;
 	}

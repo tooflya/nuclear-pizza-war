@@ -53,6 +53,10 @@ class WealthManager : public BatchEntityManager
 		// ===========================================================
 		// Fields
 		// ===========================================================
+    
+        CCLabelTTF* mPackText1;
+        CCLabelTTF* mPackText2;
+        CCLabelTTF* mPackText3;
 
 		// ===========================================================
 		// Constructors
@@ -97,6 +101,8 @@ class WealthManager : public BatchEntityManager
 		// ===========================================================
 		// Virtual Methods
 		// ===========================================================
+    
+        virtual void clear();
 };
 
 #endif

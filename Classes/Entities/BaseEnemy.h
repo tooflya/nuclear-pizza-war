@@ -28,7 +28,9 @@ class BaseEnemy : public BarEntity
 
 	private:
 
-	public:
+    public:
+        float mTalkTime;
+        float mTalkTimeElapsed;
 
 		float mShootVectorX;
 		float mShootVectorY;

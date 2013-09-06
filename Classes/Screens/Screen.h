@@ -7,6 +7,12 @@
 #include "Entity.h"
 #include "Options.h"
 
+#if CC_TARGET_PLATFORM == PLATFORM_ANDROID
+
+#include <jni.h>
+
+#endif
+
 using namespace cocos2d;
 
 class Screen : public CCScene, public Touchable

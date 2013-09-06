@@ -60,13 +60,6 @@ CCPoint Utils::vectorNormalize(float pVectorX, float pVectorY, float pMultipleFa
 	return ccp(x, y);
 }
 
-long Utils::millisecondNow()
-{
-    struct cc_timeval now;
-    CCTime::gettimeofdayCocos2d(&now, NULL);
-    return (now.tv_sec * 1000 + now.tv_sec / 1000);
-}
-
 bool Utils::isOnPizza(Entity* pEntity)
 {
 	float cx = Options::CAMERA_CENTER_X + Utils::coord(25);
@@ -102,6 +95,13 @@ void Utils::obstacle(Entity* pEntity, float pX, float pY, float pMagnet, float p
 void Utils::obstacle(Entity* pEntity, Entity* pEntity2, float pMagnet, float pRadius)
 {
 	Utils::obstacle(pEntity, pEntity2->getCenterX(), pEntity2->getCenterY(), pMagnet, pRadius);
+}
+
+long Utils::millisecondNow()
+{
+    struct cc_timeval now;
+    CCTime::gettimeofdayCocos2d(&now, NULL);
+    return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
 
 // ===========================================================

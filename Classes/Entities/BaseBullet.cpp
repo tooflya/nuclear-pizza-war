@@ -5,7 +5,7 @@
 
 BaseBullet::BaseBullet()
 {
-	this->mTextureFileName = "actors/bullet.png";
+	this->mTextureFileName = "bullet.png";
 }
 
 BaseBullet::BaseBullet(const char* pszFileName, int pHorizontalFramesCount, int pVerticalFramesCount) :

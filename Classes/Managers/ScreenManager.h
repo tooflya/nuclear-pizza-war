@@ -7,6 +7,7 @@
 #include "Level.h"
 #include "GameOver.h"
 #include "GameWon.h"
+#include "MojangSplashScreen.h"
 
 using namespace cocos2d;
 
@@ -75,7 +76,9 @@ class ScreenManager
 		// Fields
 		// ===========================================================
 
-		Screen* mScreens[4];
+		Screen* mScreens[5];
+
+		int mCurrentScreenIndex;
 
 		// ===========================================================
 		// Constructors

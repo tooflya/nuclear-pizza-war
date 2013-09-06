@@ -20,13 +20,13 @@
 // ===========================================================
 
 Slice::Slice() :
-	Entity("pizzarelated/ansjovalienbotslice.png")
+	Entity("ansjovalienbotslice.png")
 	{
 		this->setIgnoreSorting(true);
 
 		this->setSpeed(200.0f + Utils::randomf(0.0f, 200.0f));
 
-		this->mShadow = new Entity("pizzarelated/ansjovalienbotslice.png");
+		this->mShadow = new Entity("ansjovalienbotslice.png");
 		this->mShadow->setIsShadow();
 		this->mShadow->setColor(ccc3(0.0f, 0.0f, 0.0f));
 		this->mShadow->setIgnoreSorting(true);

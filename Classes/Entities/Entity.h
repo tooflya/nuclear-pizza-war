@@ -171,6 +171,9 @@ class Entity : public CCSprite, public Touchable
 		virtual bool destroy();
 		virtual bool destroy(bool pManage);
 
+		virtual void onCreate();
+		virtual void onDestroy();
+
 		void setEntityManager(EntityManager* pEntityManager);
 		void setEntityManager(BatchEntityManager* pBatchEntityManager);
 
@@ -209,6 +212,8 @@ class Entity : public CCSprite, public Touchable
 		void setFinishFrame(int pFinishFrame);
 
 		void setAnimationStartTimeout(float pSecodsTimeout);
+    
+        void setAnimationReverse(bool pReverse);
 
 		virtual void onAnimationStart();
 		virtual void onAnimationEnd();
@@ -235,6 +240,8 @@ class Entity : public CCSprite, public Touchable
 		virtual void update(float pDeltaTime);
 
 		virtual void draw();
+
+		void setRegisterAsTouchable(bool pTouchable);
 
 		/**
 		 *

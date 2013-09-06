@@ -16,7 +16,7 @@ EnemyBullet::EnemyBullet(const char* pszFileName, int pHorizontalFramesCount, in
 
 EnemyBullet* EnemyBullet::deepCopy()
 {
-	return new EnemyBullet("actors/alienbullet.png", 1, 1);
+	return new EnemyBullet("alienbullet.png", 1, 1);
 }
 
 #endif

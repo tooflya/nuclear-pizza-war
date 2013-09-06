@@ -54,10 +54,13 @@ void ScreenManager::generate()
 	this->mScreens[1] = new GameOver();
 	this->mScreens[2] = new GameWon();
 	this->mScreens[3] = new MainMenu();
+	this->mScreens[4] = new MojangSplashScreen();
 }
 
 void ScreenManager::set(float pAnimationTime, int pAction, int pIndex)
 {
+	this->mCurrentScreenIndex = pIndex;
+	
 	CCTransitionScene* transition = CCTransitionFade::create(pAnimationTime, this->mScreens[pIndex]);
 
 	switch(pAction)

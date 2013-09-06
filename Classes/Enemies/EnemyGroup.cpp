@@ -280,7 +280,24 @@ void EnemyGroup::update(float pDeltaTime)
 								((BigEnemy*) enemy)->mShootsCount = 12;
 							break;
 						}
-					break;
+                        break;
+					case 4:
+						switch(params->getLevel())
+                        {
+                            case 0:
+                                enemy->setMaxHealth(600);
+                                enemy->setSpeed(40.0f);
+                            break;
+                            case 1:
+                                enemy->setMaxHealth(1000);
+                                enemy->setSpeed(60.0f);
+							break;
+                            case 2:
+                                enemy->setMaxHealth(1200);
+                                enemy->setSpeed(80.0f);
+							break;
+                        }
+                    break;
 				}
 			}
 		}

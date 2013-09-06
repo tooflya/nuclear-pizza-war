@@ -15,7 +15,7 @@ LongExplosion::LongExplosion(const char* pszFileName, int pHorizontalFramesCount
 
 LongExplosion* LongExplosion::deepCopy()
 {
-	return new LongExplosion("actors/explosion3.png", 17, 1);
+	return new LongExplosion("explosion3.png", 17, 1);
 }
 
 Entity* LongExplosion::create()

@@ -19,7 +19,7 @@ class Bubble : public BarEntity
 		{
 			public:
 				Splash() :
-					Entity("actors/bubble_pop.png", 11, 1)
+					Entity("bubble_pop.png", 11, 1)
 					{
 
 					}

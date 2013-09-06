@@ -87,6 +87,39 @@ class Options
 		static bool SOUND_ENABLE;
 
 		static bool UNPUCKING;
+    
+        static const char* SPECIAL_FONT;
+    
+        static const char* SOUND_MAIN_MUSIC;
+        static const char* SOUND_AI_DEATH;
+        static const char* SOUND_AI_VOICE;
+        static const char* SOUND_ALIEN_SUICIDE;
+        static const char* SOUND_ALIEN_WARNING;
+        static const char* SOUND_ALIEN_SHOT;
+        static const char* SOUND_BASE_DAMAGE;
+        static const char* SOUND_BASE_SHOT;
+        static const char* SOUND_BEAM;
+        static const char* SOUND_BIG_EXPLOSION;
+        static const char* SOUND_CHEESIE_LAND;
+        static const char* SOUND_CHEESIE_LAND2;
+        static const char* SOUND_COIN;
+        static const char* SOUND_HEALTH;
+        static const char* SOUND_JETPACK_FAIL;
+        static const char* SOUND_PIZZAPLOP;
+        static const char* SOUND_PLAYER_ACCELERATING;
+        static const char* SOUND_PLAYER_DEATH;
+        static const char* SOUND_PLAYER_GETHIT;
+        static const char* SOUND_PLAYER_JETPACK;
+        static const char* SOUND_POWERUP1;
+        static const char* SOUND_POWERUP2;
+        static const char* SOUND_SHOT_LAND;
+        static const char* SOUND_SHOT;
+        static const char* SOUND_SHOT2;
+        static const char* SOUND_SLICE_APPROACHING;
+        static const char* SOUND_SLICE_DOCKING;
+        static const char* SOUND_SPIDER_TALK;
+        static const char* SOUND_START_LEVEL;
+        static const char* SOUND_UPGRADE;
 
 		// ===========================================================
 		// Fields

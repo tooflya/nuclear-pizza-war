@@ -16,14 +16,14 @@ class PauseButton : public Entity
 
 	public:
 		PauseButton(Level* pWorld) :
-			Entity("gui/pause_button.png")
+			Entity("pause_button.png")
 			{
 				this->mWorld = pWorld;
 
-				this->setRegisterAsTouchable(true);
+				//this->setRegisterAsTouchable(true);
 			}
 
-		void onTouch(CCTouch* touch, CCEvent* event)
+		void cause()
 		{
 			if(this->mWorld->mUpgradeLayer->getParent())
 			{
@@ -41,15 +41,49 @@ class PauseButton : public Entity
 			}
 		}
 
+		void onTouch(CCTouch* touch, CCEvent* event)
+		{
+			this->cause();
+
+            #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+            
+			if(AppDelegate::MULTIPLAYER)
+			{
+				broadcastMessage(3, 0, 0, 0);
+			}
+            
+            #endif
+		}
+
 };
 
 // ===========================================================
 // Constants
 // ===========================================================
 
+Level* Level::mObj = NULL;
+
 int Level::ENTITIES = 0;
 
 int* Level::COINS = new int[3];
+
+const char* Level::LABELS_FONT = Options::SPECIAL_FONT;
+
+const char* Level::PREPARE_FOR_BATTLE_TEXT = "Prepare for Battle";
+const char* Level::LEVEL_NUMBER_TEXT = "Level %d %s";
+const char* Level::WEALTH_TEXT = "Wealth:";
+const char* Level::LOW_HEALTH_TEXT = "Warning: Low Health";
+const char* Level::LEVEL_BEGIN_TEXT = "Level %d will begin in %d seconds...";
+const char* Level::LEVEL_CLEARED_TEXT = "Level cleared!";
+const char* Level::WIN_TEXT = "You won, I guess...";
+const char* Level::LARGE_INVASION_TEXT = "- LARGE INVASION";
+const char* Level::BEWARE_TEXT = "- BEWARE";
+const char* Level::PATIENCE_TEXT = "- PATIENCE";
+const char* Level::THE_ELITE_TEXT = "- THE ELITE";
+const char* Level::NUKES_TEXT = "- NUKES";
+const char* Level::THE_HORDE_TEXT = "- THE HORDE";
+const char* Level::DEATH_TEXT = "- DEATH";
+const char* Level::ALTERLIFE_TEXT = "- ALTERLIFE";
 
 // ===========================================================
 // Fields
@@ -61,11 +95,36 @@ int* Level::COINS = new int[3];
 
 Level::Level()
 {
+	ccLanguageType currentLanguageType = CCApplication::sharedApplication()->getCurrentLanguage();
+    switch (currentLanguageType)
+    {
+    	case kLanguageRussian:
+        	LABELS_FONT = "Arial";
+
+        	PREPARE_FOR_BATTLE_TEXT = "Приготовьтесь к битве";
+			LEVEL_NUMBER_TEXT = "Уровень %d %s";
+			WEALTH_TEXT = "Материалы:";
+			LOW_HEALTH_TEXT = "Внимание: жизни на исходе";
+			LEVEL_BEGIN_TEXT = "Уровень %d начнется через %d секунд...";
+			LEVEL_CLEARED_TEXT = "Уровень пройден!";
+			WIN_TEXT = "Ты выиграл, пока что...";
+			LARGE_INVASION_TEXT = "- Большое нападение";
+			BEWARE_TEXT = "- Берегись!";
+			PATIENCE_TEXT = "- Спокойствие";
+			THE_ELITE_TEXT = "- Элита";
+			NUKES_TEXT = "- Ядерное оружие";
+			THE_HORDE_TEXT = "- Орда";
+			DEATH_TEXT = "- Смерть";
+			ALTERLIFE_TEXT = "- Возрождение";
+        break;
+    }
+
 	COINS[0] = 0;
 	COINS[1] = 0;
 	COINS[2] = 0;
 
-	this->mLastTimeTapLeft = 0;
+	this->mLastTimeTapLeft = Utils::millisecondNow();
+	this->mLastTimeTapRight = Utils::millisecondNow();
 
 	this->setRegisterAsTouchable(true);
 
@@ -118,31 +177,39 @@ Level::Level()
 
 	new BackgroundStarsManager(this->mMainLayer, true);
 
-	this->mBackground = new Entity("pizzarelated/pizza_big.png");
+	this->mBackground = new Entity("pizza_big.png");
 	this->mBackground->setIgnoreSorting(true);
 
 	this->generatePizzaDecorations();
 
-	this->mLaser1 = new Entity("actors/laser.png", 1, 4);
-	this->mLaser2 = new Entity("actors/laser.png", 1, 4);
+	this->mLaser1 = new Entity("laser.png", 1, 4);
+	this->mLaser2 = new Entity("laser.png", 1, 4);
 	this->mLaser1->animate(0.1f);
 	this->mLaser2->animate(0.1f);
 	this->mLaser1->setIgnoreSorting(true);
 	this->mLaser2->setIgnoreSorting(true);
+    
+    this->mDiamonds = new EntityManager(5, new Diamond(), this->mUnitsLayer, 5);
 
 	this->mCastleBullets = new EntityManager(5, new BaseBullet(), this->mUnitsLayer, 5);
 	this->mCastle = new Castle(this->mCastleBullets);
 	this->mPickups = new EntityManager(25, new Pickup(), this->mUnitsLayer, 5);
-	this->mWealth = new WealthManager(25, new Entity("actors/pickups.png", 1, 3), this->mStaticLayer, 2);
+	this->mWealth = new WealthManager(25, new Entity("pickups.png", 1, 3), this->mStaticLayer, 2);
 	this->mBaseBubbles = new EntityManager(5, new Bubble(), this->mUnitsLayer, 3);
 	this->mBaseBullets = new EntityManager(50, new BaseBullet(), this->mUnitsLayer, 5);
-	this->mHero = new Hero("actors/player1_1.png", this->mBaseBullets, 4, 5);
+	this->mHero = new Hero("player1_1.png", this->mBaseBullets, 4, 5, true);
+	this->mHero2 = new Hero("player1_1.png", this->mBaseBullets, 4, 5, false);
 	this->mEnemyBullets = new EntityManager(25, new EnemyBullet(), this->mUnitsLayer, 5);
 	this->mEnemies1 = new EntityManager(20, new FollowEnemy(this->mHero), this->mUnitsLayer, 5);
 	this->mEnemies2 = new EntityManager(20, new CastleEnemy(this->mCastle), this->mUnitsLayer, 5);
 	this->mEnemies3 = new EntityManager(20, new FiredEnemy(this->mHero, this->mEnemyBullets), this->mUnitsLayer, 5);
 	this->mEnemies4 = new EntityManager(20, new BigEnemy(this->mEnemyBullets), this->mUnitsLayer, 5);
-	this->mSpiders = new EntityManager(5, new Spider(), this->mUnitsLayer, 4);
+	this->mEnemies5 = new EntityManager(20, new MineEnemy(), this->mUnitsLayer, 5);
+	this->mSpiders = new EntityManager(5, new Spider(), this->mUnitsLayer, 3);
+    
+    Entity* diamondIcon = new Entity("diamond_icon.png");
+    diamondIcon->create()->setCenterPosition(Utils::coord(24), Options::CAMERA_HEIGHT - Utils::coord(22));
+    this->mStaticLayer->addChild(diamondIcon);
 
 	this->mPauseButton = new PauseButton(this);
 	this->mPauseButton->create()->setCenterPosition(Options::CAMERA_WIDTH - Utils::coord(50), Options::CAMERA_HEIGHT - Utils::coord(50));
@@ -155,17 +222,22 @@ Level::Level()
 	this->mEnemies->addObject(this->mEnemies2);
 	this->mEnemies->addObject(this->mEnemies3);
 	this->mEnemies->addObject(this->mEnemies4);
+	this->mEnemies->addObject(this->mEnemies5);
 
 	this->mEnemiesGroup->add(this->mEnemies1);
 	this->mEnemiesGroup->add(this->mEnemies2);
 	this->mEnemiesGroup->add(this->mEnemies3);
 	this->mEnemiesGroup->add(this->mEnemies4);
+	this->mEnemiesGroup->add(this->mEnemies5);
 
-	this->mPrepareToBattle = CCLabelTTF::create("Prepare for Battle", "Fonts/Franchise-Bold.ttf", Utils::coord(65));
-	this->mLevelName = CCLabelTTF::create("Level 10", "Fonts/Franchise-Bold.ttf", Utils::coord(48));
-	this->mWealthText = CCLabelTTF::create("Wealth:", "Fonts/Franchise-Bold.ttf", Utils::coord(18));
-	this->mLowHealthText = CCLabelTTF::create("Warning: Low Health", "Fonts/Franchise-Bold.ttf", Utils::coord(65));
-	this->mLevelStartText = CCLabelTTF::create("Level 1 will begin in 5 seconds...", "Fonts/Franchise-Bold.ttf", Utils::coord(24));
+    char text[256];
+    sprintf(text, "x %d", CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds"));
+    this->mDiamondCounterText = CCLabelTTF::create(text, LABELS_FONT, Utils::coord(18));
+	this->mPrepareToBattle = CCLabelTTF::create(PREPARE_FOR_BATTLE_TEXT, LABELS_FONT, Utils::coord(65));
+	this->mLevelName = CCLabelTTF::create(LEVEL_NUMBER_TEXT, LABELS_FONT, Utils::coord(48));
+	this->mWealthText = CCLabelTTF::create(WEALTH_TEXT, LABELS_FONT, Utils::coord(18));
+	this->mLowHealthText = CCLabelTTF::create(LOW_HEALTH_TEXT, LABELS_FONT, Utils::coord(65));
+	this->mLevelStartText = CCLabelTTF::create(LEVEL_BEGIN_TEXT, LABELS_FONT, Utils::coord(24));
 
 	this->mUnitsLayer->addChild(this->mBackground, -1);
 	this->mUnitsLayer->addChild(this->mCastle, 4);
@@ -175,16 +247,18 @@ Level::Level()
 	this->mBackground->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y);
 	this->mCastle->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y);
 	this->mHero->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(200));
+	this->mHero2->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(200));
 
 	this->mPrepareToBattle->setPosition(ccp(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y + Utils::coord(200)));
 	this->mLevelName->setPosition(ccp(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(150)));
-	this->mWealthText->setPosition(ccp(Utils::coord(200), Utils::coord(30)));
+	this->mWealthText->setPosition(ccp(Utils::coord(180), Utils::coord(30)));
 	this->mLowHealthText->setPosition(ccp(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y + Utils::coord(200)));
 	this->mLevelStartText->setPosition(ccp(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y + Utils::coord(150)));
 	this->mLowHealthText->setColor(ccc3(255.0f, 0.0f, 0.0f));
 	this->mLowHealthText->setOpacity(0);
 	this->mLevelStartText->setOpacity(0);
-
+    this->mDiamondCounterText->setPosition(ccp(Utils::coord(50), Options::CAMERA_HEIGHT - Utils::coord(22)));
+    
 	this->addChild(this->mMainLayer);
 	this->addChild(this->mStaticLayer);
 
@@ -194,12 +268,17 @@ Level::Level()
 	this->mUnitsLayer->addChild(this->mHero->mShockwave, 4);
 	this->mUnitsLayer->addChild(this->mHero, 5);
 
+	this->mUnitsLayer->addChild(this->mHero2->mShadow->create(), 4);
+	this->mUnitsLayer->addChild(this->mHero2->mShockwave, 4);
+	this->mUnitsLayer->addChild(this->mHero2, 5);
+
 	this->mStaticLayer->addChild(this->mPrepareToBattle, 2);
 	this->mStaticLayer->addChild(this->mLevelName, 2);
 	this->mStaticLayer->addChild(this->mWealthText, 2);
 	this->mStaticLayer->addChild(this->mLowHealthText, 2);
 	this->mStaticLayer->addChild(this->mLevelStartText, 2);
 	this->mStaticLayer->addChild(this->mPauseButton, 2);
+    this->mStaticLayer->addChild(this->mDiamondCounterText, 2);
 
 	this->mPrepareToBattle->setOpacity(0.0f);
 	this->mLevelName->setOpacity(0.0f);
@@ -218,6 +297,10 @@ Level::Level()
 	this->mMaxSpidersCount = 0;
 
 	this->mUpgradeLevelStartText = false;
+
+	Level::mObj = this;
+
+	t = 0;
 }
 
 // ===========================================================
@@ -235,20 +318,25 @@ void Level::startLevel()
 	this->mEnemies2->clear();
 	this->mEnemies3->clear();
 	this->mEnemies4->clear();
+	this->mEnemies5->clear();
+
+	char level_number_text[256];
 
 	this->mEnemiesWave = new EnemyWave(this);
 
 	switch(++this->mCurrentLevel)
 	{
 		case 1:
-			this->mLevelName->setString("Level 1");
-
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 1, "");
+			this->mLevelName->setString(level_number_text);
+            
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(1, 0, 0)->addEnemy(5, 0, 0));
 
 			ENTITIES = 6;
 		break;
 		case 2:
-			this->mLevelName->setString("Level 2");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 2, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(5, 0, 0)->addEnemy(5, 0, 0));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 15))->addEnemy(5, 0, 0)->addEnemy(5, 0, 0));
@@ -256,7 +344,8 @@ void Level::startLevel()
 			ENTITIES = 20;
 		break;
 		case 3:
-			this->mLevelName->setString("Level 3");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 3, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(10, 0, 0));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 15))->addEnemy(8, 0, 0)->addEnemy(8, 0, 0));
@@ -264,14 +353,16 @@ void Level::startLevel()
 			ENTITIES = 26;
 		break;
 		case 4:
-			this->mLevelName->setString("Level 4");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 4, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(5, 1, 0));
 
 			ENTITIES = 5;
 		break;
 		case 5:
-			this->mLevelName->setString("Level 5");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 5, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(10, 0, 0));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 10))->addEnemy(5, 1, 0)->addEnemy(5, 1, 0));
@@ -279,14 +370,16 @@ void Level::startLevel()
 			ENTITIES = 20;
 		break;
 		case 6:
-			this->mLevelName->setString("Level 6");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 6, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(8, 2, 0));
 
 			ENTITIES = 8;
 		break;
 		case 7:
-			this->mLevelName->setString("Level 7");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 7, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(8, 2, 0));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 10))->addEnemy(5, 1, 0)->addEnemy(8, 2, 0)->addEnemy(8, 2, 0));
@@ -294,7 +387,8 @@ void Level::startLevel()
 			ENTITIES = 29;
 		break;
 		case 8:
-			this->mLevelName->setString("Level 8 - LARGE INVASION");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 8, LARGE_INVASION_TEXT);
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(10, 0, 0)->addEnemy(10, 0, 0));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 5))->addEnemy(8, 1, 0));
@@ -303,7 +397,8 @@ void Level::startLevel()
 			ENTITIES = 44;
 		break;
 		case 9:
-			this->mLevelName->setString("Level 9");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 9, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(20, 0, 1));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 10))->addEnemy(5, 2, 1)->addEnemy(5, 2, 1)->addEnemy(5, 1, 1)->addEnemy(5, 0, 1)->addEnemy(3, 2, 1)->addEnemy(7, 2, 1)->addEnemy(20, 0, 1));
@@ -311,22 +406,31 @@ void Level::startLevel()
 			ENTITIES = 70;
 		break;
 		case 10:
-			this->mLevelName->setString("Level 10 - BEWARE");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 10, BEWARE_TEXT);
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(1, 3, 0));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 10))->addEnemy(1, 3, 0)->addEnemy(1, 3, 0)->addEnemy(1, 3, 0)->addEnemy(1, 3, 0)->addEnemy(1, 3, 0));
 
 			ENTITIES = 6;
+
+            #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+            
+			unlockAchievement(1);
+            
+            #endif
 		break;
 		case 11:
-			this->mLevelName->setString("Level 11");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 11, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(20, 1, 1));
 
 			ENTITIES = 20;
 		break;
 		case 12:
-			this->mLevelName->setString("Level 12");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 12, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(2, 3, 0));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 10))->addEnemy(3, 1, 0)->addEnemy(3, 1, 0)->addEnemy(3, 1, 0));
@@ -334,7 +438,8 @@ void Level::startLevel()
 			ENTITIES = 11;
 		break;
 		case 13:
-			this->mLevelName->setString("Level 13");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 13, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(20, 0, 1));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 10))->addEnemy(5, 2, 2)->addEnemy(5, 2, 2)->addEnemy(5, 1, 2)->addEnemy(5, 0, 2)->addEnemy(3, 2, 2)->addEnemy(7, 2, 2)->addEnemy(20, 0, 1));
@@ -342,14 +447,16 @@ void Level::startLevel()
 			ENTITIES = 70;
 		break;
 		case 14:
-			this->mLevelName->setString("Level 14");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 14, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(12, 2, 1)->addEnemy(12, 2, 1));
 
 			ENTITIES = 24;
 		break;
 		case 15:
-			this->mLevelName->setString("Level 15 - PATIENCE");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 15, PATIENCE_TEXT);
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(10, 0, 2));
 
@@ -358,7 +465,8 @@ void Level::startLevel()
 			ENTITIES = 16;
 		break;
 		case 16:
-			this->mLevelName->setString("Level 16");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 16, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(10, 1, 2)->addEnemy(10, 2, 2));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 20))->addEnemy(15, 2, 1)->addEnemy(10, 1, 2));
@@ -366,7 +474,8 @@ void Level::startLevel()
 			ENTITIES = 45;
 		break;
 		case 17:
-			this->mLevelName->setString("Level 17");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 17, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(1, 3, 3));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 10))->addEnemy(10, 0, 2)->addEnemy(10, 0, 2));
@@ -375,7 +484,8 @@ void Level::startLevel()
 			ENTITIES = 26;
 		break;
 		case 18:
-			this->mLevelName->setString("Level 18 - THE ELITE");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 18, THE_ELITE_TEXT);
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(1, 3, 3));
 
@@ -386,21 +496,30 @@ void Level::startLevel()
 			ENTITIES = 36;
 		break;
 		case 19:
-			this->mLevelName->setString("Level 19");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 19, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(4, 0, 2)->addEnemy(4, 1, 2)->addEnemy(4, 2, 2)->addEnemy(4, 3, 1));
 
 			ENTITIES = 16;
 		break;
 		case 20:
-			this->mLevelName->setString("Level 20 - NUKES");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 20, NUKES_TEXT);
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(30, 1, 2));
 
 			ENTITIES = 30;
+
+            #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+            
+			unlockAchievement(3);
+            
+            #endif
 		break;
 		case 21:
-			this->mLevelName->setString("Level 21");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 21, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(8, 2, 2));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 10))->addEnemy(8, 2, 2)->addEnemy(8, 2, 2));
@@ -409,7 +528,8 @@ void Level::startLevel()
 			ENTITIES = 27;
 		break;
 		case 22:
-			this->mLevelName->setString("Level 22 - THE HORDE");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 22, THE_HORDE_TEXT);
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(30, 0, 2));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 30))->addEnemy(10, 1, 3));
@@ -417,7 +537,8 @@ void Level::startLevel()
 			ENTITIES = 40;
 		break;
 		case 23:
-			this->mLevelName->setString("Level 23");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 23, "");
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(15, 1, 2));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 10))->addEnemy(20, 0, 2)->addEnemy(20, 2, 2)->addEnemy(5, 2, 3)->addEnemy(5, 2, 3)->addEnemy(5, 2, 3)->addEnemy(5, 2, 3));
@@ -425,7 +546,8 @@ void Level::startLevel()
 			ENTITIES = 75;
 		break;
 		case 24:
-			this->mLevelName->setString("Level 24 - DEATH");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 24, DEATH_TEXT);
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(2, 3, 2)->addEnemy(2, 3, 2)->addEnemy(2, 3, 2)->addEnemy(2, 3, 2));
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 20))->addEnemy(30, 1, 3));
@@ -433,7 +555,8 @@ void Level::startLevel()
 			ENTITIES = 38;
 		break;
 		case 25:
-			this->mLevelName->setString("Level 25 - AFTERLIFE");
+			sprintf(level_number_text, LEVEL_NUMBER_TEXT, 25, ALTERLIFE_TEXT);
+			this->mLevelName->setString(level_number_text);
 
 			this->mEnemiesWave->addGroup((new EnemyGroup(this, 0))->addEnemy(10, 0, 3));
 
@@ -451,6 +574,12 @@ void Level::startLevel()
 			ENTITIES = 120;
 		break;
 		case 26:
+            #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+            
+			unlockAchievement(4);
+            
+            #endif
+
 			AppDelegate::screens->set(3.0f, 1, 2);
 
 			ENTITIES = 100;
@@ -463,7 +592,7 @@ void Level::startLevel()
 
 	this->mLevelName->runAction(CCFadeTo::create(3.0f, 255.0f));
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/start_level.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_START_LEVEL);
 
 	this->mLevelStartText->runAction(CCFadeTo::create(1.0f, 0.0f));
 
@@ -478,21 +607,21 @@ void Level::finishLevel()
 	this->removeChild(this->mEnemiesWave);
 	this->mEnemiesWave->release();
 	
-	this->mLevelName->setString("Level cleared!");
+	this->mLevelName->setString(LEVEL_CLEARED_TEXT);
 
 	this->mLevelName->runAction(CCFadeTo::create(3.0f, 255.0f));
 }
 
 void Level::generatePizzaDecorations()
 {
-	CCSpriteBatchNode* spriteBatch = CCSpriteBatchNode::create("pizzarelated/decorations.png", 75);
+	CCSpriteBatchNode* spriteBatch = CCSpriteBatchNode::create("decorations.png", 75);
 
 	float cx = this->mBackground->getWidth() / 2;
 	float cy = this->mBackground->getHeight() / 2;
 
 	float radius = this->mBackground->getWidth() * 0.40f;
 
-	Entity* decorationsSource = new Entity("pizzarelated/decorations.png", 2, 2);
+	Entity* decorationsSource = new Entity("decorations.png", 2, 2);
 
 	CCArray* decorations = CCArray::create();
 
@@ -573,22 +702,29 @@ void Level::checkCollisions(float pDeltaTime)
 
 		for(int j = 0; j < this->mEnemies2->getCount(); j++)
 		{
-			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies1->objectAtIndex(j);
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies2->objectAtIndex(j);
 
 			Utils::obstacle(enemy, bubble, 17, 50);
 		}
 
 		for(int j = 0; j < this->mEnemies3->getCount(); j++)
 		{
-			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies1->objectAtIndex(j);
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies3->objectAtIndex(j);
 
 			Utils::obstacle(enemy, bubble, 17, 50);
 		}
-
+        
 		for(int j = 0; j < this->mEnemies4->getCount(); j++)
 		{
-			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies1->objectAtIndex(j);
-
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(j);
+            
+			Utils::obstacle(enemy, bubble, 17, 50);
+		}
+        
+		for(int j = 0; j < this->mEnemies5->getCount(); j++)
+		{
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(j);
+            
 			Utils::obstacle(enemy, bubble, 17, 50);
 		}
 	}
@@ -685,11 +821,11 @@ void Level::checkCollisions(float pDeltaTime)
 				}
 			}
 		}
-
+        
 		for(int j = 0; j < this->mEnemies4->getCount(); j++)
 		{
 			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(j);
-
+            
 			if(bullet->collideWith(enemy))
 			{
 				bullet->onCollide();
@@ -700,32 +836,85 @@ void Level::checkCollisions(float pDeltaTime)
 					{
 						this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
 					}
-
+                    
 					this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
-
+                    
 					this->shake(0.5f, 4.0f);
-
+                    
+					ENTITIES--;
+				}
+			}
+		}
+        
+		for(int j = 0; j < this->mEnemies5->getCount(); j++)
+		{
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(j);
+            
+			if(bullet->collideWith(enemy))
+			{
+				bullet->onCollide();
+				
+				if(enemy->onCollide(bullet))
+				{
+					if(Utils::probably(20))
+					{
+						this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+					}
+                    
+					this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+					this->shake(0.5f, 4.0f);
+                    
 					ENTITIES--;
 				}
 			}
 		}
 	}
-
+    
 	for(int i = 0; i < this->mPickups->getCount(); i++)
 	{
 		Pickup* pickup = (Pickup*) this->mPickups->objectAtIndex(i);
-
+        
 		if(pickup->mIsMustDestroy) continue;
-
+        
 		if(this->mHero->collideWith(pickup, Utils::coord(4.0f)))
 		{
-			pickup->follow(this->mHero->getCenterX(), this->mHero->getCenterY());
-
+			pickup->follow(this->mHero->getCenterX(), this->mHero->getCenterY(), pDeltaTime);
+            
 			if(this->mHero->collideWith(pickup))
 			{
 				pickup->onCollide();
-
+                
 				this->mWealth->add(pickup->getCurrentFrameIndex());
+			}
+		}
+	}
+    
+	for(int i = 0; i < this->mDiamonds->getCount(); i++)
+	{
+		Diamond* pickup = (Diamond*) this->mDiamonds->objectAtIndex(i);
+        
+		if(pickup->mIsMustDestroy) continue;
+        
+		if(this->mHero->collideWith(pickup, Utils::coord(4.0f)))
+		{
+			pickup->follow(this->mHero->getCenterX(), this->mHero->getCenterY(), pDeltaTime);
+            
+			if(this->mHero->collideWith(pickup))
+			{
+				pickup->onCollide();
+                
+                char text[256];
+                sprintf(text, "x %d", CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds") + 1);
+                this->mDiamondCounterText->setString(text);
+                
+                CCUserDefault::sharedUserDefault()->setIntegerForKey("diamonds", CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds") + 1);
+
+                #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+                
+                updateLeaderBoard(CCUserDefault::sharedUserDefault()->getIntegerForKey("diamonds"));
+                
+                #endif
 			}
 		}
 	}
@@ -769,7 +958,7 @@ void Level::checkCollisions(float pDeltaTime)
 
 					this->mSpidersExplosions->create()->setCenterPosition(spider->getCenterX(), spider->getCenterY());
 
-					CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/big_explosion.ogg");
+					CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_BIG_EXPLOSION);
 				}
 			}
 		}
@@ -793,7 +982,7 @@ void Level::checkCollisions(float pDeltaTime)
 		{
 			enemy->death();
 
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/basedamage.ogg");
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_BASE_DAMAGE);
 
 			this->mHeroExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY() + Utils::coord(50));
 
@@ -873,47 +1062,93 @@ void Level::checkCollisions(float pDeltaTime)
 			enemiesNearCastleCount++;
 		}
 	}
-
+    
 	for(int i = 0; i < this->mEnemies4->getCount(); i++)
 	{
 		BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(i);
-
+        
 		if(enemy->collideWith(this->mHero))
 		{
 			this->mHero->onCollide(enemy);
 		}
-
+        
 		if(enemy->getHealth() <= 0 && enemy->isVisible())
 		{
 			enemy->death();
-
+            
 			if(Utils::probably(30))
 			{
 				this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
 			}
-
+            
 			this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
-
+            
 			this->shake(0.5f, 4.0f);
-
+            
 			ENTITIES--;
 		}
-
+        
 		for(int j = 0; j < this->mSpiders->getCount(); j++)
 		{
 			Spider* spider = (Spider*) this->mSpiders->objectAtIndex(j);
-
+            
 			if(spider->collideWith(enemy, 2.0f))
 			{
 				spider->follow(enemy->getCenterX(), spider->getCenterY(), pDeltaTime);
-
+                
 				if(spider->collideWith(enemy))
 				{
 					spider->onCollide(enemy);
 				}
 			}
 		}
-
+        
+		if(this->mCastle->collideWith(enemy, 2.0f))
+		{
+			enemiesNearCastleCount++;
+		}
+	}
+    
+	for(int i = 0; i < this->mEnemies5->getCount(); i++)
+	{
+		BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(i);
+        
+		if(enemy->collideWith(this->mHero))
+		{
+			this->mHero->onCollide(enemy);
+		}
+        
+		if(enemy->getHealth() <= 0 && enemy->isVisible())
+		{
+			enemy->death();
+            
+			if(Utils::probably(30))
+			{
+				this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+			}
+            
+			this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+            
+			this->shake(0.5f, 4.0f);
+            
+			ENTITIES--;
+		}
+        
+		for(int j = 0; j < this->mSpiders->getCount(); j++)
+		{
+			Spider* spider = (Spider*) this->mSpiders->objectAtIndex(j);
+            
+			if(spider->collideWith(enemy, 2.0f))
+			{
+				spider->follow(enemy->getCenterX(), spider->getCenterY(), pDeltaTime);
+                
+				if(spider->collideWith(enemy))
+				{
+					spider->onCollide(enemy);
+				}
+			}
+		}
+        
 		if(this->mCastle->collideWith(enemy, 2.0f))
 		{
 			enemiesNearCastleCount++;
@@ -1008,7 +1243,17 @@ void Level::checkCollisions(float pDeltaTime)
 		for(int i = 0; i < this->mEnemies4->getCount(); i++)
 		{
 			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(i);
-
+            
+			if(enemy->collideWith(this->mCastle->mShockwave, 2.0f))
+			{
+				enemy->onCollideC(this->mCastle);
+			}
+		}
+		
+		for(int i = 0; i < this->mEnemies5->getCount(); i++)
+		{
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(i);
+            
 			if(enemy->collideWith(this->mCastle->mShockwave, 2.0f))
 			{
 				enemy->onCollideC(this->mCastle);
@@ -1077,8 +1322,21 @@ void Level::checkCollisions(float pDeltaTime)
 
 			if(enemy->collideWith(bullet))
 			{
-				enemy->onCollide(bullet);
 				bullet->destroy();
+                
+                if(enemy->onCollide(bullet))
+                {
+                    if(Utils::probably(30))
+                    {
+                        this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    }
+                    
+                    this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+                    this->shake(0.5f, 4.0f);
+                    
+                    ENTITIES--;
+                }
 			}
 		}
 
@@ -1088,8 +1346,21 @@ void Level::checkCollisions(float pDeltaTime)
 
 			if(enemy->collideWith(bullet))
 			{
-				enemy->onCollide(bullet);
 				bullet->destroy();
+                
+                if(enemy->onCollide(bullet))
+                {
+                    if(Utils::probably(30))
+                    {
+                        this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    }
+                    
+                    this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+                    this->shake(0.5f, 4.0f);
+                    
+                    ENTITIES--;
+                }
 			}
 		}
 		
@@ -1099,19 +1370,69 @@ void Level::checkCollisions(float pDeltaTime)
 
 			if(enemy->collideWith(bullet))
 			{
-				enemy->onCollide(bullet);
 				bullet->destroy();
+                
+                if(enemy->onCollide(bullet))
+                {
+                    if(Utils::probably(30))
+                    {
+                        this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    }
+                    
+                    this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+                    this->shake(0.5f, 4.0f);
+                    
+                    ENTITIES--;
+                }
 			}
 		}
 		
 		for(int i = 0; i < this->mEnemies4->getCount(); i++)
 		{
 			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(i);
-
+            
 			if(enemy->collideWith(bullet))
 			{
-				enemy->onCollide(bullet);
 				bullet->destroy();
+                
+                if(enemy->onCollide(bullet))
+                {
+                    if(Utils::probably(30))
+                    {
+                        this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    }
+                    
+                    this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+                    this->shake(0.5f, 4.0f);
+                    
+                    ENTITIES--;
+                }
+			}
+		}
+		
+		for(int i = 0; i < this->mEnemies5->getCount(); i++)
+		{
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(i);
+            
+			if(enemy->collideWith(bullet))
+			{
+				bullet->destroy();
+                
+                if(enemy->onCollide(bullet))
+                {
+                    if(Utils::probably(30))
+                    {
+                        this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    }
+                    
+                    this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+                    this->shake(0.5f, 4.0f);
+                    
+                    ENTITIES--;
+                }
 			}
 		}
 	}
@@ -1187,7 +1508,7 @@ void Level::checkCollisions(float pDeltaTime)
 		for(int i = 0; i < this->mEnemies4->getCount(); i++)
 		{
 			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(i);
-
+            
 			if(enemy->collideWith(this->mHero->mShockwave, this->mHero->mShockwaveScale))
 			{
 				if(enemy->onCollide(this->mHero->mShockwaveDamage, enemy->getCenterX()-this->mHero->getCenterX(), enemy->getCenterY()-this->mHero->getCenterY()))
@@ -1196,11 +1517,33 @@ void Level::checkCollisions(float pDeltaTime)
 					{
 						this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
 					}
-
+                    
 					this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
-
+                    
 					this->shake(0.5f, 4.0f);
-
+                    
+					ENTITIES--;
+				}
+			}
+		}
+		
+		for(int i = 0; i < this->mEnemies5->getCount(); i++)
+		{
+			BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(i);
+            
+			if(enemy->collideWith(this->mHero->mShockwave, this->mHero->mShockwaveScale))
+			{
+				if(enemy->onCollide(this->mHero->mShockwaveDamage, enemy->getCenterX()-this->mHero->getCenterX(), enemy->getCenterY()-this->mHero->getCenterY()))
+				{
+					if(Utils::probably(30))
+					{
+						this->mPickups->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+					}
+                    
+					this->mEnemiesExplosions->create()->setCenterPosition(enemy->getCenterX(), enemy->getCenterY());
+                    
+					this->shake(0.5f, 4.0f);
+                    
 					ENTITIES--;
 				}
 			}
@@ -1279,17 +1622,31 @@ BaseEnemy* Level::getClosestEnemy(Entity* mObject)
 			distance = d;
 		}
 	}
-		
+    
 	for(int i = 0; i < this->mEnemies4->getCount(); i++)
 	{
 		BaseEnemy* enemy = (BaseEnemy*) this->mEnemies4->objectAtIndex(i);
-
+        
 		float d = Utils::distance(mObject->getCenterX(), mObject->getCenterY(), enemy->getCenterX(), enemy->getCenterY());
-
+        
 		if(closest == NULL || distance > d)
 		{
 			closest = enemy;
-
+            
+			distance = d;
+		}
+	}
+    
+	for(int i = 0; i < this->mEnemies5->getCount(); i++)
+	{
+		BaseEnemy* enemy = (BaseEnemy*) this->mEnemies5->objectAtIndex(i);
+        
+		float d = Utils::distance(mObject->getCenterX(), mObject->getCenterY(), enemy->getCenterX(), enemy->getCenterY());
+        
+		if(closest == NULL || distance > d)
+		{
+			closest = enemy;
+            
 			distance = d;
 		}
 	}
@@ -1334,26 +1691,6 @@ void Level::updateShake(float pDeltaTime)
 // Virtual Methods
 // ===========================================================
 
-void Level::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
-{
-	
-}
-
-void Level::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
-{
-
-}
-
-void Level::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
-{
-	
-}
-
-void Level::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent)
-{
-	ccTouchesEnded(pTouches, pEvent);
-}
-
 bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 {
 	if(this->mPause) return false;
@@ -1373,7 +1710,7 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 			// Fly
 			if(true) // TODO: this->mHero->isCanFly()
 			{
-				if(Utils::millisecondNow() - this->mLastTimeTapLeft < 20.0f)
+				if(Utils::millisecondNow() - this->mLastTimeTapLeft < 300)
 				{
 					if(this->mHero->getZ() > Options::MIN_Z)
 					{
@@ -1381,7 +1718,7 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 						{
 							this->shake(0.8f, 4.0f);
 
-							this->mLastTimeTapLeft = 0;
+							this->mLastTimeTapLeft = Utils::millisecondNow();
 
 							return true;
 						}
@@ -1390,13 +1727,15 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 					{
 						this->mHero->startFly();
 
-						this->mLastTimeTapLeft = 0;
+						this->mLastTimeTapLeft = Utils::millisecondNow();
 
 						return true;
 					}
 				}
-
-				this->mLastTimeTapLeft = Utils::millisecondNow();
+				else
+				{
+					this->mLastTimeTapLeft = Utils::millisecondNow();
+				}
 			}
 		}
 		else
@@ -1407,7 +1746,7 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 			// Laser
 			if(ENTITIES > 0)
 			{
-				if(Utils::millisecondNow() - this->mLastTimeTapRight < 20.0f)
+				if(Utils::millisecondNow() - this->mLastTimeTapRight < 300)
 				{
 					this->mHero->laser();
 
@@ -1564,9 +1903,12 @@ void Level::update(float pDeltaTime)
 		{
 			this->mUpgradeLevelStartTimeElapsed -= this->mUpgradeLevelStartTime;
 
-			char text[512];
-			sprintf(text, "Level %d will begin in %d seconds...", this->mCurrentLevel + 1, this->mTextSeconds);
-			this->mLevelStartText->setString(text);
+            if(this->mCurrentLevel < 25)
+            {
+                char text[512];
+                sprintf(text, LEVEL_BEGIN_TEXT, this->mCurrentLevel + 1, this->mTextSeconds);
+                this->mLevelStartText->setString(text);
+            }
 
 			this->mTextSeconds--;
 		}
@@ -1635,11 +1977,11 @@ void Level::update(float pDeltaTime)
 			
 			if(this->mCurrentLevel < 25)
 			{
-				sprintf(text, "Level %d will begin in %d seconds...", this->mCurrentLevel + 1, this->mTextSeconds);
+				sprintf(text, LEVEL_BEGIN_TEXT, this->mCurrentLevel + 1, this->mTextSeconds);
 			}
 			else
 			{
-				sprintf(text, "You won, I guess...");
+				sprintf(text, WIN_TEXT);
 			}
 			
 			this->mLevelStartText->setString(text);
@@ -1724,28 +2066,43 @@ void Level::update(float pDeltaTime)
 
 	if(this->mHero->mShouldLaserFire)
 	{
-		this->renderLaserBeam(0, this->mHero->getCenterX(), this->mHero->getCenterY() + this->mHero->getZ(), this->mLaserVectorX, this->mLaserVectorY);
+		if(this->mLaserVectorX != 0 && this->mLaserVectorY != 0)
+		{
+			this->renderLaserBeam(0, this->mHero->getCenterX(), this->mHero->getCenterY() + this->mHero->getZ(), this->mLaserVectorX, this->mLaserVectorY);
+		}
 	}
 	else
 	{
 		this->mLaser1->destroy();
 		this->mLaser2->destroy();
+
+		this->mLaserVectorX = 0;
+		this->mLaserVectorY = 0;
 	}
 
 	if(ENTITIES <= 0)
 	{
 		this->mHero->mShouldLaserFire = false;
 	}
-	
-	/*this->mHero->mShouldLaserFire = true;
-	this->mHero->mLaserVectorX = this->mCastle->getCenterX();
-	this->mHero->mLaserVectorY = this->mCastle->getCenterY();
-	this->renderLaserBeam(0, this->mHero->getCenterX(), this->mHero->getCenterY() + this->mHero->getZ(), this->mCastle->getCenterX(), this->mCastle->getCenterY());*/
+
+	 // MULTIPLAYER
+
+	if(AppDelegate::MULTIPLAYER)
+	{
+		t+=pDeltaTime;
+
+		if(t >= -1.0f)
+		{
+			t = 0;
+		}
+	}
 }
 
 void Level::onEnter()
 {
 	Screen::onEnter();
+
+	this->mPauseButton->setRegisterAsTouchable(true); // Sorry for that but it's bugs of Cocos2d-x :(
 
 	// RESTART
 
@@ -1772,15 +2129,17 @@ void Level::onEnter()
 
 	this->mTextSeconds = 0;
 
-	this->mCurrentLevel = 0;
-
 	this->mHero->reset();
+	this->mCastle->create();
 	this->mCastle->reset();
 
 	this->mEnemies1->clear();
 	this->mEnemies2->clear();
 	this->mEnemies3->clear();
 	this->mEnemies4->clear();
+	this->mEnemies5->clear();
+    
+    this->mDiamonds->clear();
 
 	this->mBaseBubbles->clear();
 
@@ -1816,7 +2175,7 @@ void Level::onEnter()
 
 void Level::onExit()
 {
-	Screen::onExit();
+	CCScene::onExit();
 }
 
 // UPDATES
@@ -1835,7 +2194,7 @@ void Level::draw()
 
 void Level::renderLaserBeam(float angle, float sx, float sy, float ex, float ey)
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/beam.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_BEAM);
 
 	sy -= 10;
 	//sx -= 10;
@@ -1877,6 +2236,51 @@ void Level::renderLaserBeam(float angle, float sx, float sy, float ex, float ey)
 	cocosAngle = -1 * angleDegrees;
 
 	this->mLaser2->setRotation(cocosAngle);
+}
+
+void Level::configure()
+{
+	if(AppDelegate::MULTIPLAYER)
+	{
+		this->mHero->create()->setCenterPosition(Options::CAMERA_CENTER_X - Utils::coord(100), Options::CAMERA_CENTER_Y - Utils::coord(200));
+		this->mHero2->create()->setCenterPosition(Options::CAMERA_CENTER_X + Utils::coord(100), Options::CAMERA_CENTER_Y - Utils::coord(200));
+	}
+	else
+	{
+		this->mHero->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(200));
+		this->mHero2->destroy();
+	}
+}
+
+void Level::nativeOnGooglePlusRealtimeMessageReceived(int param1, int param2, int param3, int param4)
+{
+	Level::mObj->onGooglePlusRealtimeMessageReceived(param1, param2, param3, param4);
+}
+
+void Level::onGooglePlusRealtimeMessageReceived(int param1, int param2, int param3, int param4)
+{
+	/*
+	 * 0 - Start jump
+	 * 1 - End jump
+	 * 2 - Start fly damage
+	 * 3 - Cause pause
+	 */
+
+	switch(param1)
+	{
+		case 0:
+			this->mHero2->startFly();
+		break;
+		case 1:
+			this->mHero2->endFly();
+		break;
+		case 2:
+			this->mHero2->startFlyDamage();
+		break;
+		case 3:
+			((PauseButton*) this->mPauseButton)->cause();
+		break;
+	}
 }
 
 #endif

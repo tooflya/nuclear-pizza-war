@@ -5,10 +5,12 @@
 #include "BaseBullet.h"
 #include "BaseEnemy.h"
 
-Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizontalFramesCount, int pVerticalFramesCount) :
+Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizontalFramesCount, int pVerticalFramesCount, bool pBroadcaster) :
 	BarEntity(pszFileName, pHorizontalFramesCount, pVerticalFramesCount)
 	{
 		this->setAsCollidable();
+
+		this->mBroadcaster = pBroadcaster;
 
 		this->mAnimationTime = 0.1f;
 		this->mAnimationTimeElapsed = 0;
@@ -18,10 +20,10 @@ Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizon
 
 		this->mAnimationFrameSide = 0;
 
-		this->mShockwave = new Entity("actors/shockwave.png");
+		this->mShockwave = new Entity("shockwave.png");
 		this->mShockwave->setScale(0);
 
-		this->mShadow = new Entity("actors/shadow.png");
+		this->mShadow = new Entity("shadow.png");
 		this->mShadow->setIsShadow();
 
 		this->mEngineParticlesAnimationTime = 0.3f;
@@ -31,10 +33,10 @@ Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizon
 
 		this->mEngineParticles = new EntityManager(5, new EngineParticle());
 
-		this->mBulletsTexture0 = new Texture("actors/bullet.png", 1, 1);
-		this->mBulletsTexture1 = new Texture("actors/bullet1.png", 1, 1);
-		this->mBulletsTexture2 = new Texture("actors/bullet2.png", 1, 1); 
-		this->mBulletsTexture3 = new Texture("actors/bullet3.png", 1, 1); 
+		this->mBulletsTexture0 = new Texture("bullet.png", 1, 1);
+		this->mBulletsTexture1 = new Texture("bullet1.png", 1, 1);
+		this->mBulletsTexture2 = new Texture("bullet2.png", 1, 1); 
+		this->mBulletsTexture3 = new Texture("bullet3.png", 1, 1); 
 
 		this->reset();
 	}
@@ -96,6 +98,11 @@ void Hero::reset()
 	this->mShockwaveScale = 1.5f;
 	
 	this->mBulletsManager->changeTexture(this->mBulletsTexture0);
+
+	this->mIsOutOfTop = false;
+	this->mFall = false;
+
+	this->setZOrder(5);
 }
 
 void Hero::laser()
@@ -108,9 +115,20 @@ void Hero::laser()
 
 void Hero::startFly()
 {
+	if(this->mIsFly) return;
+
 	this->mIsFly = true;
 	
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/player_accelerating.ogg");
+	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_PLAYER_ACCELERATING);
+
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
+	if(AppDelegate::MULTIPLAYER && this->mBroadcaster)
+	{
+		broadcastMessage(0, 0, 0, 0);
+	}
+    
+    #endif
 }
 
 void Hero::endFly()
@@ -119,6 +137,15 @@ void Hero::endFly()
 
 	this->mIsFly = false;
 	this->mFlyDownSpeed = 0;
+
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
+	if(AppDelegate::MULTIPLAYER && this->mBroadcaster)
+	{
+		broadcastMessage(1, 0, 0, 0);
+	}
+    
+    #endif
 }
 
 bool Hero::isCanFly()
@@ -134,6 +161,15 @@ bool Hero::startFlyDamage()
 
 	this->mIsFly = false;
 	this->mFlyDownSpeed = 20;
+
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
+	if(AppDelegate::MULTIPLAYER && this->mBroadcaster)
+	{
+		broadcastMessage(2, 0, 0, 0);
+	}
+    
+    #endif
 
 	return true;
 }
@@ -247,11 +283,11 @@ void Hero::fire(float pVectorX, float pVectorY)
 
 		if(this->mBulletsPower < 30)
 		{
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/shot.ogg");
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_SHOT);
 		}
 		else
 		{
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/shot2.ogg");
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_SHOT2);
 		}
 	}
 }
@@ -297,7 +333,7 @@ bool Hero::destroy()
 
 	this->mShadow->destroy();
 	
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/player_death.ogg");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_PLAYER_DEATH);
 
 	return false;
 }
@@ -498,7 +534,7 @@ void Hero::update(float pDeltaTime)
 				this->mFlyDownSpeed = 0;
 				this->mShockwaveTimeElapsed = 0;
 			
-				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/jetpack_fail.ogg");
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_JETPACK_FAIL);
 			}
 		}
 	}
@@ -526,11 +562,11 @@ void Hero::update(int type, int level)
 				break;
 				case 2:
 					this->mBulletsManager->changeTexture(this->mBulletsTexture2);
-					this->mBulletsPower = 30;
+					this->mBulletsPower = 28;
 				break;
 				case 3:
 					this->mBulletsManager->changeTexture(this->mBulletsTexture3);
-					this->mBulletsPower = 35;
+					this->mBulletsPower = 31;
 				break;
 			}
 		break;
@@ -544,7 +580,6 @@ void Hero::update(int type, int level)
 				case 2:
 					this->mIsDoubleFire = true;
 					this->setMaxFireTime(0.35f);
-					this->mBulletsPower -= 10;
 				break;
 				case 3:
 					this->setMaxFireTime(0.30f);
@@ -552,12 +587,10 @@ void Hero::update(int type, int level)
 				case 4:
 					this->mIsTripleFire = true;
 					this->setMaxFireTime(0.25f);
-					this->mBulletsPower -= 10;
 				break;
 				case 5:
 					this->mIsQuadrupleFire = true;
 					this->setMaxFireTime(0.20f);
-					this->mBulletsPower -= 10;
 				break;
 			}
 		break;
@@ -655,7 +688,7 @@ void Hero::update(int type, int level)
 			}
 		break;
 
-		case 7:
+		case 7: // Beam Ammo
 			switch(level)
 			{
 				case 1:
