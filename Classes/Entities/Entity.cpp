@@ -114,10 +114,7 @@ void Entity::constructor(const char* pszFileName, int pHorizontalFramesCount, in
 	this->mFall = false;
 	this->mIsOutOfTop = false;
 
-	this->scheduleUpdate();
 	this->getTexture()->setAntiAliasTexParameters();
-	this->retain();
-	this->release();
 
 	this->destroy();
 }
@@ -437,12 +434,12 @@ bool Entity::isIgnoreSorting()
 
 void Entity::onCreate()
 {
-
+	this->scheduleUpdate();
 }
 
 void Entity::onDestroy()
 {
-
+	this->unscheduleUpdate();
 }
 
 Entity* Entity::create()

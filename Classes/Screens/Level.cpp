@@ -123,8 +123,8 @@ Level::Level()
 	COINS[1] = 0;
 	COINS[2] = 0;
 
-	this->mLastTimeTapLeft = Utils::millisecondNow();
-	this->mLastTimeTapRight = Utils::millisecondNow();
+	this->mLastTimeTapLeft = Utils::millisecondNow() - 300;
+	this->mLastTimeTapRight = Utils::millisecondNow() - 300;
 
 	this->setRegisterAsTouchable(true);
 
@@ -1718,7 +1718,7 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 						{
 							this->shake(0.8f, 4.0f);
 
-							this->mLastTimeTapLeft = Utils::millisecondNow();
+							this->mLastTimeTapLeft = Utils::millisecondNow() - 300;
 
 							return true;
 						}
@@ -1750,7 +1750,7 @@ bool Level::ccTouchBegan(CCTouch* touch, CCEvent* event)
 				{
 					this->mHero->laser();
 
-					this->mLastTimeTapRight = Utils::millisecondNow();
+					this->mLastTimeTapRight = Utils::millisecondNow() - 300;
 				}
 
 				this->mLastTimeTapRight = Utils::millisecondNow();

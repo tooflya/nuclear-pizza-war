@@ -203,8 +203,8 @@ void Hero::follow(float pDeltaTime)
 		float x = this->mFollowCoordinateX / this->getSpeed(1);
 		float y = this->mFollowCoordinateY / this->getSpeed(1);
 
-		x = this->getCenterX() - x * 0.015f;
-		y = this->getCenterY() - y * 0.015f;
+		x = this->getCenterX() - x * pDeltaTime;
+		y = this->getCenterY() - y * pDeltaTime;
 
 		this->setCenterPosition(x, y);
 	}
