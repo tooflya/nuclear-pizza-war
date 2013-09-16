@@ -1,0 +1,58 @@
+<!--
+ * Tooflya Inc. Development
+ *
+ * @author Igor Mats from Tooflya Inc.
+ * @copyright (c) 2013 by Igor Mats
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License v2
+ * @all rights granted under this License are granted for the term of
+ * copyright on the Program, and are irrevocable provided the stated
+ * conditions are met. This License explicitly affirms your unlimited
+ * permission to run the unmodified Program. The output from running a
+ * covered work is covered by this License only if the output, given its
+ * content, constitutes a covered work. This License acknowledges your
+ * rights of fair use or other equivalent, as provided by copyright law.
+ *
+ * @version
+ *
+ *-->
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Nuclear Pizza War</title>
+    <link rel="icon" type="image/GIF" href="favicon.png"/>
+    <meta name="viewport" content="width=1000,user-scalable=no"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="full-screen" content="yes"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <style>
+         @font-face {
+            font-family: 'Franchise';
+            src: url('Resources/Fonts/Franchise.ttf');
+            font-weight: 400;
+         }
+        body, canvas {
+            font-family: 'Franchise';
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        div.container {
+            width: 800px;
+            height: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="canvas" width="800" height="600"></canvas>
+    </div>
+    <script src="application.js"></script>
+</body>
+</html>
