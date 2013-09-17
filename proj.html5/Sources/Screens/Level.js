@@ -28,8 +28,6 @@ cc.Level = cc.Screen.extend({
 
     this.addChild(this.m_MainLayer);
     this.addChild(this.m_StaticLayer);
-
-    //cc.AudioEngine.getInstance().playMusic(s_MainTheme, true);
   },
 
   update: function(deltaTime) {
@@ -211,6 +209,10 @@ cc.MainLayer = cc.Layer.extend({
     this.m_Bullets = cc.EntityManager.create(10, cc.Bullet.create(), this, 23);
     this.m_BulletsCrashes = cc.EntityManager.create(10, cc.BulletCrash.create(), this, 23);
     this.m_Enemies = [];
+    this.m_Explosions = [];
+    this.m_Explosions[0] = cc.EntityManager.create(10, cc.Explosion.create(), this, 24);
+    this.m_Explosions[1] = cc.EntityManager.create(10, cc.LongExplosion.create(), this, 24);
+    this.m_Explosions[2] = cc.EntityManager.create(10, cc.MineExplosion.create(), this, 24);
     this.m_Enemies[0] = cc.EntityManager.create(100, cc.FollowEnemy.create(), this, 24, false);
     this.m_Enemies[1] = cc.EntityManager.create(100, cc.CastleEnemy.create(), this, 24, false);
     this.m_Enemies[2] = cc.EntityManager.create(100, cc.FiredEnemy.create(), this, 24, false);
@@ -441,44 +443,21 @@ cc.MainLayer = cc.Layer.extend({
       obstacle(this.m_Personage, bubble.getCenterX(), bubble.getCenterY(), 17, 50);
     }
 
-    for(var i = 0; i < this.m_Bullets.getCount(); i++) {
-      var bullet = this.m_Bullets.get(j);
+    for(var i = 0; i < 4; i++) {
+      for(var j = 0; j < this.m_Enemies[i].getCount(); j++) {
+        var enemy = this.m_Enemies[i].get(j);
 
-      if(!bullet) break;
-
-      for(var j = 0; j < this.m_Enemies[0].getCount(); j++) {
-        var enemy = this.m_Enemies[0].get(j);
-
-        if(bullet.collideWidth(enemy)) {
-          enemy.onCollide(bullet, "bullet");
-          bullet.onCollide(enemy, "enemy");
+        if(enemy.collideWidth(this.m_Personage)) {
+          this.m_Personage.onCollide(enemy, "enemy");
         }
-      }
 
-      for(var j = 0; j < this.m_Enemies[1].getCount(); j++) {
-        var enemy = this.m_Enemies[1].get(j);
+        for(var k = 0; k < this.m_Bullets.getCount(); k++) {
+          var bullet = this.m_Bullets.get(k);
 
-        if(bullet.collideWidth(enemy)) {
-          enemy.onCollide(bullet, "bullet");
-          bullet.onCollide(enemy, "enemy");
-        }
-      }
-
-      for(var j = 0; j < this.m_Enemies[2].getCount(); j++) {
-        var enemy = this.m_Enemies[2].get(j);
-
-        if(bullet.collideWidth(enemy)) {
-          enemy.onCollide(bullet, "bullet");
-          bullet.onCollide(enemy, "enemy");
-        }
-      }
-
-      for(var j = 0; j < this.m_Enemies[3].getCount(); j++) {
-        var enemy = this.m_Enemies[3].get(j);
-
-        if(bullet.collideWidth(enemy)) {
-          enemy.onCollide(bullet, "bullet");
-          bullet.onCollide(enemy, "enemy");
+          if(enemy.collideWidth(bullet)) {
+            bullet.onCollide(enemy, "enemy");
+            enemy.onCollide(bullet, "bullet");
+          }
         }
       }
     }
@@ -505,11 +484,6 @@ cc.MainLayer = cc.Layer.extend({
   },
 
   startLevel: function(index) {
-    this.m_Enemies[0].clear();
-    this.m_Enemies[1].clear();
-    this.m_Enemies[2].clear();
-    this.m_Enemies[3].clear();
-
     this.m_EnemiesWave = cc.EnemyWave.create();
 
     switch(index)

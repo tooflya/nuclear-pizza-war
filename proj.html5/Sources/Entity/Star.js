@@ -35,6 +35,7 @@ cc.Star = cc.TiledEntity.extend({
 
     this.setCurrentFrameIndex(random(0, 6));
     this.setCenterPosition(randomf(this.m_X1, this.m_X2), this.m_Y1);
+    this.setBlendFunc(gl.ONE, gl.ZERO);
   },
 
   update: function(deltaTime) {

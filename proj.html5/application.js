@@ -20,10 +20,10 @@
 (function () {
   var d = document;
   var c = {
-    COCOS2D_DEBUG: 0,
+    COCOS2D_DEBUG: 2,
     box2d: false,
     chipmunk: false,
-    showFPS: false,
+    showFPS: true,
     loadExtension: false,
     frameRate: 1200,
     tag: 'canvas',
@@ -51,6 +51,9 @@
       'Sources/Entity/CastleEnemy.js',
       'Sources/Entity/FiredEnemy.js',
       'Sources/Entity/BigEnemy.js',
+      'Sources/Entity/Explosion.js',
+      'Sources/Entity/LongExplosion.js',
+      'Sources/Entity/MineExplosion.js',
       'Sources/Enemy/EnemyWave.js',
       'Sources/Enemy/EnemyGroup.js',
       'Sources/Screens/Screen.js',

@@ -36,6 +36,10 @@
       this.m_HealthFull = 1;
       this.m_Health = this.m_HealthFull;
 
+      this.m_IsRed = false;
+      this.m_RedTime = 0.4;
+      this.m_RedTimeElapsed = 0;
+
       this.m_BarWidth = 25;
       this.m_BarHeight = 5;
       this.m_Fall = false;
@@ -54,7 +58,7 @@
       if(callback) {
         callback(this);
       } else {
-        this.destroy();
+        this.onDestroyPrivate();
       }
     },
 
@@ -75,6 +79,13 @@
     },
 
     onCreate: function() {
+      this.onCreatePrivate();
+    },
+    onDestroy: function() {
+      this.onDestroyPrivate();
+    },
+
+    onCreatePrivate: function() {
       this.setVisible(true);
 
       if(this.m_Shadow) {
@@ -88,7 +99,7 @@
 
       this.scheduleUpdate();
     },
-    onDestroy: function() {
+    onDestroyPrivate: function() {
       this.setVisible(false);
 
       if(this.m_Shadow) {
@@ -222,6 +233,16 @@
       return x * x + y * y < d * d;
     },
 
+    onCollide: function() {
+      this.setRed();
+    },
+    setRed: function() {
+      this.m_IsRed = true;
+      this.m_RedTimeElapsed = 0;
+
+      this.setColor(new cc.Color3B(255, 0, 0));
+    },
+
     update: function(deltaTime) {
       this._super();
   
@@ -265,13 +286,13 @@
             this.m_IsOutOfTop = false;
           }
 
-          this.setCenterPosition(this.getCenterX(), this.getCenterY() - 5.0);
+          this.setCenterPosition(this.getCenterX(), this.getCenterY() - 300 * deltaTime);
 
           this.m_Shadow.setVisible(false);
 
-          this.m_Health -= 5;
+          this.m_Health -= 0.5;
           
-          //this.setRed();
+          this.setRed();
 
           this.m_Fall = true;
         }
@@ -286,6 +307,19 @@
 
           this.m_Fall = false;
           this.m_IsOutOfTop = false;
+        }
+      }
+
+      if(this.m_IsRed)
+      {
+        this.m_RedTimeElapsed += deltaTime;
+
+        if(this.m_RedTimeElapsed >= this.m_RedTime)
+        {
+          this.m_IsRed = false;
+          this.m_RedTimeElapsed = 0;
+
+          this.setColor(new cc.Color3B(255, 255, 255));
         }
       }
     },

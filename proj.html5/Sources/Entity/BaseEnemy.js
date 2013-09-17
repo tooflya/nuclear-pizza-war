@@ -18,26 +18,43 @@
  */
 
 cc.BaseEnemy = cc.AnimatedEntity.extend({
-
   onCreate: function() {
     this._super();
 
+    this.m_VectorX = 0;
+    this.m_VectorY = 0;
+
+    this.m_ShootPadding = 0;
+
     this.animate(0.1);
     this.setCollideable(true);
-
-    this.m_Healthfull = 100;
   },
   onDestroy: function() {
     this._super();
+    
+    this.getParent().getParent().m_EnemiesCount--;
 
-    if(this.getParent()) {
-      this.getParent().getParent().m_EnemiesCount--;
+    if(this.getParent().getParent().m_EnemiesCount + 1 > 0) {
+      this.getParent().m_Explosions[0].create();
+      this.getParent().m_Explosions[0].last().setCenterPosition(this.getCenterX(), this.getCenterY());
+
+      this.getParent().shake(0.5, 3.0);
     }
+
+    cc.AudioEngine.getInstance().playEffect(s_EnemyDestroy);
   },
 
   onCollide: function(object, description) {
+    this._super();
+
     switch(description) {
       case "bullet":
+        this.m_VectorX = object.m_VectorX;
+        this.m_VectorY = object.m_VectorY;
+
+        this.m_ShootPadding = 20;
+        this.m_ShootPaddingSpeed = 100;
+
         this.m_Health -= object.m_Power;
       break;
     }
@@ -46,6 +63,16 @@ cc.BaseEnemy = cc.AnimatedEntity.extend({
   update: function(deltaTime) {
     this._super(deltaTime);
 
-    this.move(deltaTime);
+    if(this.m_ShootPadding > 0) {
+      var vector = vectorNormalize(this.m_VectorX, this.m_VectorY, this.m_ShootPaddingSpeed * deltaTime);
+
+      this.setCenterPosition(this.getCenterX() + vector[0], this.getCenterY() + vector[1]);
+
+      this.m_ShootPadding -= this.m_ShootPaddingSpeed * deltaTime;
+    } else {
+      this.move(deltaTime);
+    }
+
+    this.m_Shadow.setCenterPosition(this.getCenterX(), this.getCenterY() - 15);
   }
 });

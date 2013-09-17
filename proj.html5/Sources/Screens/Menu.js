@@ -38,6 +38,8 @@
 
         this.backgroundStars.last().setCenterPosition(randomf(0.0, CAMERA_WIDTH), randomf(0.0, CAMERA_HEIGHT));
       }
+
+      cc.AudioEngine.getInstance().playMusic(s_MainTheme, true);
     },
 
     update: function(deltaTime) {

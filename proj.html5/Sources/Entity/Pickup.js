@@ -63,9 +63,9 @@ cc.Pickup = cc.TiledEntity.extend({
     }
 
     if(this.m_AnimationReverse) {
-      this.removeZ(0.1);
+      this.removeZ(10 * deltaTime);
     } else {
-      this.addZ(0.1);
+      this.addZ(10 * deltaTime);
     }
 
     this.m_Shadow.setCenterPosition(this.getCenterX(), this.getCenterY() - 10 - this.getZ());

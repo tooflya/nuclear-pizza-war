@@ -24,7 +24,7 @@ cc.Bullet = cc.TiledEntity.extend({
     this.m_Shadow = cc.TiledEntity.create(s_Bullets, 3, 2);
 
     this.m_Speed = 500;
-    this.m_Power = 200;
+    this.m_Power = 20;
   },
 
   onCreate: function() {
@@ -33,10 +33,8 @@ cc.Bullet = cc.TiledEntity.extend({
   onDestroy: function() {
     this._super();
 
-    if(this.getParent()) {
-      this.getParent().getParent().m_BulletsCrashes.create();
-      this.getParent().getParent().m_BulletsCrashes.last().setCenterPosition(this.getCenterX(), this.getCenterY());
-    }
+    this._parent._parent.m_BulletsCrashes.create();
+    this._parent._parent.m_BulletsCrashes.last().setCenterPosition(this.getCenterX(), this.getCenterY());
 
     cc.AudioEngine.getInstance().playEffect(s_PersonageShootLand);
   },

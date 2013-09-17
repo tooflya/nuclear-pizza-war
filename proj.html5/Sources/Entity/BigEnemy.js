@@ -47,7 +47,6 @@ cc.BigEnemy = cc.BaseEnemy.extend({
     var vector = vectorNormalize(this.getCenterX() - this.m_VectorX, this.getCenterY() - this.m_VectorY, this.m_Speed * deltaTime);
 
     this.setCenterPosition(this.getCenterX() - vector[0], this.getCenterY() - vector[1]);
-    this.m_Shadow.setCenterPosition(this.getCenterX(), this.getCenterY() - 15);
   },
 
   update: function(deltaTime) {

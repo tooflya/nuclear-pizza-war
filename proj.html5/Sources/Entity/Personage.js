@@ -200,6 +200,7 @@ cc.Personage = cc.AnimatedEntity.extend({
     this.m_FlyDownSpeed = 0;
 
     this.m_Flying = true;
+      cc.AudioEngine.getInstance().playEffect(s_PersonageFlying);
   },
   endFly: function() {
     this.m_EngineParticlesAnimationTime = 0.3;
@@ -252,11 +253,10 @@ cc.Personage = cc.AnimatedEntity.extend({
     // Flying
 
     if(this.m_Flying) {
-      cc.AudioEngine.getInstance().playEffect(s_PersonageFlying);
 
       this.addZ(120.0 * deltaTime);
 
-      this.m_JetPackPower = this.m_JetPackPower > 0 ? this.m_JetPackPower - 1 : 0;
+      this.m_JetPackPower = this.m_JetPackPower > 0 ? this.m_JetPackPower - 50 * deltaTime : 0;
 
       if(this.m_JetPackPower <= 0) {
         this.endFly();
@@ -265,14 +265,14 @@ cc.Personage = cc.AnimatedEntity.extend({
       if(this.getZ() > MIN_Z) {
         this.m_EngineParticlesAnimationTime = 1000;
 
-        this.m_FlyDownSpeed += 0.1;
+        this.m_FlyDownSpeed += 10 * deltaTime;
         this.removeZ((this.m_FlyDownSpeed * 60) * deltaTime);
       } else {
         this.m_EngineParticlesAnimationTime = 0.3;
 
         this.m_Flying = false;
 
-        this.m_JetPackPower = this.m_JetPackPower >= this.m_JetPackPowerFull ? this.m_JetPackPowerFull : this.m_JetPackPower + 1.0;
+        this.m_JetPackPower = this.m_JetPackPower >= this.m_JetPackPowerFull ? this.m_JetPackPowerFull : this.m_JetPackPower + 20 * deltaTime;
 
         if(this.m_FlyDownSpeed >= 10.0)
         {
@@ -406,6 +406,11 @@ cc.Personage = cc.AnimatedEntity.extend({
   onCollide: function(object, description) {
     switch(description) {
       case "pickup":
+      break;
+      case "enemy":
+        this._super();
+
+        this.m_Health -= 10;
       break;
     }
   }

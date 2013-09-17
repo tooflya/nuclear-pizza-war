@@ -17,36 +17,24 @@
  *
  */
 
-cc.FiredEnemy = cc.BaseEnemy.extend({
+cc.MineExplosion = cc.AnimatedEntity.extend({
   init: function() {
-    this._super(s_FiredEnemy, 8, 1);
-
-    this.m_Shadow = cc.Entity.create(s_Shadow);
-
-    this.m_Speed = 50;
-
-    this.m_VectorX = -1;
-    this.m_VectorY = -1;
+    this._super(s_MineExplosion, 10, 1);
   },
 
   onCreate: function() {
     this._super();
+
+    this.animate(0.1, 1);
   },
   onDestroy: function() {
     this._super();
   },
 
-  move: function(deltaTime) {
-    if(this.m_VectorX < 0 || (Math.abs(this.getCenterX() - this.m_VectorX) < 10 && Math.abs(this.getCenterY() - this.m_VectorY) < 10)) {
-      var pos = pizzaPositionFromRad(randomf(0.0, 1.0) * Math.PI * 2.0, 0.25 + randomf(0.0, 1.0) * 0.6);
-      
-      this.m_VectorX = pos[0];
-      this.m_VectorY = pos[1];
-    }
+  onAnimationEnd: function() {
+    this._super();
 
-    var vector = vectorNormalize(this.getCenterX() - this.m_VectorX, this.getCenterY() - this.m_VectorY, this.m_Speed * deltaTime);
-
-    this.setCenterPosition(this.getCenterX() - vector[0], this.getCenterY() - vector[1]);
+    this.destroy();
   },
 
   update: function(deltaTime) {
@@ -54,12 +42,12 @@ cc.FiredEnemy = cc.BaseEnemy.extend({
   },
 
   deepCopy: function() {
-    return cc.FiredEnemy.create();
+    return cc.MineExplosion.create();
   }
 });
 
-cc.FiredEnemy.create = function() {
-  var entity = new cc.FiredEnemy();
+cc.MineExplosion.create = function() {
+  var entity = new cc.MineExplosion();
   entity.init();
 
   return entity;

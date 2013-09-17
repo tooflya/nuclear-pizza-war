@@ -40,7 +40,6 @@ cc.CastleEnemy = cc.BaseEnemy.extend({
     var vector = vectorNormalize(vectorX, vectorY, this.m_Speed * deltaTime);
 
     this.setCenterPosition(this.getCenterX() - vector[0], this.getCenterY() - vector[1]);
-    this.m_Shadow.setCenterPosition(this.getCenterX(), this.getCenterY() - 15);
   },
 
   update: function(deltaTime) {
