@@ -3,6 +3,11 @@
 
 #include "BaseEnemy.h"
 
+<<<<<<< HEAD
+=======
+#include "Level.h"
+
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 BaseEnemy::BaseEnemy()
 {
 }
@@ -16,7 +21,11 @@ BaseEnemy::BaseEnemy(Hero* pHero, EntityManager* pBullets)
 BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pVerticalFramesCount) :
 	BarEntity(pszFileName, pHorizontalFramesCount, pVerticalFramesCount)
 	{
+<<<<<<< HEAD
 		this->mShadow = new Entity("actors/shadow.png");
+=======
+		this->mShadow = new Entity("shadow.png");
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		this->mShadow->setIsShadow();
 
 		this->mShootPadding = 0;
@@ -26,6 +35,12 @@ BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pV
 
 		this->setAnimationStartTimeout(Utils::randomf(0.0f, 1.5f));
 		this->animate(0.1f);
+<<<<<<< HEAD
+=======
+        
+		this->mTalkTime = Utils::randomf(1.0f, 15.0f);
+		this->mTalkTimeElapsed = 0;
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		this->resumeSchedulerAndActions();
 	}
@@ -39,9 +54,58 @@ BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pV
 
 void BaseEnemy::death()
 {
+<<<<<<< HEAD
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/ai_death.ogg");
 
 	this->destroy();
+=======
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_AI_DEATH);
+    
+    Level* screen = (Level*) AppDelegate::screens->mScreens[0];
+    
+    if(Utils::probably(10))
+    {
+        bool diamond = false;
+        bool rubin = false;
+        
+        if(true) // Diamonds
+        {
+            diamond = true;
+        }
+        else if(Utils::probably(60)) // Rubins
+        {
+            rubin = true;
+        }
+    
+        for(int i = 0; i < Utils::random(1, 3); i++)
+        {
+            Entity* pickup = screen->mDiamonds->create();
+            
+            pickup->setCenterPosition(this->getCenterX() + Utils::randomf(-35.0f, 35.0f), this->getCenterY() + Utils::randomf(-35.0f, 35.0f));
+            
+            if(diamond)
+            {
+                pickup->animate(0.1f, 0, 13);
+            }
+            else if(rubin)
+            {
+                pickup->animate(0.1f, 16, 20);
+            }
+            else
+            {
+                pickup->animate(0.1f, 30, 34);
+            }
+        }
+    }
+    
+	this->destroy();
+    
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
+	unlockAchievement(0);
+    
+    #endif
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 Entity* BaseEnemy::create()
@@ -157,6 +221,18 @@ void BaseEnemy::update(float pDeltaTime)
 	}
 
 	BarEntity::update(pDeltaTime);
+<<<<<<< HEAD
+=======
+    
+	this->mTalkTimeElapsed += pDeltaTime;
+    
+	if(this->mTalkTimeElapsed >= this->mTalkTime)
+	{
+		this->mTalkTimeElapsed -= this->mTalkTime;
+        
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_AI_VOICE);
+    }
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	float x;
 	float y;
@@ -203,7 +279,11 @@ void BaseEnemy::fire()
 	bullet->setPower(1);
 	//bullet->fire(this->getCenterX(), this->getCenterY(), this->mHero->getCenterX(), this->mHero->getCenterY());
 	
+<<<<<<< HEAD
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alienshot.ogg");
+=======
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_SHOT);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 #endif

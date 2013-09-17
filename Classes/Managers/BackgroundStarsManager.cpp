@@ -11,11 +11,19 @@ void BackgroundStarsManager::constructor(CCNode* pScreen, bool pIsLargeManagemen
 {
 	this->mIsLargeManagement = pIsLargeManagement;
 
+<<<<<<< HEAD
 	this->initWithFile("bg/stars.png", 1000);
 
 	for(int i = 0; i < 1000; i++)
 	{
 		Entity* star = new Entity("bg/stars.png", 3, 2);
+=======
+	this->initWithFile("stars.png", 1000);
+
+	for(int i = 0; i < 1000; i++)
+	{
+		Entity* star = new Entity("stars.png", 3, 2);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		star->create();
 

@@ -1,14 +1,27 @@
+<<<<<<< HEAD
 APPNAME="CocosTestCpp"
 APP_ANDROID_NAME="com.tooflya.cocostestcpp"
 
 if [ -z "${SDK_ROOT+aaa}" ]; then
 # ... if SDK_ROOT is not set, use "$HOME/bin/android-sdk"
     SDK_ROOT="$HOME/bin/android-sdk"
+=======
+APPNAME="NuclearPizzaWar"
+APP_ANDROID_NAME="com.tooflya.nuclearpizzawar"
+
+if [ -z "${SDK_ROOT+aaa}" ]; then
+# ... if SDK_ROOT is not set, use "$HOME/bin/android-sdk"
+    SDK_ROOT="$HOME/.android"
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 fi
 
 if [ -z "${NDK_ROOT+aaa}" ]; then
 # ... if NDK_ROOT is not set, use "$HOME/bin/android-ndk"
+<<<<<<< HEAD
     NDK_ROOT="$HOME/bin/android-ndk"
+=======
+    NDK_ROOT="$HOME/.android/ndk"
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 fi
 
 if [ -z "${COCOS2DX_ROOT+aaa}" ]; then

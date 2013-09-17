@@ -11,7 +11,11 @@ void Pickup::constructor()
 {
 	this->setAsCollidable();
 
+<<<<<<< HEAD
 	this->mShadow = new Entity("actors/shadow.png");
+=======
+	this->mShadow = new Entity("shadow.png");
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	this->mShadow->setIsShadow();
 
 	this->mAnimationTime = 2.0f;
@@ -59,6 +63,11 @@ void Pickup::reset()
 	this->mIsAnimationReverse = false;
 	this->mIsMustDestroy = false;
 
+<<<<<<< HEAD
+=======
+	this->setSpeed(40.0f);
+
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	this->setScale(0.0f);
 	this->setOpacity(255.0f);
 
@@ -96,17 +105,28 @@ bool Pickup::destroy()
 
 Pickup* Pickup::deepCopy()
 {
+<<<<<<< HEAD
 	return new Pickup("actors/pickups.png", 1, 3);
 }
 
 void Pickup::follow(float pVectorX, float pVectorY)
+=======
+	return new Pickup("pickups.png", 1, 3);
+}
+
+void Pickup::follow(float pVectorX, float pVectorY, float pDeltaTime)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 {
 	if(this->mCenterX == 0 && this->mCenterY == 0) return;
 
 	float vectorX = pVectorX- this->getCenterX();
 	float vectorY = pVectorY - this->getCenterY();
 
+<<<<<<< HEAD
 	CCPoint vector = Utils::vectorNormalize(vectorX, vectorY, 1.0f);
+=======
+	CCPoint vector = Utils::vectorNormalize(vectorX, vectorY, this->getSpeed(pDeltaTime));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	this->setCenterPosition(this->mCenterX + vector.x, this->mCenterY + vector.y + Utils::coord(this->mPaddingY));
 
@@ -120,7 +140,11 @@ void Pickup::startDestroy()
 
 	this->runAction(CCFadeTo::create(this->mDeathAnimationTime, 0.0f));
 
+<<<<<<< HEAD
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/health.ogg");
+=======
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_HEALTH);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 void Pickup::update(float pDeltaTime)

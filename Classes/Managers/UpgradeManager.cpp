@@ -30,7 +30,11 @@
 						this->mWorld = pWorld;
 						this->mManager = pManager;
 	
+<<<<<<< HEAD
 						this->mWealth = new EntityManager(10, new Entity("actors/pickups.png", 1, 3), this);
+=======
+						this->mWealth = new EntityManager(10, new Entity("pickups.png", 1, 3), this);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 						this->mCoinsNeed = new int[3];
 
@@ -92,7 +96,11 @@
 
 					this->mManager->check();
 
+<<<<<<< HEAD
 					CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/upgrade.ogg");
+=======
+					CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_UPGRADE);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				}
 
 				void generateWealth()
@@ -138,14 +146,25 @@
 		{
 			public:
 				DamageButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_fire_damage_level.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_fire_damage_level.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
 
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Fire Damage: 0 / 3", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(125), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::FIRE_DAMAGE_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(125), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 
@@ -165,7 +184,11 @@
 						this->mWorld->mHero->update(0, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Fire Damage: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::FIRE_DAMAGE_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -190,8 +213,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Fire Damage: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::FIRE_DAMAGE_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -208,7 +237,11 @@
 					this->mCoinsNeed[2] = 3;
 
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Fire Damage: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::FIRE_DAMAGE_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -217,14 +250,25 @@
 		{
 			public:
 				RateButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_firerate.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_firerate.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 5;
 
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Fire Rate: 0 / 5", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(112), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::FIRE_RATE_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(112), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 
@@ -244,7 +288,11 @@
 						this->mWorld->mHero->update(1, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Fire Rate: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::FIRE_RATE_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -279,8 +327,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Fire Rate: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::FIRE_RATE_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -297,7 +351,11 @@
 					this->mCoinsNeed[2] = 1;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Fire Rate: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::FIRE_RATE_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -306,14 +364,25 @@
 		{
 			public:
 				SpeedButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_speed.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_speed.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 5;
 					
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Speed: 0 / 5", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(100), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::SPEED_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(100), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 
@@ -333,7 +402,11 @@
 						this->mWorld->mHero->update(2, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Speed: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::SPEED_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -368,8 +441,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Speed: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::SPEED_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -386,7 +465,11 @@
 					this->mCoinsNeed[2] = 0;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Speed: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::SPEED_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -395,14 +478,25 @@
 		{
 			public:
 				RegenerationButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_regenerate.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_regenerate.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 5;
 					
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Regeneration Rate: 0 / 5", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(147), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::REGENERATION_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(147), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 
@@ -422,7 +516,11 @@
 						this->mWorld->mHero->update(3, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Regeneration Rate: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::REGENERATION_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -457,8 +555,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Regeneration Rate: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::REGENERATION_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -475,7 +579,11 @@
 					this->mCoinsNeed[2] = 0;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Regeneration Rate: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::REGENERATION_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -484,14 +592,25 @@
 		{
 			public:
 				HealthButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_health.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_health.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
 					
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Max Health: 0 / 3", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(120), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::HEALTH_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(120), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 
@@ -511,7 +630,11 @@
 						this->mWorld->mHero->update(4, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Max Health: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::HEALTH_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -536,8 +659,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Max Health: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::HEALTH_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -554,7 +683,11 @@
 					this->mCoinsNeed[2] = 0;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Max Health: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::HEALTH_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -563,14 +696,25 @@
 		{
 			public:
 				BeamButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_count.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_count.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
 					
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Beem Ammo: 0 / 3", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(125), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::BEEM_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(125), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 
@@ -590,7 +734,11 @@
 						this->mWorld->mHero->update(7, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Beem Ammo: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::BEEM_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -615,8 +763,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Beem Ammo: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::BEEM_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -633,7 +787,11 @@
 					this->mCoinsNeed[2] = 3;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Beem Ammo: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::BEEM_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -642,14 +800,25 @@
 		{
 			public:
 				ShockwaveButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_nova.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_nova.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
 					
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Shockwave Damage: 0 / 3", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(152), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::SHOCKWAVE_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(152), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 
@@ -669,7 +838,11 @@
 						this->mWorld->mHero->update(6, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Shockwave Damage: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::SHOCKWAVE_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -694,8 +867,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Shockwave Damage: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::SHOCKWAVE_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -712,7 +891,11 @@
 					this->mCoinsNeed[2] = 2;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Shockwave Damage: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::SHOCKWAVE_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -721,14 +904,25 @@
 		{
 			public:
 				JetpackButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_jetpack.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_jetpack.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 2;
 					
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Jetpack power: 0 / 2", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(130), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::JETPACK_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(130), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 
@@ -748,7 +942,11 @@
 						this->mWorld->mHero->update(5, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Jetpack power: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::JETPACK_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -768,8 +966,14 @@
 						{
 							this->mWealth->clear();
 
+<<<<<<< HEAD
 							sprintf(text, "Jetpack power: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::JETPACK_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -786,7 +990,11 @@
 					this->mCoinsNeed[2] = 0;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Jetpack power: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::JETPACK_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -795,14 +1003,25 @@
 		{
 			public:
 				FortificationButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_base_walls.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_base_walls.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 12;
 					this->mMaxIndex = 23;
 					
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Fortification: 12 / 23", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(133), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::FORTIFICATION_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(133), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 
@@ -822,7 +1041,11 @@
 						this->mWorld->mCastle->update(2, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Fortification: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::FORTIFICATION_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -835,8 +1058,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Fortification: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::FORTIFICATION_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -847,7 +1076,11 @@
 				void update()
 				{
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Fortification: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::FORTIFICATION_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 
 					if(this->mCurrentIndex < this->mMaxIndex)
@@ -869,7 +1102,11 @@
 					this->mCoinsNeed[2] = 0;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Fortification: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::FORTIFICATION_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -878,14 +1115,25 @@
 		{
 			public:
 				BlasterButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_base_shot.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_base_shot.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 5;
 					
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Tower Blaster: 0 / 5", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(130), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::TOWER_BLASTER_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(130), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 					
@@ -905,7 +1153,11 @@
 						this->mWorld->mCastle->update(0, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Tower Blaster: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::TOWER_BLASTER_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -940,8 +1192,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Tower Blaster: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::TOWER_BLASTER_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -958,7 +1216,11 @@
 					this->mCoinsNeed[2] = 1;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Tower Blaster: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::TOWER_BLASTER_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -967,14 +1229,25 @@
 		{
 			public:
 				NovaButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_base_blast.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_base_blast.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
 					
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Nova Defence: 0 / 3", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(130), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::NOVA_DEFENCE_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(130), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 					
@@ -994,7 +1267,11 @@
 						this->mWorld->mCastle->update(1, this->mCurrentIndex);
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Nova Defence: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::NOVA_DEFENCE_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -1019,8 +1296,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Nova Defence: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::NOVA_DEFENCE_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -1037,7 +1320,11 @@
 					this->mCoinsNeed[2] = 1;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Nova Defence: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::NOVA_DEFENCE_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -1046,14 +1333,25 @@
 		{
 			public:
 				SpidersButton(Level* pWorld, UpgradeManager* pManager) :
+<<<<<<< HEAD
 				UpgradeButton("gui/shopicons_base_spider.png", pWorld, pManager)
+=======
+				UpgradeButton("shopicons_base_spider.png", pWorld, pManager)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				{
 					this->mCurrentIndex = 0;
 					this->mMaxIndex = 3;
 					
+<<<<<<< HEAD
 					this->mLabel = CCLabelTTF::create("Defence Spiders: 0 / 3", "Arial",  Utils::coord(16));
 
 					this->mLabel->setPosition(ccp(Utils::coord(140), Utils::coord(7)));
+=======
+					this->mLabel = CCLabelTTF::create(UpgradeManager::DEFENCE_SPIDERS_TEXT1, "Arial",  Utils::coord(16));
+
+					this->mLabel->setPosition(ccp(Utils::coord(140), Utils::coord(7)));
+					this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 					this->addChild(this->mLabel);
 					
@@ -1073,7 +1371,11 @@
 						this->mWorld->updateSpiders();
 
 						char text[256];
+<<<<<<< HEAD
 						sprintf(text, "Defence Spiders: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+						sprintf(text, UpgradeManager::DEFENCE_SPIDERS_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 						this->mLabel->setString(text);
 
 						if(this->mCurrentIndex < this->mMaxIndex)
@@ -1098,8 +1400,14 @@
 						{
 							this->mWealth->clear();
 							
+<<<<<<< HEAD
 							sprintf(text, "Defence Spiders: MAX");
 							this->mLabel->setString(text);
+=======
+							sprintf(text, UpgradeManager::DEFENCE_SPIDERS_TEXT3);
+							this->mLabel->setString(text);
+							this->mLabel->setPosition(ccp(Utils::coord(60) + this->mLabel->getContentSize().width/2, Utils::coord(7)));
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 							this->mLabel->setColor(ccc3(255.0f, 230.0f, 0.0f));
 
 							this->mManager->check();
@@ -1116,7 +1424,11 @@
 					this->mCoinsNeed[2] = 0;
 					
 					char text[256];
+<<<<<<< HEAD
 					sprintf(text, "Defence Spiders: %d / %d", this->mCurrentIndex, this->mMaxIndex);
+=======
+					sprintf(text, UpgradeManager::DEFENCE_SPIDERS_TEXT2, this->mCurrentIndex, this->mMaxIndex);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					this->mLabel->setString(text);
 				}
 		};
@@ -1125,6 +1437,57 @@
 // Constants
 // ===========================================================
 
+<<<<<<< HEAD
+=======
+const char* UpgradeManager::FIRE_DAMAGE_TEXT1 = "Fire Damage: 0 / 3";
+const char* UpgradeManager::FIRE_DAMAGE_TEXT2 = "Fire Damage: %d / %d";
+const char* UpgradeManager::FIRE_DAMAGE_TEXT3 = "Fire Damage: MAX";
+
+const char* UpgradeManager::FIRE_RATE_TEXT1 = "Fire Rate: 0 / 5";
+const char* UpgradeManager::FIRE_RATE_TEXT2 = "Fire Rate: %d / %d";
+const char* UpgradeManager::FIRE_RATE_TEXT3 = "Fire Rate: MAX";
+
+const char* UpgradeManager::SPEED_TEXT1 = "Speed: 0 / 5";
+const char* UpgradeManager::SPEED_TEXT2 = "Speed: %d / %d";
+const char* UpgradeManager::SPEED_TEXT3 = "Speed: MAX";
+
+const char* UpgradeManager::REGENERATION_TEXT1 = "Regeneration Rate: 0 / 5";
+const char* UpgradeManager::REGENERATION_TEXT2 = "Regeneration Rate: %d / %d";
+const char* UpgradeManager::REGENERATION_TEXT3 = "Regeneration Rate: MAX";
+
+const char* UpgradeManager::HEALTH_TEXT1 = "Max Health: 0 / 3";
+const char* UpgradeManager::HEALTH_TEXT2 = "Max Health: %d / %d";
+const char* UpgradeManager::HEALTH_TEXT3 = "Max Health: MAX";
+
+const char* UpgradeManager::BEEM_TEXT1 = "Beem Ammo: 0 / 3";
+const char* UpgradeManager::BEEM_TEXT2 = "Beem Ammo: %d / %d";
+const char* UpgradeManager::BEEM_TEXT3 = "Beem Ammo: MAX";
+
+const char* UpgradeManager::SHOCKWAVE_TEXT1 = "Shockwave Damage: 0 / 3";
+const char* UpgradeManager::SHOCKWAVE_TEXT2 = "Shockwave Damage: %d / %d";
+const char* UpgradeManager::SHOCKWAVE_TEXT3 = "Shockwave Damage: MAX";
+
+const char* UpgradeManager::JETPACK_TEXT1 = "Jetpack Power: 0 / 2";
+const char* UpgradeManager::JETPACK_TEXT2 = "Jetpack Power: %d / %d";
+const char* UpgradeManager::JETPACK_TEXT3 = "Jetpack Power: MAX";
+
+const char* UpgradeManager::FORTIFICATION_TEXT1 = "Fortification: 12 / 23";
+const char* UpgradeManager::FORTIFICATION_TEXT2 = "Fortification: %d / %d";
+const char* UpgradeManager::FORTIFICATION_TEXT3 = "Fortification: MAX";
+
+const char* UpgradeManager::TOWER_BLASTER_TEXT1 = "Tower Blaster: 0 / 5";
+const char* UpgradeManager::TOWER_BLASTER_TEXT2 = "Tower Blaster: %d / %d";
+const char* UpgradeManager::TOWER_BLASTER_TEXT3 = "Tower Blaster: MAX";
+
+const char* UpgradeManager::NOVA_DEFENCE_TEXT1 = "Nova Defence: 0 / 3";
+const char* UpgradeManager::NOVA_DEFENCE_TEXT2 = "Nova Defence: %d / %d";
+const char* UpgradeManager::NOVA_DEFENCE_TEXT3 = "Nova Defence: MAX";
+
+const char* UpgradeManager::DEFENCE_SPIDERS_TEXT1 = "Defence Spiders: 0 / 3";
+const char* UpgradeManager::DEFENCE_SPIDERS_TEXT2 = "Defence Spiders: %d / %d";
+const char* UpgradeManager::DEFENCE_SPIDERS_TEXT3 = "Defence Spiders: MAX";
+
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 // ===========================================================
 // Fields
 // ===========================================================
@@ -1135,10 +1498,71 @@
 
 UpgradeManager::UpgradeManager(Level* pWorld)
 {
+<<<<<<< HEAD
 	this->mWorld = pWorld;
 
 	Entity* holder1 = new Entity("gui/holder1.png");
 	Entity* holder2 = new Entity("gui/holder1.png");
+=======
+	ccLanguageType currentLanguageType = CCApplication::sharedApplication()->getCurrentLanguage();
+    switch (currentLanguageType)
+    {
+    	case kLanguageRussian:
+    		FIRE_DAMAGE_TEXT1 = "Урон стрельбы: 0 / 3";
+    		FIRE_DAMAGE_TEXT2 = "Урон стрельбы: %d / %d";
+    		FIRE_DAMAGE_TEXT3 = "Урон стрельбы: Макс.";
+
+    		FIRE_RATE_TEXT1 = "Скорость стрельбы: 0 / 5";
+    		FIRE_RATE_TEXT2 = "Скорость стрельбы: %d / %d";
+    		FIRE_RATE_TEXT3 = "Скорость стрельбы: Макс.";
+
+    		SPEED_TEXT1 = "Скорость: 0 / 5";
+    		SPEED_TEXT2 = "Скорость: %d / %d";
+    		SPEED_TEXT3 = "Скорость: Макс.";
+
+    		REGENERATION_TEXT1 = "Восстановление: 0 / 5";
+    		REGENERATION_TEXT2 = "Восстановление: %d / %d";
+    		REGENERATION_TEXT3 = "Восстановление: Макс.";
+
+    		HEALTH_TEXT1 = "Здоровье: 0 / 3";
+    		HEALTH_TEXT2 = "Здоровье: %d / %d";
+    		HEALTH_TEXT3 = "Здоровье: Макс.";
+
+    		BEEM_TEXT1 = "Урон лазера: 0 / 3";
+    		BEEM_TEXT2 = "Урон лазера: %d / %d";
+    		BEEM_TEXT3 = "Урон лазера: Макс.";
+
+    		SHOCKWAVE_TEXT1 = "Урон ударной волны: 0 / 3";
+    		SHOCKWAVE_TEXT2 = "Урон ударной волны: %d / %d";
+    		SHOCKWAVE_TEXT3 = "Урон ударной волны: Макс.";
+
+    		JETPACK_TEXT1 = "Мощность полета: 0 / 2";
+    		JETPACK_TEXT2 = "Мощность полета: %d / %d";
+    		JETPACK_TEXT3 = "Мощность полета: Макс.";
+
+    		FORTIFICATION_TEXT1 = "Защита башни: 12 / 23";
+    		FORTIFICATION_TEXT2 = "Защита башни: %d / %d";
+    		FORTIFICATION_TEXT3 = "Защита башни: Макс.";
+
+			TOWER_BLASTER_TEXT1 = "Урон бластера башни: 0 / 5";
+			TOWER_BLASTER_TEXT2 = "Урон бластера башни: %d / %d";
+			TOWER_BLASTER_TEXT3 = "Урон бластера башни: Макс.";
+
+			NOVA_DEFENCE_TEXT1 = "Мощность защитной волны: 0 / 3";
+			NOVA_DEFENCE_TEXT2 = "Мощность защитной волны: %d / %d";
+			NOVA_DEFENCE_TEXT3 = "Мощность защитной волны: Макс.";
+
+			DEFENCE_SPIDERS_TEXT1 = "Количество пауков: 0 / 3";
+			DEFENCE_SPIDERS_TEXT2 = "Количество пауков: %d / %d";
+			DEFENCE_SPIDERS_TEXT3 = "Количество пауков: Макс.";
+    	break;
+    }
+
+	this->mWorld = pWorld;
+
+	Entity* holder1 = new Entity("holder1.png");
+	Entity* holder2 = new Entity("holder1.png");
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	holder1->create()->setCenterPosition(Options::CAMERA_CENTER_X - holder1->getWidth() / 2 - Utils::coord(50), Options::CAMERA_CENTER_Y);
 	holder2->create()->setCenterPosition(Options::CAMERA_CENTER_X + holder2->getWidth() / 2 + Utils::coord(50), Options::CAMERA_CENTER_Y);
@@ -1148,7 +1572,11 @@ UpgradeManager::UpgradeManager(Level* pWorld)
 
 	for(int i = 0; i < 8; i++)
 	{
+<<<<<<< HEAD
 		Entity* holder = new Entity("gui/holder2.png");
+=======
+		Entity* holder = new Entity("holder2.png");
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		UpgradeButton* icon;
 
 		switch(i)
@@ -1196,7 +1624,11 @@ UpgradeManager::UpgradeManager(Level* pWorld)
 
 	for(int i = 0; i < 4; i++)
 	{
+<<<<<<< HEAD
 		Entity* holder = new Entity("gui/holder2.png");
+=======
+		Entity* holder = new Entity("holder2.png");
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		UpgradeButton* icon;
 
 		switch(i)
@@ -1265,6 +1697,18 @@ void UpgradeManager::check()
 	this->mBlasterButton->check();
 	this->mNovaButton->check();
 	this->mSpidersButton->check();
+<<<<<<< HEAD
+=======
+
+    #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
+	if(this->mDamageButton->mCurrentIndex >= this->mDamageButton->mMaxIndex && this->mRateButton->mCurrentIndex >= this->mRateButton->mMaxIndex)
+	{
+		unlockAchievement(2);
+	}
+    
+    #endif
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 // ===========================================================

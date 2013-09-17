@@ -12,9 +12,15 @@
 // ===========================================================
 
 BigEnemy::BigEnemy(EntityManager* pBullets) :
+<<<<<<< HEAD
 	BaseEnemy("actors/alien4.png", 4, 1)
 	{
 		this->mShadow = new Entity("actors/largeshadow.png");
+=======
+	BaseEnemy("alien4.png", 4, 1)
+	{
+		this->mShadow = new Entity("largeshadow.png");
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		this->mShadow->setIsShadow();
 
 		this->mBullets = pBullets;
@@ -92,7 +98,11 @@ void BigEnemy::update(float pDeltaTime)
 			((BaseBullet*) this->mBullets->create())->fire(this->getCenterX(), this->getCenterY(), this->getCenterX() + x, this->getCenterY() + y);
 		}
 
+<<<<<<< HEAD
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alienshot.ogg");
+=======
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_SHOT);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	}
 }
 

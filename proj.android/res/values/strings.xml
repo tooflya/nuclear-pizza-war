@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Nuclear Pizza War</string>
+<<<<<<< HEAD
+=======
+    <string name="signing_in">Signing in with Google</string>
+    <string name="signing_out">Signing out</string>
+    <string name="unknown_error">For some unknown reason, authorization failed</string>
+   
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 </resources>

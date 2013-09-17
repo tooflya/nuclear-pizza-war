@@ -19,7 +19,11 @@ class Bubble : public BarEntity
 		{
 			public:
 				Splash() :
+<<<<<<< HEAD
 					Entity("actors/bubble_pop.png", 11, 1)
+=======
+					Entity("bubble_pop.png", 11, 1)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					{
 
 					}

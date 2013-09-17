@@ -60,6 +60,7 @@ CCPoint Utils::vectorNormalize(float pVectorX, float pVectorY, float pMultipleFa
 	return ccp(x, y);
 }
 
+<<<<<<< HEAD
 long Utils::millisecondNow()
 {
     struct cc_timeval now;
@@ -67,6 +68,8 @@ long Utils::millisecondNow()
     return (now.tv_sec * 1000 + now.tv_sec / 1000);
 }
 
+=======
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 bool Utils::isOnPizza(Entity* pEntity)
 {
 	float cx = Options::CAMERA_CENTER_X + Utils::coord(25);
@@ -104,6 +107,16 @@ void Utils::obstacle(Entity* pEntity, Entity* pEntity2, float pMagnet, float pRa
 	Utils::obstacle(pEntity, pEntity2->getCenterX(), pEntity2->getCenterY(), pMagnet, pRadius);
 }
 
+<<<<<<< HEAD
+=======
+long Utils::millisecondNow()
+{
+    struct cc_timeval now;
+    CCTime::gettimeofdayCocos2d(&now, NULL);
+    return (now.tv_sec * 1000 + now.tv_usec / 1000);
+}
+
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 // ===========================================================
 // Virtual Methods
 // ===========================================================

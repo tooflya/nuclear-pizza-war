@@ -15,7 +15,11 @@ BaseExplosion::BaseExplosion(const char* pszFileName, int pHorizontalFramesCount
 
 BaseExplosion* BaseExplosion::deepCopy()
 {
+<<<<<<< HEAD
 	return new BaseExplosion("actors/explosion2.png", 17, 1);
+=======
+	return new BaseExplosion("explosion2.png", 17, 1);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 Entity* BaseExplosion::create()

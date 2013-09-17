@@ -12,7 +12,11 @@
 // ===========================================================
 
 CastleEnemy::CastleEnemy(Castle* pCastle) :
+<<<<<<< HEAD
 	BaseEnemy("actors/alien2.png", 8, 1)
+=======
+	BaseEnemy("alien2.png", 8, 1)
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	{
 		this->setAsCollidable();
 		
@@ -27,7 +31,11 @@ CastleEnemy::CastleEnemy(Castle* pCastle) :
 
 		// Shockwave
 
+<<<<<<< HEAD
 		this->mShockwave = new Entity("actors/alien_shockwave.png");
+=======
+		this->mShockwave = new Entity("alien_shockwave.png");
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		this->mShockwave->setIgnoreSorting(true);
 
 		//
@@ -60,7 +68,11 @@ bool CastleEnemy::onCollide()
 		this->mShockwave->setScale(0);
 		this->mShockwave->create()->runAction(CCScaleTo::create(this->mShockwaveTime, 1.5f));
 
+<<<<<<< HEAD
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alien_warning.ogg");
+=======
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_WARNING);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		this->removeHealth(20);
 	}
@@ -91,7 +103,11 @@ bool CastleEnemy::destroy()
 
 void CastleEnemy::death()
 {
+<<<<<<< HEAD
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alien_suicide.ogg");
+=======
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_SUICIDE);
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	this->destroy();
 }
@@ -143,6 +159,7 @@ void CastleEnemy::update(float pDeltaTime)
 	switch(Options::FORTIFICATION_LEVEL)
 	{
 		case 0:
+<<<<<<< HEAD
 			magnet = 50.0f;
 		break;
 		case 1:
@@ -157,6 +174,22 @@ void CastleEnemy::update(float pDeltaTime)
 	}
 
 	if(this->circlesCollideCoordinatesWith(this->getCenterX(), this->getCenterY(), Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y, Utils::coord((magnet)))) // TODO: Some problem here with small resolutions.
+=======
+			magnet = 70.0f;
+		break;
+		case 1:
+			magnet = 80.0f;
+		break;
+		case 2:
+			magnet = 90.0f;
+		break;
+		case 3:
+			magnet = 100.0f;
+		break;
+	}
+
+	if(this->circlesCollideCoordinatesWith(this->getCenterX(), this->getCenterY(), Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y, Utils::coord(magnet)))
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	{
 		this->onCollide();
 	}

@@ -47,6 +47,7 @@ echo "APP_ROOT = $APP_ROOT"
 echo "APP_ANDROID_ROOT = $APP_ANDROID_ROOT"
 
 # make sure assets is exist
+<<<<<<< HEAD
 if [ -d "$APP_ANDROID_ROOT"/assets ]; then
     rm -rf "$APP_ANDROID_ROOT"/assets
 fi
@@ -64,6 +65,25 @@ if [ -f "$file" ]; then
     cp "$file" "$APP_ANDROID_ROOT"/assets
 fi
 done
+=======
+#if [ -d "$APP_ANDROID_ROOT"/assets ]; then
+    #rm -rf "$APP_ANDROID_ROOT"/assets
+#fi
+
+#mkdir "$APP_ANDROID_ROOT"/assets
+
+# copy resources
+#for file in "$APP_ROOT"/Resources/*
+#do
+#if [ -d "$file" ]; then
+    #cp -rf "$file" "$APP_ANDROID_ROOT"/assets
+#fi
+
+#if [ -f "$file" ]; then
+    #cp "$file" "$APP_ANDROID_ROOT"/assets
+#fi
+#done
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 # copy icons (if they exist)
 file="$APP_ANDROID_ROOT"/assets/Icons/Icon-96.png

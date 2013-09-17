@@ -90,8 +90,11 @@ class Utils
 
 		static CCPoint vectorNormalize(float pVectorX, float pVectorY, float pMultipleFactor);
 
+<<<<<<< HEAD
 		static long millisecondNow();
 
+=======
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		static float coord(float pCoordinate);
 
 		static float distance(float dX0, float dY0, float dX1, float dY1);
@@ -105,7 +108,13 @@ class Utils
 		static bool isOnPizza(Entity* pEntity);
 
 		static void obstacle(Entity* pEntity, float pX, float pY, float pMagnet, float pRadius);
+<<<<<<< HEAD
 		static void obstacle(Entity* pEntity, Entity* pEntity2, float pMagnet, float pRadius);
+=======
+        static void obstacle(Entity* pEntity, Entity* pEntity2, float pMagnet, float pRadius);
+    
+        static long millisecondNow();
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		
 		// ===========================================================
 		// Virtual Methods

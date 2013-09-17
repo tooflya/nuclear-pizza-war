@@ -91,6 +91,10 @@ class SplashScreen : public Screen
 		// Virtual Methods
 		// ===========================================================
 
+<<<<<<< HEAD
+=======
+		virtual void onEnter();
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		virtual void onTouch(CCTouch* touch, CCEvent* event);
 		virtual void update(float pDeltaTime);
 };

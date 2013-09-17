@@ -39,6 +39,12 @@
 #include "SpiderExplosion.cpp"
 #include "Spider.cpp"
 #include "LongExplosion.cpp"
+<<<<<<< HEAD
+=======
+#include "Diamond.cpp"
+#include "MineEnemy.cpp"
+#include "MojangSplashScreen.cpp"
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 #include "platform/android/jni/JniHelper.h"
 #include <jni.h>
 #include <android/log.h>

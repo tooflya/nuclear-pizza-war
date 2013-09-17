@@ -87,6 +87,11 @@ class AppDelegate : private CCApplication
 		// Constants
 		// ===========================================================
 
+<<<<<<< HEAD
+=======
+		static bool MULTIPLAYER;
+		
+>>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		static ScreenManager* screens;
 
 		// ===========================================================
