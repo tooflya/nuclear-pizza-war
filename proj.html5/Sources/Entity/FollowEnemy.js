@@ -34,10 +34,10 @@ cc.FollowEnemy = cc.BaseEnemy.extend({
   },
 
   move: function(deltaTime) {
-    var vectorX = this.getCenterX() - this._parent.m_Personage.getCenterX();
-    var vectorY = this.getCenterY() - this._parent.m_Personage.getCenterY() - this._parent.m_Personage.getZ();
+    var x = this.getCenterX() - this._parent.m_Personage.getCenterX();
+    var y = this.getCenterY() - this._parent.m_Personage.getCenterY() + this._parent.m_Personage.getZ();
 
-    var vector = vectorNormalize(vectorX, vectorY, this.m_Speed * deltaTime);
+    var vector = vectorNormalize(x, y, this.m_Speed * deltaTime);
 
     this.setCenterPosition(this.getCenterX() - vector[0], this.getCenterY() - vector[1]);
   },

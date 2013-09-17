@@ -23,11 +23,20 @@ cc.Level = cc.Screen.extend({
 
     this.m_EnemiesCount = 0;
 
-    this.m_MainLayer = cc.MainLayer.create();
     this.m_StaticLayer = cc.StaticLayer.create();
+    this.m_MainLayer = cc.MainLayer.create();
 
-    this.addChild(this.m_MainLayer);
-    this.addChild(this.m_StaticLayer);
+    this.addChild(this.m_MainLayer, 0);
+    this.addChild(this.m_StaticLayer, 1);
+
+    this.mDebug = true;
+    if(this.mDebug) {
+      this.mDebugText = cc.Text.create("", 13, this.m_StaticLayer, function(entity) {
+        entity.setFontName("Sans Serif");
+        entity.setZOrder(1000);
+      });
+      this.mDebugUpdateTimeElapsed = 0;
+    }
   },
 
   update: function(deltaTime) {
@@ -42,6 +51,28 @@ cc.Level = cc.Screen.extend({
 
     if(x < 500 && x > -500) {
       this.m_MainLayer.setPosition(x, this.m_MainLayer.getPosition().y);
+    }
+
+    if(this.mDebug) {
+      this.mDebugUpdateTimeElapsed += deltaTime;
+
+      if(this.mDebugUpdateTimeElapsed > 0.3) {
+        this.mDebugUpdateTimeElapsed = 0;
+
+        this.mDebugText.setString(
+        "Debug Information:\n\n"
+        + "Camera width: " + CAMERA_WIDTH + "\n"
+        + "Camera height: " + CAMERA_HEIGHT + "\n"
+        + "Frames per second: " + Math.round(1.0 / director.getDeltaTime()) + "\n"
+        + "Camera position: \n"
+        + "\tx: " + Math.round(this.m_MainLayer.getPosition().x) + "\n"
+        + "\ty: " + Math.round(this.m_MainLayer.getPosition().y) + "\n"
+        + "Draw calls: " + "undefinied" + "\n"
+        + "Total children count: " + this.m_MainLayer.getTotalChildrenCount() + "\n"
+        + "Total visible children count: " + this.m_MainLayer.getTotalChildrenCount(true) + "\n"
+        + "");
+        this.mDebugText.setPosition(10 + this.mDebugText.getWidth() / 2, CAMERA_HEIGHT - this.mDebugText.getHeight() / 2 - 10);
+      }
     }
   }
 });
@@ -202,21 +233,24 @@ cc.MainLayer = cc.Layer.extend({
   init: function() {
     this._super();
 
-    this.m_BackgroundStars = cc.EntityManager.create(1000, cc.Star.create(), this);
+    this.m_Enemies = [];
+    this.m_Explosions = [];
+
+    this.m_BackgroundStars = cc.EntityManager.create(100, cc.Star.create(), this);
     this.m_Slices = cc.EntityManager.create(2, cc.Slice.create(), this, 500);
     this.m_Bubbles = cc.EntityManager.create(2, cc.Bubble.create(), this, 22, false);
     this.m_Pickups = cc.EntityManager.create(10, cc.Pickup.create(), this, 23, false);
     this.m_Bullets = cc.EntityManager.create(10, cc.Bullet.create(), this, 23);
     this.m_BulletsCrashes = cc.EntityManager.create(10, cc.BulletCrash.create(), this, 23);
-    this.m_Enemies = [];
-    this.m_Explosions = [];
-    this.m_Explosions[0] = cc.EntityManager.create(10, cc.Explosion.create(), this, 24);
-    this.m_Explosions[1] = cc.EntityManager.create(10, cc.LongExplosion.create(), this, 24);
-    this.m_Explosions[2] = cc.EntityManager.create(10, cc.MineExplosion.create(), this, 24);
+
     this.m_Enemies[0] = cc.EntityManager.create(100, cc.FollowEnemy.create(), this, 24, false);
     this.m_Enemies[1] = cc.EntityManager.create(100, cc.CastleEnemy.create(), this, 24, false);
     this.m_Enemies[2] = cc.EntityManager.create(100, cc.FiredEnemy.create(), this, 24, false);
     this.m_Enemies[3] = cc.EntityManager.create(100, cc.BigEnemy.create(), this, 24, false);
+
+    this.m_Explosions[0] = cc.EntityManager.create(10, cc.Explosion.create(), this, 24);
+    this.m_Explosions[1] = cc.EntityManager.create(10, cc.LongExplosion.create(), this, 24);
+    this.m_Explosions[2] = cc.EntityManager.create(10, cc.MineExplosion.create(), this, 24);
 
     this.m_Background = cc.Entity.create(s_Platform, this, function(entity) {
       entity.setCenterPosition(CAMERA_CENTER_X, CAMERA_CENTER_Y);
@@ -237,7 +271,7 @@ cc.MainLayer = cc.Layer.extend({
       entity.setZOrder(24);
     });
 
-    for(var i = 0; i < 1000; i++) {
+    for(var i = 0; i < 100; i++) {
       this.m_BackgroundStars.create();
       this.m_BackgroundStars.last().setCoordinates(-500, CAMERA_WIDTH + 500, CAMERA_WIDTH + 300, -300);
       this.m_BackgroundStars.last().setCenterPosition(randomf(-500, CAMERA_WIDTH + 500), randomf(-300, CAMERA_WIDTH + 300));
@@ -344,6 +378,8 @@ cc.MainLayer = cc.Layer.extend({
     // Collisions
 
     this.checkCollisions(deltaTime);
+
+    // Update shake
 
     this.updateShake(deltaTime);
   },

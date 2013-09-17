@@ -17,38 +17,18 @@
  *
  */
 
-  cc.Menu = cc.Screen.extend({
+  cc.GameWone= cc.Screen.extend({
     init: function() {
       this._super();
 
-      this.backgroundStars = cc.EntityManager.create(100, cc.Star.create(), this);
-
-      cc.Entity.create(s_GameManuBackground, this, function(entity) {
+      this.background = cc.Entity.create(s_GameWoneBackground, this, function(entity) {
         entity.setCenterPosition(CAMERA_CENTER_X, CAMERA_CENTER_Y);
       });
-
-      cc.Button.create(s_ButtonStart, this, function(entity) {
-        entity.setCenterPosition(CAMERA_CENTER_X, CAMERA_CENTER_Y / 2);
-      }, function(entity) {
-        director.replaceScene(cc.TransitionFade.create(2.0, cc.Level.create()));
-      });
-
-      for(var i = 0; i < 100; i++) {
-        this.backgroundStars.create();
-
-        this.backgroundStars.last().setCenterPosition(randomf(0.0, CAMERA_WIDTH), randomf(0.0, CAMERA_HEIGHT));
-      }
-
-      cc.AudioEngine.getInstance().playMusic(s_MainTheme, true);
-    },
-
-    update: function(deltaTime) {
-      this._super(deltaTime);
     }
 });
 
-cc.Menu.create = function() {
-  var screen = new cc.Menu();
+cc.GameWone.create = function() {
+  var screen = new cc.GameWone();
   screen.init();
 
   return screen;

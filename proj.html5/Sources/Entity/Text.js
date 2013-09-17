@@ -30,6 +30,13 @@ cc.Text = cc.LabelTTF.extend({
     if(callback) {
       callback(this);
     }
+  },
+
+  getWidth: function() {
+    return this.getContentSize().width;
+  },
+  getHeight: function() {
+    return this.getContentSize().height;
   }
 });
 

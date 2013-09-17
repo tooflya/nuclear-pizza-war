@@ -34,6 +34,22 @@ String.prototype.format = function() {
   });
 };
 
+cc.Node.prototype.getTotalChildrenCount = function(visible) {
+  var count = 0;
+
+  for(var i = 0; i < this.getChildrenCount(); i++) {
+    var child = this.getChildren()[i];
+
+    if(child.isVisible() || !visible) {
+      count++;
+
+      count += child.getTotalChildrenCount(visible);
+    }
+  }
+
+  return count;
+}
+
 vectorNormalize = function(px, py, factor) {
   var x = px / Math.sqrt(px * px + py * py) * factor;
   var y = py / Math.sqrt(px * px + py * py) * factor;

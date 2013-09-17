@@ -71,6 +71,16 @@ cc.Personage = cc.AnimatedEntity.extend({
   onCreate: function() {
     this._super();
   },
+  onDestroy: function() {
+    this._super();
+
+    this.m_Shockwave.destroy();
+    this._parent.m_Explosions[1].create();
+    this._parent.m_Explosions[1].last().setCenterPosition(this.getCenterX(), this.getCenterY() + this._parent.m_Explosions[1].last().getHeight() / 2 - 30);
+
+    cc.AudioEngine.getInstance().playEffect(s_PersonageDestroy);
+    cc.Director.getInstance().replaceScene(cc.TransitionFade.create(3.0, cc.GameOver.create()));
+  },
 
   setFireCoordinates: function(x, y) {
     this.m_FireVectorX = x;

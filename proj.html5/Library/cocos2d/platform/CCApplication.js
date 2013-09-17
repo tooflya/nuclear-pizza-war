@@ -78,14 +78,14 @@ cc.ORIENTATION_LANDSCAPE_RIGHT = 3;
  * @constant
  * @type Number
  */
-cc.CANVAS = 0;
+cc.CANVAS = 1;
 
 /**
  * WebGL of render type
  * @constant
  * @type Number
  */
-cc.WEBGL = 1;
+cc.WEBGL = 0;
 
 /**
  * drawing primitive of game engine

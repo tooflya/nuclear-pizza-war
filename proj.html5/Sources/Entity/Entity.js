@@ -203,7 +203,7 @@
     collideWidth: function(entity, factor) {
       if(!factor) factor = 0.5;
       if(!this.isVisible() || !entity.isVisible()) return false;
-      //if(this.getZ() > entity.getHeight() / 2 || entity.getZ() > this.getHeight() / 2) return false;
+      if(this.getZ() > entity.getHeight() || entity.getZ() > this.getHeight()) return false;
 
       if (this.getCenterX() - (this.getWidth() / 2) * factor < entity.getCenterX() + (entity.getWidth() / 2) * factor &&
         this.getCenterX() + (this.getWidth() / 2) * factor > entity.getCenterX() - (entity.getWidth() / 2) * factor &&

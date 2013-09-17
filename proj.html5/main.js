@@ -49,7 +49,7 @@ var cocos2dApp = cc.Application.extend({
     director.setAnimationInterval(1.0 / this.config['frameRate']);
 
     cc.Preloader.preload(g_resources, function() {
-      director.replaceScene(cc.CyberHipposSplashScreen.create());
+      director.replaceScene(cc.Level.create());
     }, this);
 
     return true;

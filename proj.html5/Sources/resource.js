@@ -30,6 +30,7 @@ var s_BigEnemy = "alien4.png";
 var s_Explosion = "explosion2.png";
 var s_LongExplosion = "explosion3.png";
 var s_MineExplosion = "explosion1.png";
+var s_MineExplosion = "explosion1.png";
 
 var s_MainTheme = "Resources/Music/mus_fast02.wav";
 var s_PersonageShoot = "Resources/Sound/shot.wav";
@@ -41,6 +42,7 @@ var s_PersonageFlyingDamage = "Resources/Sound/jetpack_fail.wav";
 var s_BubblePop = "Resources/Sound/pizzaplop.wav";
 var s_PickupPop = "Resources/Sound/health.wav";
 var s_EnemyDestroy = "Resources/Sound/ai_death.wav";
+var s_PersonageDestroy = "Resources/Sound/player_death.wav";
 
 var s_Font = "Franchise";
 
@@ -90,5 +92,6 @@ var g_resources = [
     {src: s_PersonageFlyingDamage},
     {src: s_BubblePop},
     {src: s_PickupPop},
-    {src: s_EnemyDestroy}
+    {src: s_EnemyDestroy},
+    {src: s_PersonageDestroy}
 ];

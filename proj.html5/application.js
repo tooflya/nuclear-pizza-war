@@ -20,10 +20,10 @@
 (function () {
   var d = document;
   var c = {
-    COCOS2D_DEBUG: 2,
+    COCOS2D_DEBUG: 0,
     box2d: false,
     chipmunk: false,
-    showFPS: true,
+    showFPS: false,
     loadExtension: false,
     frameRate: 1200,
     tag: 'canvas',
@@ -62,6 +62,8 @@
       'Sources/Screens/MojangSplashScreen.js',
       'Sources/Screens/Menu.js',
       'Sources/Screens/Level.js',
+      'Sources/Screens/GameOver.js',
+      'Sources/Screens/GameWone.js',
       'Sources/Managers/EntityManager.js'
     ]
   };

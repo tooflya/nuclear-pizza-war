@@ -26,6 +26,7 @@ cc.EntityManager = cc.Class.extend({
     this.m_Capacity = capacity;
 
     var spriteBatch = cc.SpriteBatchNode.create(entity.m_TextureFileName, this.m_Capacity * (entity.m_Shadow ? 2 : 1));
+    spriteBatch.setUserData("cc.SpriteBatchNode");
 
     for(var i = 0; i < capacity; i++) {
       var currentEntity;
