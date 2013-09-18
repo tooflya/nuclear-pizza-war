@@ -32,6 +32,8 @@
 
       this.m_IsCollidable = false;
       this.m_IsOutOfTop = false;
+      this.m_IsIgnoreSorting = true;
+      this.m_IsShadow = false;
 
       this.m_HealthFull = 1;
       this.m_Health = this.m_HealthFull;
@@ -148,6 +150,11 @@
       this.setZOrder(22);
       this.setColor(cc.c3(0.0, 0.0, 0.0));
       this.setOpacity(150);
+
+      this.m_IsShadow = true;
+    },
+    setIgnoreSorting: function(value) {
+      this.m_IsIgnoreSorting = value;
     },
 
     getZ: function() {
@@ -200,16 +207,16 @@
       return x < -500 - this.getWidth() / 2 || x > CAMERA_WIDTH + 500 + this.getWidth() / 2 || y < -300 - this.getHeight() / 2 || y > CAMERA_HEIGHT + 300 + this.getHeight() / 2;
     },
 
-    collideWidth: function(entity, factor) {
+    collideWith: function(entity, factor) {
       if(!factor) factor = 0.5;
       if(!this.isVisible() || !entity.isVisible()) return false;
-      if(this.getZ() > entity.getHeight() || entity.getZ() > this.getHeight()) return false;
+      if(this.getZ() > entity.getHeightScaled() || entity.getZ() > this.getHeightScaled()) return false;
 
-      if (this.getCenterX() - (this.getWidth() / 2) * factor < entity.getCenterX() + (entity.getWidth() / 2) * factor &&
-        this.getCenterX() + (this.getWidth() / 2) * factor > entity.getCenterX() - (entity.getWidth() / 2) * factor &&
-        this.getCenterY() - (this.getHeight() / 2) * factor < entity.getCenterY() + (entity.getHeight() / 2) * factor &&
-        this.getCenterY() + (this.getHeight() / 2) * factor > entity.getCenterY() - (entity.getHeight() / 2) * factor &&
-        this.getZ() <= (entity.getZ() + entity.getHeight()) * factor)
+      if (this.getCenterX() - (this.getWidthScaled() / 2) * factor <= entity.getCenterX() + (entity.getWidthScaled() / 2) * factor &&
+        this.getCenterX() + (this.getWidthScaled() / 2) * factor >= entity.getCenterX() - (entity.getWidthScaled() / 2) * factor &&
+        this.getCenterY() - (this.getHeightScaled() / 2) * factor <= entity.getCenterY() + (entity.getHeightScaled() / 2) * factor &&
+        this.getCenterY() + (this.getHeightScaled() / 2) * factor >= entity.getCenterY() - (entity.getHeightScaled() / 2) * factor &&
+        this.getZ() <= (entity.getZ() + entity.getHeightScaled()) * factor)
       {
         return true;
       }
@@ -251,7 +258,7 @@
         var magnet;
         var radius;
 
-        switch(2/*Options::FORTIFICATION_LEVEL*/)
+        switch(FORTIFICATION_LEVEL)
         {
           case 0:
             magnet = 50.0;

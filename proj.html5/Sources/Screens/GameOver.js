@@ -24,6 +24,10 @@
       this.background = cc.Entity.create(s_GameOverBackground, this, function(entity) {
         entity.setCenterPosition(CAMERA_CENTER_X, CAMERA_CENTER_Y);
       });
+    },
+
+    onTouch: function() {
+      director.replaceScene(cc.TransitionFade.create(2.0, cc.Level.create()));
     }
 });
 

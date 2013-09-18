@@ -24,24 +24,21 @@ cc.BaseEnemy = cc.AnimatedEntity.extend({
     this.m_VectorX = 0;
     this.m_VectorY = 0;
 
+    this.m_FireTime = 1.0;
+    this.m_FireTimeElapsed = 0;
+
     this.m_ShootPadding = 0;
 
     this.animate(0.1);
     this.setCollideable(true);
+    this.setIgnoreSorting(false);
   },
   onDestroy: function() {
     this._super();
     
-    this.getParent().getParent().m_EnemiesCount--;
+    this._parent.getParent().m_EnemiesCount--;
 
-    if(this.getParent().getParent().m_EnemiesCount + 1 > 0) {
-      this.getParent().m_Explosions[0].create();
-      this.getParent().m_Explosions[0].last().setCenterPosition(this.getCenterX(), this.getCenterY());
-
-      this.getParent().shake(0.5, 3.0);
-    }
-
-    cc.AudioEngine.getInstance().playEffect(s_EnemyDestroy);
+    this._parent.shake(0.5, 3.0);
   },
 
   onCollide: function(object, description) {
@@ -54,6 +51,15 @@ cc.BaseEnemy = cc.AnimatedEntity.extend({
 
         this.m_ShootPadding = 20;
         this.m_ShootPaddingSpeed = 100;
+
+        this.m_Health -= object.m_Power;
+      break;
+      case "shockwave":
+        this.m_VectorX = this.getCenterX() - object.getCenterX();
+        this.m_VectorY = this.getCenterY() - object.getCenterY();
+
+        this.m_ShootPadding = 50;
+        this.m_ShootPaddingSpeed = 200;
 
         this.m_Health -= object.m_Power;
       break;

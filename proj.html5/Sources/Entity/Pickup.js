@@ -29,6 +29,8 @@ cc.Pickup = cc.TiledEntity.extend({
     this.m_Speed = 25;
 
     this.m_AnimationReverse = false;
+
+    this.setIgnoreSorting(false);
   },
 
   onCreate: function() {

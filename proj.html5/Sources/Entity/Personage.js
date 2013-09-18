@@ -18,15 +18,19 @@
  */
 
 cc.Personage = cc.AnimatedEntity.extend({
-  init: function(parent, callback) {
+  init: function(transfer, parent, callback) {
     this._super(s_Personage, 4, 5, parent, function(){});
+
+    this.m_BroadcastTransfer = transfer;
 
     this.m_EngineParticles = cc.EntityManager.create(5, cc.EngineParticle.create(), this.getParent(), 23);
     this.m_Shadow = cc.Entity.create(s_Shadow);
     this.m_Shockwave = cc.Entity.create(s_PersonageShockwave, this.getParent());
     this.m_Shockwave.setZOrder(22);
+    this.m_Shockwave.m_Power = 1;
 
     this.setCollideable(true);
+    this.setIgnoreSorting(false);
 
     this.m_CommandMove = [false, false, false, false, false];
 
@@ -60,12 +64,29 @@ cc.Personage = cc.AnimatedEntity.extend({
     this.m_FireTime = 0.45;
     this.m_FireTimeElapsed = 0;
 
-    this.m_HealthFull = 1000;
-    this.m_Health = 900;
+    this.setMaxHealth(10000);
 
     this.setCurrentFrameIndex(8);
 
     callback(this);
+
+    if(Connection.isEnabled()) {
+      this.m_LoginName = cc.Text.create(Connection._login, 16, this);
+    }
+
+    if(Connection.isEnabled() && this.m_BroadcastTransfer) {
+      var p = this;
+
+      setInterval(function() {
+        Connection.send("update", {
+          id: 12,
+          session: Connection._sessionId,
+          x: p.getCenterX(),
+          y: p.getCenterY(),
+          i: p.getCurrentFrameIndex()
+        });
+      }, 500);
+    }
   },
 
   onCreate: function() {
@@ -200,6 +221,11 @@ cc.Personage = cc.AnimatedEntity.extend({
     this.setCenterPosition(x, y);
     this.m_Shockwave.setCenterPosition(x, y - 15);
     this.m_Shadow.setCenterPosition(x, y - 15 - this.getZ());
+
+    if(Connection.isEnabled()) {
+      this.m_LoginName.setPosition(this.getWidth() / 2, this.getHeight() / 2 + this.getHeight());
+      this.m_LoginName.setScaleX(this.getScaleX());
+    }
   },
 
   startFly: function() {
@@ -343,6 +369,14 @@ cc.Personage = cc.AnimatedEntity.extend({
         this.endFly();
       break;
     }
+
+    if(Connection.isEnabled() && this.m_BroadcastTransfer) {
+      Connection.send("update", {
+        id: 11,
+        session: Connection._sessionId,
+        e: e
+      });
+    }
   },
   onKeyDown: function(e) {
     switch(e) {
@@ -375,29 +409,85 @@ cc.Personage = cc.AnimatedEntity.extend({
         this.m_SpacebarLastPushTime = new Date().getTime();
       break;
     }
+
+    if(Connection.isEnabled() && this.m_BroadcastTransfer) {
+      Connection.send("update", {
+        id: 10,
+        session: Connection._sessionId,
+        e: e
+      });
+    }
   },
 
   onMouseDown: function(e) {
     this.m_IsShouldFire = true;
+
+    if(Connection.isEnabled() && this.m_BroadcastTransfer) {
+      Connection.send("update", {
+        id: 13,
+        session: Connection._sessionId,
+        e: e
+      });
+    }
   },
   onMouseUp: function(e) {
     this.m_IsShouldFire = false;
+
+    if(Connection.isEnabled() && this.m_BroadcastTransfer) {
+      Connection.send("update", {
+        id: 14,
+        session: Connection._sessionId,
+        e: e
+      });
+    }
   },
   onMouseMoved: function(e) {
-    var location = this.getParent().convertTouchToNodeSpace(e);
+    if(this.m_BroadcastTransfer) {
+      var location = this.getParent().convertToNodeSpace(cc.p(e._point.x, e._point.y));
+    } else {
+      var location = cc.p(e.location_custom.x, e.location_custom.y);
+    }
 
     this.setFireCoordinates((location.x - CAMERA_CENTER_X), (location.y - CAMERA_CENTER_Y));
 
-    this.m_MouseX = e.getLocation().x + this.getCenterX() - CAMERA_CENTER_X;
-    this.m_MouseY = e.getLocation().y + this.getCenterY() - CAMERA_CENTER_Y;
+    this.m_MouseX = e._point.x + this.getCenterX() - CAMERA_CENTER_X;
+    this.m_MouseY = e._point.y + this.getCenterY() - CAMERA_CENTER_Y;
+
+    if(this.m_BroadcastTransfer) {
+      e.location_custom = cc.p(location.x, location.y);
+    }
+
+    if(Connection.isEnabled() && this.m_BroadcastTransfer) {
+      Connection.send("update", {
+        id: 15,
+        session: Connection._sessionId,
+        e: e
+      });
+    }
   },
   onMouseDragged: function(e) {
-    var location = this.getParent().convertTouchToNodeSpace(e);
+    if(this.m_BroadcastTransfer) {
+      var location = this.getParent().convertToNodeSpace(cc.p(e._point.x, e._point.y));
+    } else {
+      var location = cc.p(e.location_custom.x, e.location_custom.y);
+    }
 
     this.setFireCoordinates((location.x - CAMERA_CENTER_X), (location.y - CAMERA_CENTER_Y));
 
-    this.m_MouseX = e.getLocation().x + this.getCenterX() - CAMERA_CENTER_X;
-    this.m_MouseY = e.getLocation().y + this.getCenterY() - CAMERA_CENTER_Y;
+    this.m_MouseX = e._point.x + this.getCenterX() - CAMERA_CENTER_X;
+    this.m_MouseY = e._point.y + this.getCenterY() - CAMERA_CENTER_Y;
+
+    if(this.m_BroadcastTransfer) {
+      e.location_custom = cc.p(location.x, location.y);
+    }
+
+    if(Connection.isEnabled() && this.m_BroadcastTransfer) {
+      Connection.send("update", {
+        id: 16,
+        session: Connection._sessionId,
+        e: e
+      });
+    }
   },
 
   fire: function() {
@@ -409,6 +499,7 @@ cc.Personage = cc.AnimatedEntity.extend({
     this.getParent().m_Bullets.last().setCurrentFrameIndex(0);
     this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
     this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+    this.getParent().m_Bullets.last().by = "personage";
 
     cc.AudioEngine.getInstance().playEffect(s_PersonageShoot);
   },
@@ -422,13 +513,18 @@ cc.Personage = cc.AnimatedEntity.extend({
 
         this.m_Health -= 10;
       break;
+      case "bullet":
+        this._super();
+
+        this.m_Health -= object.m_Power;
+      break;
     }
   }
 });
 
-cc.Personage.create = function(parent, callback) {
+cc.Personage.create = function(transfer, parent, callback) {
   var entity = new cc.Personage();
-  entity.init(parent, callback);
+  entity.init(transfer, parent, callback);
 
   return entity;
 };

@@ -18,12 +18,44 @@
  */
 
 Array.prototype.swap = function(x, y) {
-  var b = this[x];
+  var temp = this[x];
   this[x] = this[y];
-  this[y] = b;
+  this[y] = temp;
 
   return this;
 }
+
+Array.prototype.swapAtIndex = function(index, object) {
+  var temp = this[index];
+  var i = this.indexOf(object);
+  this[index] = object;
+  this[i] = temp;
+
+  return this;
+}
+
+Array.prototype.swapObjects = function(object1, object2) {
+  var i1 = this.indexOf(object1);
+  var i2 = this.indexOf(object2);
+
+  this.swap(i1, i2);
+
+  return this;
+}
+
+Array.prototype.insert = function(index, item) {
+  this.splice(index, 0, item);
+};
+
+Array.prototype.getBySessionId = function(value) {
+  for(var i = 0; i < this.length; i++) {
+    if(this[i]._sessionId == value) {
+      return this[i];
+    }
+  }
+
+  return false;
+};
 
 String.prototype.format = function() {
   var args = arguments;
@@ -95,7 +127,11 @@ obstacle = function(entity, px, py, magnet, radius)
     }
 
     entity.setCenterPosition(dx, dy + entity.getHeight() / 2);
+
+    return true;
   }
+
+  return false;
 }
 
 pizzaPositionFromRad = function(rad, distanceFromCenterPercentage) {

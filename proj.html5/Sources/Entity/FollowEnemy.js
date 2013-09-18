@@ -31,6 +31,11 @@ cc.FollowEnemy = cc.BaseEnemy.extend({
   },
   onDestroy: function() {
     this._super();
+
+    this._parent.m_Explosions[0].create();
+    this._parent.m_Explosions[0].last().setCenterPosition(this.getCenterX(), this.getCenterY());
+
+    cc.AudioEngine.getInstance().playEffect(s_EnemyDestroy);
   },
 
   move: function(deltaTime) {

@@ -30,7 +30,13 @@
       cc.Button.create(s_ButtonStart, this, function(entity) {
         entity.setCenterPosition(CAMERA_CENTER_X, CAMERA_CENTER_Y / 2);
       }, function(entity) {
-        director.replaceScene(cc.TransitionFade.create(2.0, cc.Level.create()));
+        if(document.ccConfig.multiplayer) {
+          Connection = new Connection();
+          TEMP = cc.Level.create();
+          Connection.connect();
+        }
+
+        director.replaceScene(cc.TransitionFade.create(2.0, TEMP));
       });
 
       for(var i = 0; i < 100; i++) {
@@ -39,7 +45,7 @@
         this.backgroundStars.last().setCenterPosition(randomf(0.0, CAMERA_WIDTH), randomf(0.0, CAMERA_HEIGHT));
       }
 
-      cc.AudioEngine.getInstance().playMusic(s_MainTheme, true);
+      //cc.AudioEngine.getInstance().playMusic(s_MainTheme, true);
     },
 
     update: function(deltaTime) {

@@ -49,7 +49,7 @@ var cocos2dApp = cc.Application.extend({
     director.setAnimationInterval(1.0 / this.config['frameRate']);
 
     cc.Preloader.preload(g_resources, function() {
-      director.replaceScene(cc.Level.create());
+      director.replaceScene(cc.Menu.create());
     }, this);
 
     return true;
@@ -57,3 +57,5 @@ var cocos2dApp = cc.Application.extend({
 });
 
 var App = new cocos2dApp();
+var Connection;
+var TEMP;

@@ -27,9 +27,9 @@
     },
 
     onEnter: function() {
+      this._super();
 
       director.getTouchDispatcher().addTargetedDelegate(this, 0, true);
-      this._super();
     },
     onExit: function() {
       this._super();

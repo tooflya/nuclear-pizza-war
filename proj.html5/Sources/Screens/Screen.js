@@ -20,17 +20,44 @@
   cc.Screen = cc.Scene.extend({
     init: function() {
       this._super();
+
+      this.touched = false;
     },
 
     onEnter: function() {
       this._super();
 
       this.scheduleUpdate();
+
+      director.getTouchDispatcher().addTargetedDelegate(this, 0, false);
     },
     onExit: function() {
       this._super();
 
       this.unscheduleUpdate();
+
+      director.getTouchDispatcher().removeDelegate(this);
+    },
+
+    containsTouchLocation: function(touch) {
+      return true;
+    },
+
+    onTouchBegan: function(touch, event) {
+      this.touched = this.containsTouchLocation(touch);
+
+      return this.touched;
+    },
+    onTouchMoved: function(touch, event) {
+    },
+    onTouchEnded: function(touch, event) {
+      if(this.touched) {
+        this.onTouch();
+      }
+    },
+
+    onTouch: function() {
+
     }
 });
 

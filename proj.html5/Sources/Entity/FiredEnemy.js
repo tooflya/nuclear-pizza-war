@@ -34,6 +34,11 @@ cc.FiredEnemy = cc.BaseEnemy.extend({
   },
   onDestroy: function() {
     this._super();
+
+    this._parent.m_Explosions[0].create();
+    this._parent.m_Explosions[0].last().setCenterPosition(this.getCenterX(), this.getCenterY());
+
+    cc.AudioEngine.getInstance().playEffect(s_EnemyDestroy);
   },
 
   move: function(deltaTime) {
@@ -51,6 +56,28 @@ cc.FiredEnemy = cc.BaseEnemy.extend({
 
   update: function(deltaTime) {
     this._super(deltaTime);
+
+    this.m_FireTimeElapsed += deltaTime;
+
+    if(this.m_FireTimeElapsed >= this.m_FireTime) {
+      this.m_FireTimeElapsed = 0;
+
+      this.fire();
+    }
+  },
+
+  fire: function() {
+    this._parent.m_Bullets.create();
+
+    var x = this.getCenterX() - this._parent.m_Personage.getCenterX();
+    var y = this.getCenterY() - this._parent.m_Personage.getCenterY();
+
+    this._parent.m_Bullets.last().setCurrentFrameIndex(4);
+    this._parent.m_Bullets.last().setCoordinates(-x, y, this._parent.m_Personage.getCenterX(), this._parent.m_Personage.getCenterY());
+    this._parent.m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+    this.getParent().m_Bullets.last().by = "enemy";
+
+    cc.AudioEngine.getInstance().playEffect(s_EnemyShoot);
   },
 
   deepCopy: function() {

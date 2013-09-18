@@ -20,13 +20,14 @@
 (function () {
   var d = document;
   var c = {
-    COCOS2D_DEBUG: 0,
+    COCOS2D_DEBUG: 2,
     box2d: false,
     chipmunk: false,
     showFPS: false,
     loadExtension: false,
     frameRate: 1200,
     tag: 'canvas',
+    multiplayer: true,
     engineDir: 'Library/cocos2d/',
     appFiles: [
       'Sources/resource.js',
@@ -64,7 +65,8 @@
       'Sources/Screens/Level.js',
       'Sources/Screens/GameOver.js',
       'Sources/Screens/GameWone.js',
-      'Sources/Managers/EntityManager.js'
+      'Sources/Managers/EntityManager.js',
+      'Sources/Network/Connection.js'
     ]
   };
 

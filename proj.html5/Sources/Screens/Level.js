@@ -29,10 +29,10 @@ cc.Level = cc.Screen.extend({
     this.addChild(this.m_MainLayer, 0);
     this.addChild(this.m_StaticLayer, 1);
 
-    this.mDebug = true;
-    if(this.mDebug) {
-      this.mDebugText = cc.Text.create("", 13, this.m_StaticLayer, function(entity) {
+    if(document.ccConfig.COCOS2D_DEBUG >= 2) {
+      this.mDebugText = cc.Text.create("", 14, this.m_StaticLayer, function(entity) {
         entity.setFontName("Sans Serif");
+        entity.setColor(new cc.Color3B(0.0, 255.0, 0.0));
         entity.setZOrder(1000);
       });
       this.mDebugUpdateTimeElapsed = 0;
@@ -42,8 +42,8 @@ cc.Level = cc.Screen.extend({
   update: function(deltaTime) {
     this._super(deltaTime);
 
-    var x = -this.m_MainLayer.m_Personage.getCenterX() + CAMERA_CENTER_X;
-    var y = -this.m_MainLayer.m_Personage.getCenterY() + CAMERA_CENTER_Y;
+    var x = -this.m_MainLayer.m_Personages[0].getCenterX() + CAMERA_CENTER_X;
+    var y = -this.m_MainLayer.m_Personages[0].getCenterY() + CAMERA_CENTER_Y;
 
     if(y < 300 && y > -300) {
       this.m_MainLayer.setPosition(this.m_MainLayer.getPosition().x, y);
@@ -53,10 +53,10 @@ cc.Level = cc.Screen.extend({
       this.m_MainLayer.setPosition(x, this.m_MainLayer.getPosition().y);
     }
 
-    if(this.mDebug) {
+    if(document.ccConfig.COCOS2D_DEBUG >= 2) {
       this.mDebugUpdateTimeElapsed += deltaTime;
 
-      if(this.mDebugUpdateTimeElapsed > 0.3) {
+      if(this.mDebugUpdateTimeElapsed > 0.1) {
         this.mDebugUpdateTimeElapsed = 0;
 
         this.mDebugText.setString(
@@ -70,6 +70,7 @@ cc.Level = cc.Screen.extend({
         + "Draw calls: " + "undefinied" + "\n"
         + "Total children count: " + this.m_MainLayer.getTotalChildrenCount() + "\n"
         + "Total visible children count: " + this.m_MainLayer.getTotalChildrenCount(true) + "\n"
+        + "Total circles: " + this.m_MainLayer.m_CircleOperations + "\n"
         + "");
         this.mDebugText.setPosition(10 + this.mDebugText.getWidth() / 2, CAMERA_HEIGHT - this.mDebugText.getHeight() / 2 - 10);
       }
@@ -235,26 +236,27 @@ cc.MainLayer = cc.Layer.extend({
 
     this.m_Enemies = [];
     this.m_Explosions = [];
+    this.m_Personages = [];
 
     this.m_BackgroundStars = cc.EntityManager.create(100, cc.Star.create(), this);
     this.m_Slices = cc.EntityManager.create(2, cc.Slice.create(), this, 500);
     this.m_Bubbles = cc.EntityManager.create(2, cc.Bubble.create(), this, 22, false);
     this.m_Pickups = cc.EntityManager.create(10, cc.Pickup.create(), this, 23, false);
-    this.m_Bullets = cc.EntityManager.create(10, cc.Bullet.create(), this, 23);
-    this.m_BulletsCrashes = cc.EntityManager.create(10, cc.BulletCrash.create(), this, 23);
+    this.m_Bullets = cc.EntityManager.create(100, cc.Bullet.create(), this, 23);
+    this.m_BulletsCrashes = cc.EntityManager.create(100, cc.BulletCrash.create(), this, 23);
 
     this.m_Enemies[0] = cc.EntityManager.create(100, cc.FollowEnemy.create(), this, 24, false);
     this.m_Enemies[1] = cc.EntityManager.create(100, cc.CastleEnemy.create(), this, 24, false);
     this.m_Enemies[2] = cc.EntityManager.create(100, cc.FiredEnemy.create(), this, 24, false);
     this.m_Enemies[3] = cc.EntityManager.create(100, cc.BigEnemy.create(), this, 24, false);
 
-    this.m_Explosions[0] = cc.EntityManager.create(10, cc.Explosion.create(), this, 24);
-    this.m_Explosions[1] = cc.EntityManager.create(10, cc.LongExplosion.create(), this, 24);
-    this.m_Explosions[2] = cc.EntityManager.create(10, cc.MineExplosion.create(), this, 24);
+    this.m_Explosions[0] = cc.EntityManager.create(10, cc.Explosion.create(), this, 25);
+    this.m_Explosions[1] = cc.EntityManager.create(10, cc.LongExplosion.create(), this, 25);
+    this.m_Explosions[2] = cc.EntityManager.create(10, cc.MineExplosion.create(), this, 25);
 
     this.m_Background = cc.Entity.create(s_Platform, this, function(entity) {
       entity.setCenterPosition(CAMERA_CENTER_X, CAMERA_CENTER_Y);
-      entity.setZOrder(20);
+      entity.setZOrder(18);
     });
 
     this.generatePizzaDecorations();
@@ -265,7 +267,7 @@ cc.MainLayer = cc.Layer.extend({
       entity.setZOrder(21);
     });
 
-    this.m_Personage = cc.Personage.create(this, function(entity) {
+    this.m_Personages[0] = cc.Personage.create(true, this, function(entity) {
       entity.create();
       entity.setCenterPosition(CAMERA_CENTER_X, CAMERA_CENTER_Y - 150);
       entity.setZOrder(24);
@@ -292,7 +294,7 @@ cc.MainLayer = cc.Layer.extend({
   },
 
   generatePizzaDecorations: function() {
-    var decorations = cc.EntityManager.create(75, cc.TiledEntity.create(s_Decorations, 2, 2), this, 21);
+    var decorations = cc.EntityManager.create(75, cc.TiledEntity.create(s_Decorations, 2, 2), this, 19);
 
     for (var i = 0; i < 75; i++)
     {
@@ -343,6 +345,8 @@ cc.MainLayer = cc.Layer.extend({
   update: function(deltaTime) {
     this._super(deltaTime);
 
+    this.m_CircleOperations = 0;
+
     this.m_SliceTimeElapsed += deltaTime;
 
     // Slices
@@ -354,24 +358,32 @@ cc.MainLayer = cc.Layer.extend({
 
       if(this.m_Slices.getCount() < 2) {
         this.m_Slices.create();
-        this.m_Slices.last().setCoordinates(this.m_Personage.getCenterX(), this.m_Personage.getCenterY());
+        this.m_Slices.last().setCoordinates(this.m_Personages[0].getCenterX(), this.m_Personages[0].getCenterY());
       }
     }
 
     // Bubbles
 
-    if(this.m_Bubbles.getCount() < 2)
-    {
-      this.m_BubbleAppearTimeElapsed += deltaTime;
-
-      if(this.m_BubbleAppearTimeElapsed >= this.m_BubbleAppearTime)
+    if(Connection.isServer()) {
+      if(this.m_Bubbles.getCount() < 2)
       {
-        this.m_BubbleAppearTimeElapsed = 0;
-        this.m_BubbleAppearTime = 5.0 + randomf(0.0, 10.0);
+        this.m_BubbleAppearTimeElapsed += deltaTime;
 
-        var location = getSafePizzaPosition();
-        this.m_Bubbles.create();
-        this.m_Bubbles.last().setCenterPosition(location[0], location[1]);
+        if(this.m_BubbleAppearTimeElapsed >= this.m_BubbleAppearTime)
+        {
+          this.m_BubbleAppearTimeElapsed = 0;
+          this.m_BubbleAppearTime = 5.0 + randomf(0.0, 10.0);
+
+          var location = getSafePizzaPosition();
+          this.m_Bubbles.create();
+          this.m_Bubbles.last().setCenterPosition(location[0], location[1]);
+
+          Connection.send("update", {
+            id: 1456,
+            x: location[0],
+            y: location[1]
+          });
+        }
       }
     }
 
@@ -379,29 +391,37 @@ cc.MainLayer = cc.Layer.extend({
 
     this.checkCollisions(deltaTime);
 
+    // Unpacking
+
+    this.unpacking();
+
+    // Sort Z Order
+
+    this.sortZOrder();
+
     // Update shake
 
     this.updateShake(deltaTime);
   },
 
   onKeyUp: function(e) {
-    this.m_Personage.onKeyUp(e);
+    this.m_Personages[0].onKeyUp(e);
   },
   onKeyDown: function(e) {
-    this.m_Personage.onKeyDown(e);
+    this.m_Personages[0].onKeyDown(e);
   },
 
   onMouseDown: function(e) {
-    this.m_Personage.onMouseDown(e);
+    this.m_Personages[0].onMouseDown(e);
   },
   onMouseUp: function(e) {
-    this.m_Personage.onMouseUp(e);
+    this.m_Personages[0].onMouseUp(e);
   },
   onMouseMoved: function(e) {
-    this.m_Personage.onMouseMoved(e);
+    this.m_Personages[0].onMouseMoved(e);
   },
   onMouseDragged: function(e) {
-    this.m_Personage.onMouseDragged(e);
+    this.m_Personages[0].onMouseDragged(e);
   },
 
   shake: function(d, i)
@@ -424,7 +444,7 @@ cc.MainLayer = cc.Layer.extend({
         this.m_Shaking = false;
         this.m_ShakeDuration = 0;
 
-        this.getParent().setPosition(0, 0);
+        this._parent.runAction(cc.MoveTo.create(0.2, cc.p(0, 0)));
       }
       else
       {
@@ -443,72 +463,175 @@ cc.MainLayer = cc.Layer.extend({
     for(var i = 0; i < this.m_Bubbles.getCount(); i++) {
       var bubble = this.m_Bubbles.get(i);
 
+      for(var p = 0; p < this.m_Personages.length; p++) {
+        if(bubble.collideWith(this.m_Personages[p].m_Shockwave, 1.2)) {
+          bubble.onCollide(this.m_Personages[p].m_Shockwave, "shockwave");
+        }
+
+        this.m_CircleOperations++;
+      }
+
       for(var j = 0; j < this.m_Bullets.getCount(); j++) {
         var bullet = this.m_Bullets.get(j);
 
-        if(bullet.collideWidth(bubble)) {
+        if(bullet.collideWith(bubble)) {
           bullet.onCollide(bubble, "bubble");
           bubble.onCollide(bullet, "bullet");
         }
+
+        this.m_CircleOperations++;
       }
 
-      for(var j = 0; j < this.m_Enemies[0].getCount(); j++) {
-        var enemy = this.m_Enemies[0].get(j);
+      for(var k = 0; k < 4; k++) {
+        for(var m = 0; m < this.m_Enemies[k].getCount(); m++) {
+          var enemy = this.m_Enemies[k].get(m);
 
-        obstacle(enemy, bubble.getCenterX(), bubble.getCenterY(), 17, 50);
+          obstacle(enemy, bubble.getCenterX(), bubble.getCenterY(), 17, 50);
+
+          this.m_CircleOperations++;
+        }
+
+        this.m_CircleOperations++;
       }
 
-      for(var j = 0; j < this.m_Enemies[1].getCount(); j++) {
-        var enemy = this.m_Enemies[1].get(j);
+      for(var p = 0; p < this.m_Personages.length; p++) {
+        obstacle(this.m_Personages[p], bubble.getCenterX(), bubble.getCenterY(), 17, 50);
 
-        obstacle(enemy, bubble.getCenterX(), bubble.getCenterY(), 17, 50);
+        this.m_CircleOperations++;
       }
 
-      for(var j = 0; j < this.m_Enemies[2].getCount(); j++) {
-        var enemy = this.m_Enemies[2].get(j);
-
-        obstacle(enemy, bubble.getCenterX(), bubble.getCenterY(), 17, 50);
-      }
-
-      for(var j = 0; j < this.m_Enemies[3].getCount(); j++) {
-        var enemy = this.m_Enemies[3].get(j);
-
-        obstacle(enemy, bubble.getCenterX(), bubble.getCenterY(), 17, 50);
-      }
-
-      obstacle(this.m_Personage, bubble.getCenterX(), bubble.getCenterY(), 17, 50);
+      this.m_CircleOperations++;
     }
 
     for(var i = 0; i < 4; i++) {
       for(var j = 0; j < this.m_Enemies[i].getCount(); j++) {
         var enemy = this.m_Enemies[i].get(j);
 
-        if(enemy.collideWidth(this.m_Personage)) {
-          this.m_Personage.onCollide(enemy, "enemy");
+        for(var p = 0; p < this.m_Personages.length; p++) {
+          if(enemy.collideWith(this.m_Personages[p])) {
+            this.m_Personages[p].onCollide(enemy, "enemy");
+          }
+
+          if(enemy.collideWith(this.m_Personages[p].m_Shockwave, 1.2)) {
+            enemy.onCollide(this.m_Personages[p].m_Shockwave, "shockwave");
+          }
+
+          this.m_CircleOperations++;
         }
 
         for(var k = 0; k < this.m_Bullets.getCount(); k++) {
           var bullet = this.m_Bullets.get(k);
 
-          if(enemy.collideWidth(bullet)) {
-            bullet.onCollide(enemy, "enemy");
-            enemy.onCollide(bullet, "bullet");
+          switch(bullet.by)
+          {
+            case "personage":
+              if(enemy.collideWith(bullet)) {
+                bullet.onCollide(enemy, "enemy");
+                enemy.onCollide(bullet, "bullet");
+              }
+            break;
+            case "enemy":
+              for(var p = 0; p < this.m_Personages.length; p++) {
+                if(this.m_Personages[p].collideWith(bullet)) {
+                  bullet.onCollide(this.m_Personages[p], "personage");
+                  this.m_Personages[p].onCollide(bullet, "bullet");
+                }
+
+                this.m_CircleOperations++;
+              }
+            break;
           }
+
+          this.m_CircleOperations++;
         }
+
+        this.m_CircleOperations++;
       }
+
+      this.m_CircleOperations++;
     }
 
     for(var i = 0; i < this.m_Pickups.getCount(); i++) {
       var pickup = this.m_Pickups.get(i);
 
-      if(this.m_Personage.collideWidth(pickup, 5)) {
-        pickup.follow(this.m_Personage.getCenterX(), this.m_Personage.getCenterY(), deltaTime);
+      for(var p = 0; p < this.m_Personages.length; p++) {
+      if(this.m_Personages[p].collideWith(pickup, 5)) {
+        pickup.follow(this.m_Personages[p].getCenterX(), this.m_Personages[p].getCenterY(), deltaTime);
       }
 
-      if(this.m_Personage.collideWidth(pickup)) {
-        this.m_Personage.onCollide(pickup, "pickup");
+      if(this.m_Personages[p].collideWith(pickup)) {
+        this.m_Personages[p].onCollide(pickup, "pickup");
         pickup.destroy();
       }
+
+      this.m_CircleOperations++;
+      }
+
+      this.m_CircleOperations++;
+    }
+  },
+  unpacking: function() {
+    var padding = 0.1;
+
+    for(var i = 0; i < 4; i++) {
+      for(var j = 0; j < this.m_Enemies[i].getCount(); j++) {
+        var enemy1 = this.m_Enemies[i].get(j);
+
+        for(var k = 0; k < 4; k++) {
+          for(var m = 0; m < this.m_Enemies[k].getCount(); m++) {
+            var enemy2 = this.m_Enemies[k].get(m);
+
+            if((i + 1) * (j + 1) == (k + 1) * (m + 1)) continue;
+
+            if(enemy1.m_Shadow.collideWith(enemy2.m_Shadow, 1.0))
+            {
+              var x1 = enemy1.getCenterX();
+              var x2 = enemy2.getCenterX();
+
+              var y1 = enemy1.getCenterY();
+              var y2 = enemy2.getCenterY();
+
+              enemy1.setCenterPosition(x1 + (x1 > x2 ? padding : -padding), y1 + (y1 > y2 ? padding : -padding));
+              enemy2.setCenterPosition(x2 + (x2 > x1 ? padding : -padding), y2 + (y2 > y1 ? padding : -padding));
+            }
+
+            this.m_CircleOperations++;
+          }
+
+          this.m_CircleOperations++;
+        }
+
+        this.m_CircleOperations++;
+      }
+
+      this.m_CircleOperations++;
+    }
+  },
+  sortZOrder: function() {
+    var i;
+
+    for(var j = 0; j < this.getChildrenCount(); j++) {
+      var entity1 = this.getChildren()[j];
+
+      if(entity1.m_IsIgnoreSorting || !entity1.m_TextureFileName) {
+        continue;
+      }
+
+      for(i = j - 1; i >= 0; i--) {
+        var entity2 = this.getChildren()[i];
+
+        if(entity2.m_IsIgnoreSorting || !entity2.m_TextureFileName) {
+          continue;
+        }
+
+        if(entity2.getCenterY() - entity2.getHeightScaled() - entity2.getZ() <= entity1.getCenterY() - entity1.getHeightScaled() - entity1.getZ()) {
+          this.getChildren().swapAtIndex(i + 1, entity2);
+        }
+
+        this.m_CircleOperations++;
+      }
+
+      this.m_CircleOperations++;
     }
   },
 
@@ -519,13 +642,14 @@ cc.MainLayer = cc.Layer.extend({
     this._super();
   },
 
-  startLevel: function(index) {
+  startLevel: function(index) {return;
     this.m_EnemiesWave = cc.EnemyWave.create();
 
     switch(index)
     {
       case 1:
         this.m_EnemiesWave.addGroup(cc.EnemyGroup.create(this, 0).addEnemy(1, 0, 0).addEnemy(5, 0, 0));
+        this.m_EnemiesWave.addGroup((cc.EnemyGroup.create(this, 0)).addEnemy(8, 2, 0));
 
         this.getParent().m_EnemiesCount = 6;
       break;
@@ -687,6 +811,20 @@ cc.MainLayer = cc.Layer.extend({
         this.getParent().m_EnemiesCount = 100;
       break;
     }
+  },
+
+  // NETWORKING
+
+  addPersonage: function(data) {
+    var personage = cc.Personage.create(false, this, function(entity) {
+      entity.create();
+      entity.setCenterPosition(CAMERA_CENTER_X, CAMERA_CENTER_Y - 150);
+      entity.setZOrder(24);
+    });
+    personage.m_LoginName.setString(data.name);
+    personage._sessionId = data.session;
+
+    this.m_Personages.push(personage);
   }
 });
 

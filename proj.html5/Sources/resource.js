@@ -18,6 +18,7 @@ var s_SmallShadow = "smallshadow.png";
 var s_LargeShadow = "largeshadow.png";
 var s_Slice = "ansjovalienbotslice.png";
 var s_PersonageShockwave = "shockwave.png";
+var s_EnemyShockwave = "alien_shockwave.png";
 var s_Bubble = "bubble.png";
 var s_BubbleSplash = "bubble_pop.png";
 var s_Bullets = "bullets.png";
@@ -34,6 +35,7 @@ var s_MineExplosion = "explosion1.png";
 
 var s_MainTheme = "Resources/Music/mus_fast02.wav";
 var s_PersonageShoot = "Resources/Sound/shot.wav";
+var s_EnemyShoot = "Resources/Sound/alienshot.wav";
 var s_SliceCreated = "Resources/Sound/slice_approaching.wav";
 var s_PersonageStartFlying = "Resources/Sound/player_jetpack.wav";
 var s_PersonageShootLand = "Resources/Sound/shot_land.wav";
@@ -43,6 +45,8 @@ var s_BubblePop = "Resources/Sound/pizzaplop.wav";
 var s_PickupPop = "Resources/Sound/health.wav";
 var s_EnemyDestroy = "Resources/Sound/ai_death.wav";
 var s_PersonageDestroy = "Resources/Sound/player_death.wav";
+var s_EnemyWarning = "Resources/Sound/alien_warning.wav";
+var s_EnemySuicide = "Resources/Sound/alien_suicide.wav";
 
 var s_Font = "Franchise";
 
@@ -70,6 +74,7 @@ var g_resources = [
     {src: s_LargeShadow},
     {src: s_Slice},
     {src: s_PersonageShockwave},
+    {src: s_EnemyShockwave},
     {src: s_Bubble},
     {src: s_BubbleSplash},
     {src: s_Bullets},
@@ -85,6 +90,7 @@ var g_resources = [
 
     {src: s_MainTheme},
     {src: s_PersonageShoot},
+    {src: s_EnemyShoot},
     {src: s_SliceCreated},
     {src: s_PersonageStartFlying},
     {src: s_PersonageShootLand},
@@ -93,5 +99,7 @@ var g_resources = [
     {src: s_BubblePop},
     {src: s_PickupPop},
     {src: s_EnemyDestroy},
-    {src: s_PersonageDestroy}
+    {src: s_PersonageDestroy},
+    {src: s_EnemyWarning},
+    {src: s_EnemySuicide}
 ];
