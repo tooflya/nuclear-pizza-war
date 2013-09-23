@@ -39,8 +39,16 @@ cc.FollowEnemy = cc.BaseEnemy.extend({
   },
 
   move: function(deltaTime) {
-    var x = this.getCenterX() - this._parent.m_Personage.getCenterX();
-    var y = this.getCenterY() - this._parent.m_Personage.getCenterY() + this._parent.m_Personage.getZ();
+    var personage = this._parent.m_Personages[0];
+
+    for(var i = 1; i < this._parent.m_Personages.length; i++) {
+      if(false) { // TODO: Add distance condition.
+        personage = this._parent.m_Personages[i];
+      }
+    }
+
+    var x = this.getCenterX() - personage.getCenterX();
+    var y = this.getCenterY() - personage.getCenterY() + personage.getZ();
 
     var vector = vectorNormalize(x, y, this.m_Speed * deltaTime);
 

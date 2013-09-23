@@ -31,10 +31,9 @@
         entity.setCenterPosition(CAMERA_CENTER_X, CAMERA_CENTER_Y / 2);
       }, function(entity) {
         if(document.ccConfig.multiplayer) {
-          Connection = new Connection();
           TEMP = cc.Level.create();
           Connection.connect();
-        }
+        } else {TEMP = cc.Level.create();}
 
         director.replaceScene(cc.TransitionFade.create(2.0, TEMP));
       });
@@ -44,18 +43,29 @@
 
         this.backgroundStars.last().setCenterPosition(randomf(0.0, CAMERA_WIDTH), randomf(0.0, CAMERA_HEIGHT));
       }
-
-      //cc.AudioEngine.getInstance().playMusic(s_MainTheme, true);
     },
 
     update: function(deltaTime) {
       this._super(deltaTime);
+    },
+
+    onEnter: function() {
+      this._super();
+
+      cc.AudioEngine.getInstance().playMusic(s_MainTheme, true);
+    },
+    onExit: function() {
+      this._super();
     }
 });
 
 cc.Menu.create = function() {
-  var screen = new cc.Menu();
-  screen.init();
+  if(cc.Menu.instance) {
+    return cc.Menu.instance;
+  } else {
+  cc.Menu.instance = new cc.Menu();
+  cc.Menu.instance.init();
 
-  return screen;
+  return cc.Menu.instance;
+  }
 };

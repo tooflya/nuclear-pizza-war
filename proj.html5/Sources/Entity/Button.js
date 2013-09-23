@@ -29,16 +29,16 @@
     onEnter: function() {
       this._super();
 
-      director.getTouchDispatcher().addTargetedDelegate(this, 0, true);
+      director.getTouchDispatcher()._addTargetedDelegate(this, 0, false);
     },
     onExit: function() {
       this._super();
 
-      director.getTouchDispatcher().removeDelegate(this);
+      director.getTouchDispatcher()._removeDelegate(this);
     },
 
     containsTouchLocation: function(touch) {
-      return cc.rectContainsPoint(cc.RectMake(this.getCenterX() - this.getWidth() / 2, this.getCenterY() - this.getHeight() / 2, this.getWidth(), this.getHeight()), touch.getLocation()) && this.isVisible();
+      return cc.rectContainsPoint(cc.RectMake(this.getWorldCenterX() - this.getWidth() / 2, this.getWorldCenterY() - this.getHeight() / 2, this.getWidth(), this.getHeight()), touch.getLocation()) && this.isVisible() && this.getOpacity() >= 255;
     },
 
     onTouchBegan: function(touch, event) {

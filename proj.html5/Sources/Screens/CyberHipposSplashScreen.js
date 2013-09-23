@@ -50,8 +50,12 @@
 });
 
 cc.CyberHipposSplashScreen.create = function() {
-  var screen = new cc.CyberHipposSplashScreen();
-  screen.init();
+  if(cc.CyberHipposSplashScreen.instance) {
+    return cc.CyberHipposSplashScreen.instance;
+  } else {
+  cc.CyberHipposSplashScreen.instance = new cc.CyberHipposSplashScreen();
+  cc.CyberHipposSplashScreen.instance.init();
 
-  return screen;
+  return cc.CyberHipposSplashScreen.instance;
+  }
 };

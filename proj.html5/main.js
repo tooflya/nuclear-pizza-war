@@ -48,8 +48,15 @@ var cocos2dApp = cc.Application.extend({
     director.setDisplayStats(this.config['showFPS']);
     director.setAnimationInterval(1.0 / this.config['frameRate']);
 
-    cc.Preloader.preload(g_resources, function() {
-      director.replaceScene(cc.Menu.create());
+    cc.LoaderScene.preload(g_resources, function() {
+      cc.CyberHipposSplashScreen.create();
+      cc.MojangSplashScreen.create();
+      cc.Menu.create();
+      cc.Level.create();
+      cc.GameOver.create();
+      cc.GameWone.create();
+
+      director.replaceScene(cc.TransitionFade.create(1.0, cc.Level.create()));
     }, this);
 
     return true;
@@ -57,5 +64,4 @@ var cocos2dApp = cc.Application.extend({
 });
 
 var App = new cocos2dApp();
-var Connection;
-var TEMP;
+var Connection = new Connection();

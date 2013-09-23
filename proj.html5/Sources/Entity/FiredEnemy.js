@@ -67,15 +67,27 @@ cc.FiredEnemy = cc.BaseEnemy.extend({
   },
 
   fire: function() {
-    this._parent.m_Bullets.create();
+    var personage = this._parent.m_Personages[0];
 
-    var x = this.getCenterX() - this._parent.m_Personage.getCenterX();
-    var y = this.getCenterY() - this._parent.m_Personage.getCenterY();
+    for(var i = 1; i < this._parent.m_Personages.length; i++) {
+      if(false) { // TODO: Add distance condition.
+        personage = this._parent.m_Personages[i];
+      }
+    }
 
-    this._parent.m_Bullets.last().setCurrentFrameIndex(4);
-    this._parent.m_Bullets.last().setCoordinates(-x, y, this._parent.m_Personage.getCenterX(), this._parent.m_Personage.getCenterY());
-    this._parent.m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
-    this.getParent().m_Bullets.last().by = "enemy";
+    for(var i = 0; i < this.m_FireCount; i++) {
+      this._parent.m_Bullets.create();
+
+      var x = this.getCenterX() - personage.getCenterX();
+      var y = this.getCenterY() - personage.getCenterY();
+
+      this._parent.m_Bullets.last().setCurrentFrameIndex(4);
+      this._parent.m_Bullets.last().setCoordinates(-x, y, personage.getCenterX(), personage.getCenterY());
+      this._parent.m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this._parent.m_Bullets.last().m_Power = this.m_FirePower;
+      this._parent.m_Bullets.last().m_Speed = 200;
+      this.getParent().m_Bullets.last().by = "enemy";
+    }
 
     cc.AudioEngine.getInstance().playEffect(s_EnemyShoot);
   },

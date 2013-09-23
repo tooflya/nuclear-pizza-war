@@ -126,6 +126,13 @@
       return this.getPosition().y;
     },
 
+    getWorldCenterX: function() {
+      return this._parent.convertToWorldSpace(this.getPosition()).x;
+    },
+    getWorldCenterY: function() {
+      return this._parent.convertToWorldSpace(this.getPosition()).y;
+    },
+
     getWidth: function() {
       return this.m_Width;
     },
@@ -133,10 +140,10 @@
       return this.m_Height;
     },
     getWidthScaled: function() {
-      return this.m_Width * this.getScaleX();
+      return this.m_Width * Math.abs(this.getScaleX());
     },
     getHeightScaled: function() {
-      return this.m_Height * this.getScaleY();
+      return this.m_Height * Math.abs(this.getScaleY());
     },
 
     setManager: function(manager) {
@@ -247,7 +254,7 @@
       this.m_IsRed = true;
       this.m_RedTimeElapsed = 0;
 
-      this.setColor(new cc.Color3B(255, 0, 0));
+      this.setColor(new cc.Color4B(255, 0, 0, 255));
     },
 
     update: function(deltaTime) {
@@ -326,7 +333,7 @@
           this.m_IsRed = false;
           this.m_RedTimeElapsed = 0;
 
-          this.setColor(new cc.Color3B(255, 255, 255));
+          this.setColor(new cc.Color4B(255, 255, 255, 255));
         }
       }
     },
@@ -373,11 +380,8 @@
         this.m_RectangleVerticles2[2] = cc.p(x2, y2);
         this.m_RectangleVerticles2[3] = cc.p(x1, y2);
 
-        cc.drawingUtil.setDrawColor4B(0, 0, 0, 255);
-        cc.drawingUtil.drawSolidPoly(this.m_RectangleVerticles1, 4, cc.Color4B(0, 0, 0, 1));
-
-        cc.drawingUtil.setDrawColor4B(this.R1, this.G1, this.B1, 255);
-        cc.drawingUtil.drawSolidPoly(this.m_RectangleVerticles2, 4, cc.Color4B(0, 0, 0, 1));
+        cc.drawingUtil.drawSolidPoly(this.m_RectangleVerticles1, 4, new cc.Color4F(0, 0, 0, 1));
+        cc.drawingUtil.drawSolidPoly(this.m_RectangleVerticles2, 4, new cc.Color4F(this.R1 / 255, this.G1 / 255, this.B1 / 255, 1));
       } else if(this.m_Health <= 0) {
         this.destroy();
       }

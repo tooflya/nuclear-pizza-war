@@ -82,8 +82,10 @@ cc.EntityManager = cc.Class.extend({
   },
 
   clear: function() {
-    for(var i = 0; i < this.getCapacity(); i++)
-    {
+    for(var i = 0; i < this.getCapacity(); i++) {
+      this.get(i).destroy();
+    }
+    for(var i = 0; i < this.getCapacity(); i++) {
       this.get(i).destroy();
     }
   },
@@ -94,6 +96,17 @@ cc.EntityManager = cc.Class.extend({
 
   last: function() {
     return this.m_Elements[this.m_LastElementNumber];
+  },
+
+  scheduleUpdate: function() {
+    for(var i = 0; i < this.getCount(); i++) {
+      this.get(i).scheduleUpdate();
+    }
+  },
+  unscheduleUpdate: function() {
+    for(var i = 0; i < this.getCount(); i++) {
+      this.get(i).unscheduleUpdate();
+    }
   }
 });
 

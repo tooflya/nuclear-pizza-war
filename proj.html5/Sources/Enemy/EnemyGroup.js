@@ -27,18 +27,30 @@ cc.EnemyGroup = cc.Node.extend({
     this.m_TimeElapsed = 0;
 
     this.m_Emmiters = [];
-    this.m_Emmiters[0] = cc.p(50,   160);
-    this.m_Emmiters[1] = cc.p(-100,  350);
-    this.m_Emmiters[2] = cc.p(200,   570);
-    this.m_Emmiters[3] = cc.p(800,   70);
-    this.m_Emmiters[4] = cc.p(1170,  350);
-    this.m_Emmiters[5] = cc.p(800,   570);
-    this.m_Emmiters[6] = cc.p(390,   50);
-    this.m_Emmiters[7] = cc.p(390,   580);
+    this.m_Emmiters[0] = cc.p(200,   -30);
+    this.m_Emmiters[1] = cc.p(-250,  350);
+    this.m_Emmiters[2] = cc.p(200,   630);
+    this.m_Emmiters[3] = cc.p(800,   20);
+    this.m_Emmiters[4] = cc.p(800,   580);
+    this.m_Emmiters[5] = cc.p(1050,   350);
 
     this.m_Groups = [];
 
     this.scheduleUpdate();
+
+    if(document.ccConfig.COCOS2D_DEBUG >= 2) {
+      var e = this;
+      for(var i = 0; i < this.m_Emmiters.length; i++) {
+        cc.Entity.create(s_Debug, cc.Level.instance.m_MainLayer, function(entity) {
+          entity.create();
+          entity.setZOrder(20);
+          entity.setCenterPosition(e.m_Emmiters[i].x, e.m_Emmiters[i].y);
+
+          var text = cc.Text.create(i, 20, entity);
+          text.setPosition(entity.getWidth() / 2, entity.getHeight() / 2);
+        });
+      }
+    }
   },
 
   addEnemy: function(count, type, level) {
@@ -57,7 +69,7 @@ cc.EnemyGroup = cc.Node.extend({
       for(var i = 0; i < this.m_Groups.length; i++)
       {
         var params = this.m_Groups[i];
-        var r = random(0, 8);
+        var r = random(0, this.m_Emmiters.length);
 
         var x = this.m_Emmiters[r].x;
         var y = this.m_Emmiters[r].y;
@@ -120,21 +132,24 @@ cc.EnemyGroup = cc.Node.extend({
               {
                 case 0:
                   enemy.setMaxHealth(150);
-                  //enemy.setFireTime(randomf(3.0, 15.0));
-
-                  //((FiredEnemy*) enemy).mShootsCount = 1;
+                  enemy.setSpeed(30.0);
+                  enemy.setFireTime(randomf(3.0, 15.0));
+                  enemy.setFirePower(5);
+                  enemy.setFireCount(1);
                 break;
                 case 1:
                   enemy.setMaxHealth(300);
-                  //enemy.setFireTime(randomf(3.0, 10.0));
-
-                  //((FiredEnemy*) enemy).mShootsCount = 3;
+                  enemy.setSpeed(40.0);
+                  enemy.setFireTime(randomf(3.0, 10.0));
+                  enemy.setFirePower(15);
+                  enemy.setFireCount(3);
                 break;
                 case 2:
                   enemy.setMaxHealth(450);
-                  //enemy.setFireTime(randomf(3.0, 7.0));
-
-                  //((FiredEnemy*) enemy).mShootsCount = 3;
+                  enemy.setSpeed(50.0);
+                  enemy.setFireTime(randomf(3.0, 7.0));
+                  enemy.setFirePower(20);
+                  enemy.setFireCount(3);
                 break;
               }
             break;

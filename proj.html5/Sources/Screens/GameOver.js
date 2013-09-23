@@ -27,13 +27,19 @@
     },
 
     onTouch: function() {
-      director.replaceScene(cc.TransitionFade.create(2.0, cc.Level.create()));
+      cc.Level.instance.m_MainLayer.m_Personages[0].reset();
+
+      director.popScene();
     }
 });
 
 cc.GameOver.create = function() {
-  var screen = new cc.GameOver();
-  screen.init();
+  if(cc.GameOver.instance) {
+    return cc.GameOver.instance;
+  } else {
+  cc.GameOver.instance = new cc.GameOver();
+  cc.GameOver.instance.init();
 
-  return screen;
+  return cc.GameOver.instance;
+  }
 };

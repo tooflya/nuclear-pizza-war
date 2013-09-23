@@ -24,14 +24,23 @@ cc.BaseEnemy = cc.AnimatedEntity.extend({
     this.m_VectorX = 0;
     this.m_VectorY = 0;
 
+    this.m_VoiceTime = randomf(2.0, 15.0);
+    this.m_VoiceTimeElapsed = 0;
+
     this.m_FireTime = 1.0;
     this.m_FireTimeElapsed = 0;
+
+    this.m_FirePower = 0;
+    this.m_FireCount = 0;
 
     this.m_ShootPadding = 0;
 
     this.animate(0.1);
     this.setCollideable(true);
     this.setIgnoreSorting(false);
+    this.setColor(new cc.Color3B(255, 255, 255));
+    this.setScale(0);
+    this.runAction(cc.ScaleTo.create(0.2, 1));
   },
   onDestroy: function() {
     this._super();
@@ -39,6 +48,13 @@ cc.BaseEnemy = cc.AnimatedEntity.extend({
     this._parent.getParent().m_EnemiesCount--;
 
     this._parent.shake(0.5, 3.0);
+
+    if(this.getParent()) {
+      if(probably(10)) {
+        this.getParent().m_Pickups.create();
+        this.getParent().m_Pickups.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      }
+    }
   },
 
   onCollide: function(object, description) {
@@ -62,8 +78,21 @@ cc.BaseEnemy = cc.AnimatedEntity.extend({
         this.m_ShootPaddingSpeed = 200;
 
         this.m_Health -= object.m_Power;
+      break
+      case "spider":
+        this.m_Health -= object.m_Power;
       break;
     }
+  },
+
+  setFireTime: function(value) {
+    this.m_FireTime = value;
+  },
+  setFirePower: function(value) {
+    this.m_FirePower = value;
+  },
+  setFireCount: function(value) {
+    this.m_FireCount = value;
   },
 
   update: function(deltaTime) {
@@ -80,5 +109,13 @@ cc.BaseEnemy = cc.AnimatedEntity.extend({
     }
 
     this.m_Shadow.setCenterPosition(this.getCenterX(), this.getCenterY() - 15);
+
+    this.m_VoiceTimeElapsed += deltaTime;
+
+    if(this.m_VoiceTimeElapsed >= this.m_VoiceTime) {
+      this.m_VoiceTimeElapsed = 0;
+
+      cc.AudioEngine.getInstance().playEffect(s_EnemyVoice);
+    }
   }
 });

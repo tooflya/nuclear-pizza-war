@@ -29,14 +29,14 @@
 
       this.scheduleUpdate();
 
-      director.getTouchDispatcher().addTargetedDelegate(this, 0, false);
+      director.getTouchDispatcher()._addTargetedDelegate(this, 0, false);
     },
     onExit: function() {
       this._super();
 
       this.unscheduleUpdate();
 
-      director.getTouchDispatcher().removeDelegate(this);
+      director.getTouchDispatcher()._removeDelegate(this);
     },
 
     containsTouchLocation: function(touch) {

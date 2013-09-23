@@ -418,7 +418,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             texDef.fontDimensions = cc.SIZE_POINTS_TO_PIXELS(this._dimensions);
         } else {
             texDef.fontSize = this._fontSize;
-            texDef.fontDimensions = cc.SizeMake(this._dimensions.width, this._dimensions.height);
+            texDef.fontDimensions = cc.size(this._dimensions.width, this._dimensions.height);
         }
 
         texDef.fontName       =  this._fontName;
@@ -734,6 +734,16 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         cc.Sprite.prototype.setPosition.call(this, realPosition);
     },
 
+    setPositionX:function(x){
+        this._originalPosition.x = x;
+        cc.Sprite.prototype.setPositionX.call(this, x);
+    },
+
+    setPositionY:function(y){
+        this._originalPosition.y = y;
+        cc.Sprite.prototype.setPositionY.call(this, y);
+    },
+
     getPosition:function(){
         return cc.p(this._originalPosition.x, this._originalPosition.y);
     },
@@ -893,7 +903,6 @@ else
 
 cc.LabelTTF.__labelHeightDiv = document.createElement("div");
 cc.LabelTTF.__labelHeightDiv.style.fontFamily = "Arial";
-cc.LabelTTF.__labelHeightDiv.innerHTML = "ajghl~!";
 cc.LabelTTF.__labelHeightDiv.style.position = "absolute";
 cc.LabelTTF.__labelHeightDiv.style.left = "-100px";
 cc.LabelTTF.__labelHeightDiv.style.top = "-100px";
@@ -904,10 +913,12 @@ cc.LabelTTF.__getFontHeightByDiv = function(fontName, fontSize){
     var clientHeight = cc.LabelTTF.__fontHeightCache[fontName + "." + fontSize];
     if (clientHeight > 0) return clientHeight;
     var labelDiv = cc.LabelTTF.__labelHeightDiv;
+    labelDiv.innerHTML = "ajghl~!";
     labelDiv.style.fontFamily = fontName;
     labelDiv.style.fontSize = fontSize + "px";
     clientHeight = labelDiv.clientHeight ;
     cc.LabelTTF.__fontHeightCache[fontName + "." + fontSize] = clientHeight;
+    labelDiv.innerHTML = "";
     return clientHeight;
 };
 

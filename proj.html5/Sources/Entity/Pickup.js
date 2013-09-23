@@ -23,7 +23,7 @@ cc.Pickup = cc.TiledEntity.extend({
 
     this.m_Shadow = cc.Entity.create(s_Shadow);
 
-    this.m_AnimationTime = 3;
+    this.m_AnimationTime = 2;
     this.m_AnimationTimeElapsed = 0;
 
     this.m_Speed = 25;
@@ -45,6 +45,13 @@ cc.Pickup = cc.TiledEntity.extend({
     this._super();
 
     cc.AudioEngine.getInstance().playEffect(s_PickupPop);
+  },
+
+  onCollide: function(object, description) {
+    cc.Level.instance.m_Wealth[this.getCurrentFrameIndex()]++;
+    cc.Level.instance.m_StaticLayer.m_WealthManager.update();
+
+    this.destroy();
   },
 
   follow: function(x, y, deltaTime) {

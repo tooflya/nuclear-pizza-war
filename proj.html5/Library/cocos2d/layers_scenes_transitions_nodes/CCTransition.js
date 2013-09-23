@@ -278,12 +278,6 @@ cc.TransitionSceneOriented.create = function (t, scene, orientation) {
  */
 cc.TransitionRotoZoom = cc.TransitionScene.extend(/** @lends cc.TransitionRotoZoom# */{
     /**
-     * Constructor
-     */
-    ctor:function () {
-    },
-
-    /**
      * Custom On Enter callback
      * @override
      */
@@ -544,12 +538,6 @@ cc.ADJUST_FACTOR = 0.5;
 cc.TransitionSlideInL = cc.TransitionScene.extend(/** @lends cc.TransitionSlideInL# */{
     _sceneOrder:function () {
         this._isInSceneOnTop = false;
-    },
-
-    /**
-     * Constructor
-     */
-    ctor:function () {
     },
 
     /**
@@ -1234,7 +1222,7 @@ cc.TransitionFade = cc.TransitionScene.extend(/** @lends cc.TransitionFade# */{
      */
     ctor:function () {
         cc.TransitionScene.prototype.ctor.call(this);
-        this._color = new cc.Color3B()
+        this._color = new cc.Color4B()
     },
 
     /**
@@ -1420,7 +1408,7 @@ cc.TransitionTurnOffTiles = cc.TransitionScene.extend(/** @lends cc.TransitionTu
         var aspect = winSize.width / winSize.height;
         var x = 0 | (12 * aspect);
         var y = 12;
-        var toff = cc.TurnOffTiles.create(this._duration, cc.SizeMake(x, y));
+        var toff = cc.TurnOffTiles.create(this._duration, cc.size(x, y));
         var action = this.easeActionWithAction(toff);
         this._outScene.runAction(cc.Sequence.create(action, cc.CallFunc.create(this.finish, this), cc.StopGrid.create()));
     },
@@ -1559,7 +1547,7 @@ cc.TransitionFadeTR = cc.TransitionScene.extend(/** @lends cc.TransitionFadeTR# 
         var x = 0 | (12 * aspect);
         var y = 12;
 
-        var action = this.actionWithSize(cc.SizeMake(x, y));
+        var action = this.actionWithSize(cc.size(x, y));
         this._outScene.runAction(
             cc.Sequence.create(this.easeActionWithAction(action), cc.CallFunc.create(this.finish, this),
                 cc.StopGrid.create())

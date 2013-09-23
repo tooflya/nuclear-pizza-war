@@ -20,14 +20,14 @@
 (function () {
   var d = document;
   var c = {
-    COCOS2D_DEBUG: 2,
+    COCOS2D_DEBUG: 0,
     box2d: false,
     chipmunk: false,
-    showFPS: false,
+    showFPS: true,
     loadExtension: false,
-    frameRate: 1200,
+    frameRate: 60,
     tag: 'canvas',
-    multiplayer: true,
+    multiplayer: false,
     engineDir: 'Library/cocos2d/',
     appFiles: [
       'Sources/resource.js',
@@ -55,10 +55,10 @@
       'Sources/Entity/Explosion.js',
       'Sources/Entity/LongExplosion.js',
       'Sources/Entity/MineExplosion.js',
+      'Sources/Entity/Spider.js',
       'Sources/Enemy/EnemyWave.js',
       'Sources/Enemy/EnemyGroup.js',
       'Sources/Screens/Screen.js',
-      'Sources/Screens/Preloader.js',
       'Sources/Screens/CyberHipposSplashScreen.js',
       'Sources/Screens/MojangSplashScreen.js',
       'Sources/Screens/Menu.js',
@@ -66,7 +66,10 @@
       'Sources/Screens/GameOver.js',
       'Sources/Screens/GameWone.js',
       'Sources/Managers/EntityManager.js',
-      'Sources/Network/Connection.js'
+      'Sources/Managers/WealthManager.js',
+      'Sources/Network/Connection.js',
+      'Sources/Network/Settings.js',
+      'Sources/Network/Updater.js'
     ]
   };
 

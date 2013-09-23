@@ -23,7 +23,7 @@ Connection = cc.Class.extend({
       return;
     }
 
-    this._url = '127.0.0.1';
+    this._url = '37.229.129.226';
     this._port = '82';
 
     this._server = false;
@@ -31,24 +31,24 @@ Connection = cc.Class.extend({
 
     this._login = "";
     this._room = "";
+    this._pvp = false;
+
+    this.m_Updater = new Updater();
+    this.m_Settings = new Settings();
 
     this._sessionId = -1;
 
     this.connection = io.connect('http://' + this._url + ':' + this._port);
 
-    this.connection.on("connecting", function() {
-      console.log("Client is trying to connecting to the server...");
-    });
-
     this.connection.on("connect", function() {
-      console.log("Connection was opened.");
-
       Connection._login = document.getElementById('login').value;
       Connection._room = document.getElementById('room').value;
+      Connection._pvp = document.getElementById('pvp').checked;
 
       this.emit("login", {
         login: Connection._login,
-        room: Connection._room
+        room: Connection._room,
+        pvp: Connection._pvp
       });
     });
 
@@ -57,73 +57,26 @@ Connection = cc.Class.extend({
     });
 
     this.connection.on("settings", function(data) {
-      console.log("Setting received: " + data.id);
-
-      var game = TEMP.m_MainLayer;
-
-      switch(data.id) {
-        case 0:
-          Connection._server = data.server;
-          Connection._client = data.client;
-          Connection._sessionId = data.session;
-
-          game.m_Personages[0].m_LoginName.setString(Connection._login);
-          game.m_Personages[0]._sessionId = data.session;
-
-          console.log("Settings is stored. Game is now set to " + (Connection._server ? "server" : "client"));
-        break;
-        case 1:
-          game.addPersonage(data);
-        break;
-      }
-    });
-
-    this.connection.on("info", function(data, callback) {
-      console.log(data.message);
+      this.m_Settings.update(data);
     });
 
     this.connection.on("update", function(data) {
-      var game = TEMP.m_MainLayer;
-      switch(data.id) {
-        case 0:
-          game.addPersonage(data);
-        break;
-      }
-      switch(data.id) {
-        case 10:
-          game.m_Personages.getBySessionId(data.session).onKeyDown(data.e);
-        break;
-        case 11:
-          game.m_Personages.getBySessionId(data.session).onKeyUp(data.e);
-        break;
-        case 12:
-          game.m_Personages.getBySessionId(data.session).setCenterPosition(data.x, data.y);
-          game.m_Personages.getBySessionId(data.session).setCurrentFrameIndex(data.i);
-        break;
-        case 13:
-          game.m_Personages.getBySessionId(data.session).onMouseDown(data.e);
-        break;
-        case 14:
-          game.m_Personages.getBySessionId(data.session).onMouseUp(data.e);
-        break;
-        case 15:
-          game.m_Personages.getBySessionId(data.session).onMouseMoved(data.e);
-        break;
-        case 16:
-          game.m_Personages.getBySessionId(data.session).onMouseDragged(data.e);
-        break;
-      }
-      switch(data.id) {
-        case 1456:
-          game.m_Bubbles.create();
-          game.m_Bubbles.last().setCenterPosition(data.x, data.y);
-        break;
-      }
+      this.m_Updater.update(data);
     });
 
     this.connection.on("announcement", function(data) {
-      console.log(data.message);
+      var game = TEMP.m_StaticLayer;
+
+      game.announcement(data);
     });
+  },
+
+  announcement: function(data) {
+    if(!this.isServer()) {
+      //return false;
+    }
+
+    this.send("announcement", data);
   },
 
   isEnabled: function() {
@@ -132,10 +85,15 @@ Connection = cc.Class.extend({
   isServer: function() {
     return (this._server || !document.ccConfig.multiplayer);
   },
+  isPVP: function() {
+    return this.isEnabled() && this._pvp;
+  },
 
   send: function(name, data) {
-    data.room = this._room;
+    if(document.ccConfig.multiplayer) {
+      data.room = this._room;
 
-    this.connection.emit(name, data);
+      this.connection.emit(name, data);
+    }
   }
 });

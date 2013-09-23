@@ -33,10 +33,12 @@ cc.Bullet = cc.TiledEntity.extend({
   onDestroy: function() {
     this._super();
 
-    this._parent._parent.m_BulletsCrashes.create();
-    this._parent._parent.m_BulletsCrashes.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+    if(isOnPizza(this)) {
+      this._parent._parent.m_BulletsCrashes.create();
+      this._parent._parent.m_BulletsCrashes.last().setCenterPosition(this.getCenterX(), this.getCenterY());
 
-    cc.AudioEngine.getInstance().playEffect(s_PersonageShootLand);
+      cc.AudioEngine.getInstance().playEffect(s_PersonageShootLand);
+    }
   },
 
   setCoordinates: function(x, y, mx, my) {
@@ -45,6 +47,11 @@ cc.Bullet = cc.TiledEntity.extend({
 
     this.m_MouseX = mx;
     this.m_MouseY = my;
+  },
+  setCoordinatesPadding: function(x, y)
+  {
+    this.m_VectorX += this.m_VectorX > 0 ? x : -x;
+    this.m_VectorY += this.m_VectorY < 0 ? y : -y;
   },
   setCurrentFrameIndex: function(index) {
     this._super(index);
@@ -74,14 +81,8 @@ cc.Bullet = cc.TiledEntity.extend({
 
     this.m_Shadow.setCenterPosition(this.getCenterX(), this.getCenterY() - Math.abs(padding)/* - this.mFakeZ*/);
 
-    if(vector[1] > 0) {
-      if(this.getCenterY() > this.m_MouseY) {
-        this.destroy();
-      }
-    } else {
-      if(this.getCenterY() < this.m_MouseY) {
-        this.destroy();
-      }
+    if((Math.abs(this.getCenterX() - this.m_MouseX) > 30 ? (vector[0] > 0 ? this.getCenterX() > this.m_MouseX : this.getCenterX() < this.m_MouseX) : false) || (Math.abs(this.getCenterY() - this.m_MouseY) > 30 ? (vector[1] > 0 ? this.getCenterY() > this.m_MouseY : this.getCenterY() < this.m_MouseY) : false)) {
+      this.destroy();
     }
   },
 

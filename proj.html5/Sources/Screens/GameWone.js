@@ -28,8 +28,12 @@
 });
 
 cc.GameWone.create = function() {
-  var screen = new cc.GameWone();
-  screen.init();
+  if(cc.GameWone.instance) {
+    return cc.GameWone.instance;
+  } else {
+  cc.GameWone.instance = new cc.GameWone();
+  cc.GameWone.instance.init();
 
-  return screen;
+  return cc.GameWone.instance;
+  }
 };

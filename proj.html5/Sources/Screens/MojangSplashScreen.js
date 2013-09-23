@@ -50,8 +50,12 @@
 });
 
 cc.MojangSplashScreen.create = function() {
-  var screen = new cc.MojangSplashScreen();
-  screen.init();
+  if(cc.MojangSplashScreen.instance) {
+    return cc.MojangSplashScreen.instance;
+  } else {
+  cc.MojangSplashScreen.instance = new cc.MojangSplashScreen();
+  cc.MojangSplashScreen.instance.init();
 
-  return screen;
+  return cc.MojangSplashScreen.instance;
+  }
 };

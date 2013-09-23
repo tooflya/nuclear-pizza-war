@@ -423,11 +423,11 @@ cc.ProgressTimer = cc.NodeRGBA.extend(/** @lends cc.ProgressTimer# */{
         var flipXOffset = 0 | (locOffsetPosition.x), flipYOffset = -locOffsetPosition.y - locRect.height;
 
         context.save();
-        if (locSprite._flipX) {
+        if (locSprite._flippedX) {
             flipXOffset = -locOffsetPosition.x - locRect.width;
             context.scale(-1, 1);
         }
-        if (locSprite._flipY) {
+        if (locSprite._flippedY) {
             flipYOffset = locOffsetPosition.y;
             context.scale(1, -1);
         }
@@ -790,7 +790,7 @@ cc.ProgressTimer = cc.NodeRGBA.extend(/** @lends cc.ProgressTimer# */{
                 locEndAngle = 270 + 3.6 * this._percentage;
             }
 
-            if (locSprite._flipX) {
+            if (locSprite._flippedX) {
                 locOrigin.x -= spriteSize.width * (this._midPoint.x * 2);
                 locStartAngle= -locStartAngle;
                 locEndAngle= -locEndAngle;
@@ -798,7 +798,7 @@ cc.ProgressTimer = cc.NodeRGBA.extend(/** @lends cc.ProgressTimer# */{
                 locEndAngle -= 180;
                 locCounterClockWise = !locCounterClockWise;
             }
-            if (locSprite._flipY) {
+            if (locSprite._flippedY) {
                 locOrigin.y+=spriteSize.height*(this._midPoint.y*2);
                 locCounterClockWise = !locCounterClockWise;
                 locStartAngle= -locStartAngle;
@@ -818,13 +818,25 @@ cc.ProgressTimer = cc.NodeRGBA.extend(/** @lends cc.ProgressTimer# */{
             var currentDrawSize = cc.size(drawedSize.width + drawingSize.width, drawedSize.height + drawingSize.height);
 
             var startPoint = cc.p(spriteSize.width * locMidPoint.x, spriteSize.height * locMidPoint.y);
+
             var needToLeft = startPoint.x - currentDrawSize.width / 2;
+            if (locMidPoint.x > 0.5) {
+                if (currentDrawSize.width / 2 >= spriteSize.width - startPoint.x) {
+                    needToLeft = spriteSize.width - currentDrawSize.width;
+                }
+            }
+
             var needToTop = startPoint.y - currentDrawSize.height / 2;
+            if (locMidPoint.y > 0.5) {
+                if (currentDrawSize.height / 2 >= spriteSize.height - startPoint.y) {
+                    needToTop = spriteSize.height - currentDrawSize.height;
+                }
+            }
 
             //left pos
             locBarRect.x = 0;
             var flipXNeed = 1;
-            if (locSprite._flipX) {
+            if (locSprite._flippedX) {
                 locBarRect.x -= currentDrawSize.width;
                 flipXNeed = -1;
             }
@@ -835,7 +847,7 @@ cc.ProgressTimer = cc.NodeRGBA.extend(/** @lends cc.ProgressTimer# */{
             //right pos
             locBarRect.y = 0;
             var flipYNeed = 1;
-            if (locSprite._flipY) {
+            if (locSprite._flippedY) {
                 locBarRect.y += currentDrawSize.height;
                 flipYNeed = -1;
             }

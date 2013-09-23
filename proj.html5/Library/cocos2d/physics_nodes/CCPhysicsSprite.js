@@ -116,10 +116,14 @@
             return this._body.p.y;
         },
 
-        setPosition:function (pos) {
-            var locBody = this._body;
-            locBody.p.x = pos.x;
-            locBody.p.y = pos.y;
+        setPosition:function (newPosOrxValue, yValue) {
+            if(arguments.length==2){
+                this._body.p.x = newPosOrxValue;
+                this._body.p.y = yValue;
+            }else{
+                this._body.p.x = newPosOrxValue.x;
+                this._body.p.y = newPosOrxValue.y;
+            }
             //this._syncPosition();
         },
         _syncPosition:function () {
@@ -198,14 +202,14 @@
 
                 // base abcd
                 t.a = t.d = Cos;
-                t.c = -Sin;
-                t.b = Sin;
+                t.b = -Sin;
+                t.c = Sin;
 
                 // scale
                 if (locScaleX !== 1 || locScaleY !== 1) {
                     t.a *= locScaleX;
-                    t.b *= locScaleX;
-                    t.c *= locScaleY;
+                    t.c *= locScaleX;
+                    t.b *= locScaleY;
                     t.d *= locScaleY;
                 }
 

@@ -53,9 +53,11 @@
     setCurrentFrameIndex: function(index) {
       if(index < this.m_FramesCount && index >= 0)
       {
-        this.setTextureRect(cc.RectMake(this.m_FramesCoordinatesX[index], this.m_FramesCoordinatesY[index], this.m_Width / this.m_HorizontalFramesCount, this.m_Height / this.m_VerticalFramesCount));
+        if(this.m_CurrentFrameIndex != index) {
+          this.setTextureRect(cc.rect(this.m_FramesCoordinatesX[index], this.m_FramesCoordinatesY[index], this.m_Width / this.m_HorizontalFramesCount, this.m_Height / this.m_VerticalFramesCount));
 
-        this.m_CurrentFrameIndex = index;
+          this.m_CurrentFrameIndex = index;
+        }
       }
       else
       {
@@ -85,10 +87,10 @@
       return this.m_FrameHeight;
     },
     getWidthScaled: function() {
-      return this.m_FrameWidth * this.getScaleX();
+      return this.m_FrameWidth * Math.abs(this.getScaleX());
     },
     getHeightScaled: function() {
-      return this.m_FrameHeight * this.getScaleY();
+      return this.m_FrameHeight * Math.abs(this.getScaleY());
     },
 
     deepCopy: function() {

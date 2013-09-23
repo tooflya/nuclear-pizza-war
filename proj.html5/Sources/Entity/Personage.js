@@ -32,42 +32,6 @@ cc.Personage = cc.AnimatedEntity.extend({
     this.setCollideable(true);
     this.setIgnoreSorting(false);
 
-    this.m_CommandMove = [false, false, false, false, false];
-
-    this.m_SpeedX = 100;
-    this.m_SpeedY = 100;
-
-    this.m_Flying = false;
-
-    this.m_AnimationTime = 0.1;
-    this.m_AnimationTimeElapsed = 0;
-
-    this.m_AnimationFrameSide = 0;
-
-    this.m_EngineParticlesAnimationTime = 0.3;
-    this.m_EngineParticlesAnimationTimeElapsed = 0;
-
-    this.m_EngineParticlesAnimationTime = 0.3;
-    this.m_EngineParticlesAnimationTimeElapsed = 0;
-
-    this.m_JetPackPower = 100;
-    this.m_JetPackPowerFull = 100;
-
-    this.m_SpacebarLastPushTime = 0;
-
-    this.m_ShockwaveScale = 1.5;
-
-    this.m_IsShouldFire = false;
-    this.m_FireVectorX = 0;
-    this.m_FireVectorY = 0;
-
-    this.m_FireTime = 0.45;
-    this.m_FireTimeElapsed = 0;
-
-    this.setMaxHealth(10000);
-
-    this.setCurrentFrameIndex(8);
-
     callback(this);
 
     if(Connection.isEnabled()) {
@@ -83,24 +47,96 @@ cc.Personage = cc.AnimatedEntity.extend({
           session: Connection._sessionId,
           x: p.getCenterX(),
           y: p.getCenterY(),
-          i: p.getCurrentFrameIndex()
+          i: p.getCurrentFrameIndex(),
+          h: p.m_Health
         });
       }, 500);
     }
   },
 
+  reset: function() {
+    this.create();
+        
+    if(this.m_BroadcastTransfer) {
+      Connection.send("update", {
+        id: 18,
+        session: Connection._sessionId
+      });
+    }
+  },
+
   onCreate: function() {
     this._super();
+
+    this.setCenterPosition(CAMERA_CENTER_X, CAMERA_CENTER_Y - 150);
+    this.setMaxHealth(100);
+    this.setZOrder(24);
+
+    this.m_CommandMove = [false, false, false, false, false];
+
+    this.m_Speed = 100;
+
+    this.m_Flying = false;
+
+    this.m_AnimationTime = 0.1;
+    this.m_AnimationTimeElapsed = 0;
+
+    this.m_AnimationFrameSide = 0;
+    this.m_AnimationFrameSideLast = 0;
+
+    this.m_EngineParticlesAnimationTime = 0.3;
+    this.m_EngineParticlesAnimationTimeElapsed = 0;
+
+    this.m_EngineParticlesAnimationTime = 0.3;
+    this.m_EngineParticlesAnimationTimeElapsed = 0;
+
+    this.m_JetPackPower = 100;
+    this.m_JetPackPowerFull = 100;
+
+    this.m_SpacebarLastPushTime = 0;
+
+    this.m_ShockwaveScale = 1.5;
+
+    this.m_IsShouldFire = false;
+
+    this.m_FireVectorX = 0;
+    this.m_FireVectorY = 0;
+
+    this.m_FirePower = 20;
+    this.m_FireSpeed = 500;
+    this.m_FireCount = 1;
+    this.m_FireFrame = 0;
+
+    this.m_HealthRegenerationTime = 1.0;
+    this.m_HealthRegenerationTimeElapsed = 0;
+
+    this.m_FireTime = 0.45;
+    this.m_FireTimeElapsed = 0;
+
+    this.m_ShootPadding = 0;
+
+    this.setCurrentFrameIndex(8);
   },
   onDestroy: function() {
+    if(!this.isVisible()) return;
+
     this._super();
 
     this.m_Shockwave.destroy();
     this._parent.m_Explosions[1].create();
     this._parent.m_Explosions[1].last().setCenterPosition(this.getCenterX(), this.getCenterY() + this._parent.m_Explosions[1].last().getHeight() / 2 - 30);
 
+    this._parent.shake(1.0, 10.0);
+
     cc.AudioEngine.getInstance().playEffect(s_PersonageDestroy);
-    cc.Director.getInstance().replaceScene(cc.TransitionFade.create(3.0, cc.GameOver.create()));
+
+    if(Connection.isEnabled()) {
+      if(this.m_BroadcastTransfer) {
+        cc.Director.getInstance().pushScene(cc.TransitionFade.create(3.0, cc.GameOver.create()));
+      }
+    } else {
+    cc.Director.getInstance().pushScene(cc.TransitionFade.create(3.0, cc.GameOver.create()));
+    }
   },
 
   setFireCoordinates: function(x, y) {
@@ -117,21 +153,21 @@ cc.Personage = cc.AnimatedEntity.extend({
 
       switch(i) {
         case 0:
-          y += this.m_SpeedY * deltaTime;
+          y += this.m_Speed * deltaTime;
         break;
         case 1:
-          y -= this.m_SpeedY * deltaTime;
+          y -= this.m_Speed * deltaTime;
         break;
         case 2:
-          x -= this.m_SpeedX * deltaTime;
+          x -= this.m_Speed * deltaTime;
         break;
         case 3:
-          x += this.m_SpeedX * deltaTime;
+          x += this.m_Speed * deltaTime;
         break;
       }
     }
-
-    var pontencialFrame = this.getCurrentFrameIndex() - this.m_AnimationFrameSide;
+    
+    var pontencialFrame = this.getCurrentFrameIndex() - this.m_AnimationFrameSideLast;
 
     if(this.m_IsShouldFire) {
       var padding1 = 0;
@@ -226,10 +262,12 @@ cc.Personage = cc.AnimatedEntity.extend({
       this.m_LoginName.setPosition(this.getWidth() / 2, this.getHeight() / 2 + this.getHeight());
       this.m_LoginName.setScaleX(this.getScaleX());
     }
+
+    this.m_AnimationFrameSideLast = this.m_AnimationFrameSide;
   },
 
   startFly: function() {
-    if(this.m_JetPackPower < this.m_JetPackPowerFull / 2) return;
+    if(this.m_JetPackPower <= 0) return;
     if(this.getZ() > MIN_Z) return;
 
     this.m_EngineParticlesAnimationTime = 0.1;
@@ -322,6 +360,18 @@ cc.Personage = cc.AnimatedEntity.extend({
       }
     }
 
+    // Health Regeneration
+
+    if(this.m_Health < this.m_HealthFull) {
+      this.m_HealthRegenerationTimeElapsed += deltaTime;
+
+      if(this.m_HealthRegenerationTimeElapsed >= this.m_HealthRegenerationTime) {
+        this.m_HealthRegenerationTimeElapsed = 0
+
+        this.m_Health += 1;
+      }
+    }
+
     // Shockwave
 
     this.m_ShockwaveTimeElapsed += deltaTime;
@@ -342,7 +392,66 @@ cc.Personage = cc.AnimatedEntity.extend({
       }
     }
 
-    this.move(deltaTime);
+    if(this.m_ShootPadding > 0) {
+      var vector = vectorNormalize(this.m_VectorX, this.m_VectorY, this.m_ShootPaddingSpeed * deltaTime);
+
+      this.setCenterPosition(this.getCenterX() + vector[0], this.getCenterY() + vector[1]);
+
+      this.m_ShootPadding -= this.m_ShootPaddingSpeed * deltaTime;
+    } else {
+      this.move(deltaTime);
+    }
+  },
+  draw: function() {
+    this._super();
+
+    if(this.m_JetPackPower < this.m_JetPackPowerFull) {
+        var x1;
+        var x2;
+        var y1;
+        var y2;
+
+        var rectangleVerticles1 = [];
+        var rectangleVerticles2 = [];
+
+        x1 = (this.getWidth() - this.m_BarWidth) / 2;
+        x2 = this.getWidth() - x1 + 1 * 2;
+
+        y1 = -5;
+        y2 = y1 - this.m_BarHeight;
+
+        if(this.m_Health < this.m_HealthFull) {
+          y1 -= 6;
+          y2 -= 6;
+        }
+
+        rectangleVerticles1[0] = cc.p(x1, y1);
+        rectangleVerticles1[1] = cc.p(x2, y1);
+        rectangleVerticles1[2] = cc.p(x2, y2);
+        rectangleVerticles1[3] = cc.p(x1, y2);
+
+        x1 = x1 + 1;
+        x2 = x1 + (((x2 - x1) - 1) * (this.m_JetPackPower) / this.m_JetPackPowerFull);
+
+        y1 = y1 - 1;
+        y2 = y1 - this.m_BarHeight + 1 * 2;
+
+        if(this.getScaleX() < 0)
+        {
+          var padding = this.m_BarWidth - this.m_BarWidth * (this.m_JetPackPower / this.m_JetPackPowerFull);
+
+          x1 += padding;
+          x2 += padding;
+        }
+
+        rectangleVerticles2[0] = cc.p(x1, y1);
+        rectangleVerticles2[1] = cc.p(x2, y1);
+        rectangleVerticles2[2] = cc.p(x2, y2);
+        rectangleVerticles2[3] = cc.p(x1, y2);
+
+        cc.drawingUtil.drawSolidPoly(rectangleVerticles1, 4, new cc.Color4F(0, 0, 0, 1));
+        cc.drawingUtil.drawSolidPoly(rectangleVerticles2, 4, new cc.Color4F(0/ 255, 200 / 255, 255 / 255, 1));
+    }
   },
 
   onKeyUp: function(e) {
@@ -490,18 +599,149 @@ cc.Personage = cc.AnimatedEntity.extend({
     }
   },
 
-  fire: function() {
-    this.getParent().m_Bullets.create();
+  fire: function(data) {
+    if(Connection.isEnabled() && this.m_BroadcastTransfer) {
+      Connection.send("update", {
+        id: 17,
+        session: Connection._sessionId
+      });
+    }
 
-    var x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
-    var y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
+    if(!this.m_BroadcastTransfer && !data) {
+      return;
+    }
 
-    this.getParent().m_Bullets.last().setCurrentFrameIndex(0);
-    this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
-    this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
-    this.getParent().m_Bullets.last().by = "personage";
+    if(this.m_FireCount == 1) {
+      var x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
+      var y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
 
-    cc.AudioEngine.getInstance().playEffect(s_PersonageShoot);
+      this.getParent().m_Bullets.create();
+      this.getParent().m_Bullets.last().setCurrentFrameIndex(this.m_FireFrame);
+      this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
+      this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.getParent().m_Bullets.last().by = "personage";
+      this.getParent().m_Bullets.last().m_Power = this.m_FirePower;
+      this.getParent().m_Bullets.last().m_Speed = this.m_FireSpeed;
+      this.getParent().m_Bullets.last()._sessionId = this._sessionId;
+    } else if(this.m_FireCount == 2) {
+      var x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
+      var y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
+
+      this.getParent().m_Bullets.create();
+      this.getParent().m_Bullets.last().setCurrentFrameIndex(this.m_FireFrame);
+      this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
+      this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.getParent().m_Bullets.last().setCoordinatesPadding(10, 10);
+      this.getParent().m_Bullets.last().by = "personage";
+      this.getParent().m_Bullets.last().m_Power = this.m_FirePower;
+      this.getParent().m_Bullets.last().m_Speed = this.m_FireSpeed;
+      this.getParent().m_Bullets.last()._sessionId = this._sessionId;
+
+      x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
+      y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
+
+      this.getParent().m_Bullets.create();
+      this.getParent().m_Bullets.last().setCurrentFrameIndex(this.m_FireFrame);
+      this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
+      this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.getParent().m_Bullets.last().setCoordinatesPadding(-10, -10);
+      this.getParent().m_Bullets.last().by = "personage";
+      this.getParent().m_Bullets.last().m_Power = this.m_FirePower;
+      this.getParent().m_Bullets.last().m_Speed = this.m_FireSpeed;
+      this.getParent().m_Bullets.last()._sessionId = this._sessionId;
+    } else if(this.m_FireCount == 3) {
+      var x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
+      var y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
+
+      this.getParent().m_Bullets.create();
+      this.getParent().m_Bullets.last().setCurrentFrameIndex(this.m_FireFrame);
+      this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
+      this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.getParent().m_Bullets.last().setCoordinatesPadding(10, 10);
+      this.getParent().m_Bullets.last().by = "personage";
+      this.getParent().m_Bullets.last().m_Power = this.m_FirePower;
+      this.getParent().m_Bullets.last().m_Speed = this.m_FireSpeed;
+      this.getParent().m_Bullets.last()._sessionId = this._sessionId;
+
+      x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
+      y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
+
+      this.getParent().m_Bullets.create();
+      this.getParent().m_Bullets.last().setCurrentFrameIndex(this.m_FireFrame);
+      this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
+      this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.getParent().m_Bullets.last().setCoordinatesPadding(-10, -10);
+      this.getParent().m_Bullets.last().by = "personage";
+      this.getParent().m_Bullets.last().m_Power = this.m_FirePower;
+      this.getParent().m_Bullets.last().m_Speed = this.m_FireSpeed;
+      this.getParent().m_Bullets.last()._sessionId = this._sessionId;
+
+      x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
+      y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
+
+      this.getParent().m_Bullets.create();
+      this.getParent().m_Bullets.last().setCurrentFrameIndex(this.m_FireFrame);
+      this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
+      this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.getParent().m_Bullets.last().by = "personage";
+      this.getParent().m_Bullets.last().m_Power = this.m_FirePower;
+      this.getParent().m_Bullets.last().m_Speed = this.m_FireSpeed;
+      this.getParent().m_Bullets.last()._sessionId = this._sessionId;
+    } else if(this.m_FireCount == 4) {
+      var x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
+      var y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
+
+      this.getParent().m_Bullets.create();
+      this.getParent().m_Bullets.last().setCurrentFrameIndex(this.m_FireFrame);
+      this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
+      this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.getParent().m_Bullets.last().setCoordinatesPadding(10, 10);
+      this.getParent().m_Bullets.last().by = "personage";
+      this.getParent().m_Bullets.last().m_Power = this.m_FirePower;
+      this.getParent().m_Bullets.last().m_Speed = this.m_FireSpeed;
+      this.getParent().m_Bullets.last()._sessionId = this._sessionId;
+
+      x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
+      y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
+
+      this.getParent().m_Bullets.create();
+      this.getParent().m_Bullets.last().setCurrentFrameIndex(this.m_FireFrame);
+      this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
+      this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.getParent().m_Bullets.last().setCoordinatesPadding(-10, -10);
+      this.getParent().m_Bullets.last().by = "personage";
+      this.getParent().m_Bullets.last().m_Power = this.m_FirePower;
+      this.getParent().m_Bullets.last().m_Speed = this.m_FireSpeed;
+      this.getParent().m_Bullets.last()._sessionId = this._sessionId;
+
+      x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
+      y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
+
+      this.getParent().m_Bullets.create();
+      this.getParent().m_Bullets.last().setCurrentFrameIndex(this.m_FireFrame);
+      this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
+      this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.getParent().m_Bullets.last().setCoordinatesPadding(30, 30);
+      this.getParent().m_Bullets.last().by = "personage";
+      this.getParent().m_Bullets.last().m_Power = this.m_FirePower;
+      this.getParent().m_Bullets.last().m_Speed = this.m_FireSpeed;
+      this.getParent().m_Bullets.last()._sessionId = this._sessionId;
+
+      x = this.m_FireVectorX + (CAMERA_CENTER_X - this.getCenterX());
+      y = -this.m_FireVectorY - (CAMERA_CENTER_Y - this.getCenterY());
+
+      this.getParent().m_Bullets.create();
+      this.getParent().m_Bullets.last().setCurrentFrameIndex(this.m_FireFrame);
+      this.getParent().m_Bullets.last().setCoordinates(x, y, this.m_MouseX, this.m_MouseY);
+      this.getParent().m_Bullets.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.getParent().m_Bullets.last().setCoordinatesPadding(-30, -30);
+      this.getParent().m_Bullets.last().by = "personage";
+      this.getParent().m_Bullets.last().m_Power = this.m_FirePower;
+      this.getParent().m_Bullets.last().m_Speed = this.m_FireSpeed;
+      this.getParent().m_Bullets.last()._sessionId = this._sessionId;
+    }
+
+    cc.AudioEngine.getInstance().playEffect(s_PersonageShoot[this.m_FireFrame]);
   },
 
   onCollide: function(object, description) {
@@ -511,12 +751,158 @@ cc.Personage = cc.AnimatedEntity.extend({
       case "enemy":
         this._super();
 
-        this.m_Health -= 10;
+        this.m_Health -= 0.5;
       break;
       case "bullet":
         this._super();
 
+        this.m_VectorX = object.m_VectorX;
+        this.m_VectorY = object.m_VectorY;
+
         this.m_Health -= object.m_Power;
+
+        this.m_ShootPadding = 20;
+        this.m_ShootPaddingSpeed = 100;
+      break;
+      case "Shockwave":
+        this._super();
+
+        this.m_Health -= object.m_Power;
+      break;
+    }
+  },
+
+  scheduleUpdate: function() {
+    this._super();
+
+    if(this.m_EngineParticles) {
+      this.m_EngineParticles.scheduleUpdate();
+    }
+  },
+  unscheduleUpdate: function() {
+    this._super();
+
+    if(this.m_EngineParticles) {
+      this.m_EngineParticles.unscheduleUpdate();
+    }
+  },
+
+  upgrade: function(id, level) {
+    switch(id) {
+      case 0:
+        switch(level) {
+          case 1:
+            this.m_FirePower = 25;
+          break;
+          case 2:
+            this.m_FirePower = 30;
+          break;
+          case 3:
+            this.m_FirePower = 35;
+          break;
+        }
+        this.m_FireFrame++;
+      break;
+      case 1:
+        switch(level) {
+          case 1:
+            this.m_FireTime = 0.40;
+            this.m_FireCount = 1;
+          break;
+          case 2:
+            this.m_FireTime = 0.35;
+            this.m_FireCount = 2;
+          break;
+          case 3:
+            this.m_FireTime = 0.30;
+            this.m_FireCount = 2;
+          break;
+          case 4:
+            this.m_FireTime = 0.25;
+            this.m_FireCount = 3;
+          break;
+          case 5:
+            this.m_FireTime = 0.20;
+            this.m_FireCount = 4;
+          break;
+        }
+      break;
+      case 2:
+        switch(level) {
+          case 1:
+            this.m_Speed = 110;
+          break;
+          case 2:
+            this.m_Speed = 120;
+          break;
+          case 3:
+            this.m_Speed = 130;
+          break;
+          case 4:
+            this.m_Speed = 140;
+          break;
+          case 5:
+            this.m_Speed = 150;
+          break;
+        }
+      break;
+      case 3:
+        switch(level) {
+          case 1:
+            this.m_HealthRegenerationTime = 0.8;
+          break;
+          case 2:
+            this.m_HealthRegenerationTime = 0.6;
+          break;
+          case 3:
+            this.m_HealthRegenerationTime = 0.3;
+          break;
+        }
+      break;
+      case 4:
+        switch(level) {
+          case 1:
+            this.setMaxHealth(120);
+          break;
+          case 2:
+            this.setMaxHealth(140);
+          break;
+          case 3:
+            this.setMaxHealth(160);
+          break;
+          case 4:
+            this.setMaxHealth(180);
+          break;
+          case 5:
+            this.setMaxHealth(200);
+          break;
+        }
+      break;
+      case 6:
+        switch(level) {
+          case 1:
+            this.m_ShockwaveScale = 2.0;
+            this.m_Shockwave.m_Power = 2;
+          break;
+          case 2:
+            this.m_ShockwaveScale = 2.5;
+            this.m_Shockwave.m_Power = 3;
+          break;
+          case 3:
+            this.m_ShockwaveScale = 3.0;
+            this.m_Shockwave.m_Power = 5;
+          break;
+        }
+      break;
+      case 7:
+        switch(level) {
+          case 1:
+            this.m_JetPackPowerFull = 150;
+          break;
+          case 2:
+            this.m_JetPackPowerFull = 200;
+          break;
+        }
       break;
     }
   }
