@@ -2,12 +2,8 @@
 #define CONST_BASEENEMY
 
 #include "BaseEnemy.h"
-
-<<<<<<< HEAD
-=======
 #include "Level.h"
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 BaseEnemy::BaseEnemy()
 {
 }
@@ -21,11 +17,8 @@ BaseEnemy::BaseEnemy(Hero* pHero, EntityManager* pBullets)
 BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pVerticalFramesCount) :
 	BarEntity(pszFileName, pHorizontalFramesCount, pVerticalFramesCount)
 	{
-<<<<<<< HEAD
-		this->mShadow = new Entity("actors/shadow.png");
-=======
 		this->mShadow = new Entity("shadow.png");
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
+
 		this->mShadow->setIsShadow();
 
 		this->mShootPadding = 0;
@@ -35,12 +28,9 @@ BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pV
 
 		this->setAnimationStartTimeout(Utils::randomf(0.0f, 1.5f));
 		this->animate(0.1f);
-<<<<<<< HEAD
-=======
         
 		this->mTalkTime = Utils::randomf(1.0f, 15.0f);
 		this->mTalkTimeElapsed = 0;
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		this->resumeSchedulerAndActions();
 	}
@@ -54,11 +44,6 @@ BaseEnemy::BaseEnemy(const char* pszFileName, int pHorizontalFramesCount, int pV
 
 void BaseEnemy::death()
 {
-<<<<<<< HEAD
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/ai_death.ogg");
-
-	this->destroy();
-=======
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_AI_DEATH);
     
     Level* screen = (Level*) AppDelegate::screens->mScreens[0];
@@ -105,7 +90,6 @@ void BaseEnemy::death()
 	unlockAchievement(0);
     
     #endif
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 Entity* BaseEnemy::create()
@@ -221,8 +205,6 @@ void BaseEnemy::update(float pDeltaTime)
 	}
 
 	BarEntity::update(pDeltaTime);
-<<<<<<< HEAD
-=======
     
 	this->mTalkTimeElapsed += pDeltaTime;
     
@@ -232,7 +214,6 @@ void BaseEnemy::update(float pDeltaTime)
         
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_AI_VOICE);
     }
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	float x;
 	float y;
@@ -279,11 +260,7 @@ void BaseEnemy::fire()
 	bullet->setPower(1);
 	//bullet->fire(this->getCenterX(), this->getCenterY(), this->mHero->getCenterX(), this->mHero->getCenterY());
 	
-<<<<<<< HEAD
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/alienshot.ogg");
-=======
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_ALIEN_SHOT);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 #endif

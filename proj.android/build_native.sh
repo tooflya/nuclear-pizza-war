@@ -1,5 +1,5 @@
 APPNAME="NuclearPizzaWar"
-NDK_ROOT="/home/igor/.android/ndk"
+NDK_ROOT="/Users/igor/.android/ndk"
 # options
 
 buildexternalsfromsource=
@@ -11,8 +11,8 @@ usage: $0 [options]
 Build C/C++ code for $APPNAME using Android NDK
 
 OPTIONS:
--s	Build externals from source
--h	this help
+-s  Build externals from source
+-h  this help
 EOF
 }
 
@@ -37,7 +37,7 @@ fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # ... use paths relative to current directory
-COCOS2DX_ROOT="$DIR/../.."
+COCOS2DX_ROOT="$DIR/../../.."
 APP_ROOT="$DIR/.."
 APP_ANDROID_ROOT="$DIR"
 
@@ -47,25 +47,6 @@ echo "APP_ROOT = $APP_ROOT"
 echo "APP_ANDROID_ROOT = $APP_ANDROID_ROOT"
 
 # make sure assets is exist
-<<<<<<< HEAD
-if [ -d "$APP_ANDROID_ROOT"/assets ]; then
-    rm -rf "$APP_ANDROID_ROOT"/assets
-fi
-
-mkdir "$APP_ANDROID_ROOT"/assets
-
-# copy resources
-for file in "$APP_ROOT"/Resources/*
-do
-if [ -d "$file" ]; then
-    cp -rf "$file" "$APP_ANDROID_ROOT"/assets
-fi
-
-if [ -f "$file" ]; then
-    cp "$file" "$APP_ANDROID_ROOT"/assets
-fi
-done
-=======
 #if [ -d "$APP_ANDROID_ROOT"/assets ]; then
     #rm -rf "$APP_ANDROID_ROOT"/assets
 #fi
@@ -83,7 +64,6 @@ done
     #cp "$file" "$APP_ANDROID_ROOT"/assets
 #fi
 #done
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 # copy icons (if they exist)
 file="$APP_ANDROID_ROOT"/assets/Icons/Icon-96.png
@@ -92,15 +72,15 @@ if [ -f "$file" ]; then
 fi
 file="$APP_ANDROID_ROOT"/assets/Icons/Icon-72.png
 if [ -f "$file" ]; then
-	cp "$file" "$APP_ANDROID_ROOT"/res/drawable-hdpi/icon.png
+    cp "$file" "$APP_ANDROID_ROOT"/res/drawable-hdpi/icon.png
 fi
 file="$APP_ANDROID_ROOT"/assets/Icons/Icon-48.png
 if [ -f "$file" ]; then
-	cp "$file" "$APP_ANDROID_ROOT"/res/drawable-mdpi/icon.png
+    cp "$file" "$APP_ANDROID_ROOT"/res/drawable-mdpi/icon.png
 fi
 file="$APP_ANDROID_ROOT"/assets/Icons/Icon-36.png
 if [ -f "$file" ]; then
-	cp "$file" "$APP_ANDROID_ROOT"/res/drawable-ldpi/icon.png
+    cp "$file" "$APP_ANDROID_ROOT"/res/drawable-ldpi/icon.png
 fi
 
 

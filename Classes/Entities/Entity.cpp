@@ -114,14 +114,7 @@ void Entity::constructor(const char* pszFileName, int pHorizontalFramesCount, in
 	this->mFall = false;
 	this->mIsOutOfTop = false;
 
-<<<<<<< HEAD
-	this->scheduleUpdate();
-
-	this->retain();
-	this->release();
-=======
 	this->getTexture()->setAntiAliasTexParameters();
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	this->destroy();
 }
@@ -226,7 +219,7 @@ void Entity::setY(float pY)
 
 void Entity::setZ(float pZ)
 {
-	CCAssert(pZ < Options::MIN_Z, "Z coordinate cannot be < MIN_Z"); // TODO: Don't work?
+	//CCAssert(pZ < Options::MIN_Z, "Z coordinate cannot be < MIN_Z"); // TODO: Don't work?
 
 	this->mZ = pZ;
 
@@ -405,11 +398,7 @@ void Entity::setSpeed(float pSpeed)
 
 float Entity::getSpeed(float pDeltaTime)
 {
-<<<<<<< HEAD
-	return this->mSpeed * pDeltaTime;
-=======
 	return this->mSpeed * pDeltaTime / CCDirector::sharedDirector()->getContentScaleFactor();
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 bool Entity::hasShadow()
@@ -443,8 +432,6 @@ bool Entity::isIgnoreSorting()
  *
  */
 
-<<<<<<< HEAD
-=======
 void Entity::onCreate()
 {
 	this->scheduleUpdate();
@@ -455,7 +442,6 @@ void Entity::onDestroy()
 	this->unscheduleUpdate();
 }
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 Entity* Entity::create()
 {
 	this->setVisible(true);
@@ -463,11 +449,8 @@ Entity* Entity::create()
 	this->mFall = false;
 	this->mIsOutOfTop = false;
 
-<<<<<<< HEAD
-=======
 	this->onCreate();
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	return this;
 }
 
@@ -487,11 +470,8 @@ bool Entity::destroy(bool pManage)
 		}
 	}
 
-<<<<<<< HEAD
-=======
 	this->onDestroy();
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	return false;
 }
 
@@ -701,14 +681,11 @@ bool Entity::isAnimationRunning()
 	return this->mAnimationRunning;
 }
 
-<<<<<<< HEAD
-=======
 void Entity::setAnimationReverse(bool pReverse)
 {
     this->mIsAnimationReverseNeed = pReverse;
 }
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 /**
  *
  * Checing for touch detector
@@ -717,41 +694,33 @@ void Entity::setAnimationReverse(bool pReverse)
 
 void Entity::onEnter()
 {
-<<<<<<< HEAD
-	CCDirector* pDirector = CCDirector::sharedDirector();
-	pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
-=======
 	//CCDirector* pDirector = CCDirector::sharedDirector();
 	//pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	CCSprite::onEnter();
 }
 
 void Entity::onExit()
 {
-<<<<<<< HEAD
-	CCDirector* pDirector = CCDirector::sharedDirector();
-	pDirector->getTouchDispatcher()->removeDelegate(this);
-=======
 	//CCDirector* pDirector = CCDirector::sharedDirector();
 	//pDirector->getTouchDispatcher()->removeDelegate(this);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	CCSprite::onExit();
 }
 
-<<<<<<< HEAD
-=======
 void Entity::setRegisterAsTouchable(bool pTouchable)
 {
 	Touchable::setRegisterAsTouchable(pTouchable);
 
-	CCDirector* pDirector = CCDirector::sharedDirector();
-	pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
+    if(pTouchable) {
+        CCDirector* pDirector = CCDirector::sharedDirector();
+        pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
+    } else {
+        CCDirector* pDirector = CCDirector::sharedDirector();
+        pDirector->getTouchDispatcher()->removeDelegate(this);
+    }
 }
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 bool Entity::ccTouchBegan(CCTouch* touch, CCEvent* event)
 {
 	if(!this->containsTouchLocation(touch) || !this->isVisible() || !this->getParent()->isVisible())
@@ -832,8 +801,6 @@ void Entity::update(float pDeltaTime)
 			if(this->mAnimationTimeElapsed >= this->mAnimationTime)
 			{
 				this->mAnimationTimeElapsed -= this->mAnimationTime;
-<<<<<<< HEAD
-=======
                 
                 if(this->mIsAnimationReverseNeed)
                 {
@@ -858,7 +825,6 @@ void Entity::update(float pDeltaTime)
                     
                     return;
                 }
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 				if(this->mAnimationStartFrame == -1 && this->mAnimationFinishFrame == -1)
 				{
@@ -873,12 +839,8 @@ void Entity::update(float pDeltaTime)
 							
 						return;
 					}
-<<<<<<< HEAD
 
-					if(this->mAnimationRepeatCount > 0 && this->getCurrentFrameIndex() == this->mFramesCount - 1)
-=======
                     if(this->mAnimationRepeatCount > 0 && this->getCurrentFrameIndex() == this->mFramesCount - 1)
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					{
 						this->mAnimationRepeatCount--;
 
@@ -945,18 +907,6 @@ void Entity::update(float pDeltaTime)
 						if(this->mAnimationRepeatCount > 0)
 						{
 							this->mAnimationRepeatCount--;
-<<<<<<< HEAD
-
-							this->mAnimationFramesElapsed = 0;
-
-							if(this->mAnimationRepeatCount == 0)
-							{
-								this->mAnimationRunning = false;
-
-								this->onAnimationEnd();
-							}
-						}
-=======
                             
 							this->mAnimationFramesElapsed = 0;
                             
@@ -973,7 +923,6 @@ void Entity::update(float pDeltaTime)
                             
 							this->setCurrentFrameIndex(this->mAnimationStartFrame);
 						}
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 					}
 				}
 			}

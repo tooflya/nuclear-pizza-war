@@ -280,9 +280,6 @@ void EnemyGroup::update(float pDeltaTime)
 								((BigEnemy*) enemy)->mShootsCount = 12;
 							break;
 						}
-<<<<<<< HEAD
-					break;
-=======
                         break;
 					case 4:
 						switch(params->getLevel())
@@ -301,7 +298,6 @@ void EnemyGroup::update(float pDeltaTime)
 							break;
                         }
                     break;
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				}
 			}
 		}

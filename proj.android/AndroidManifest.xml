@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tooflya.nuclearpizzawar"
-<<<<<<< HEAD
-    android:versionCode="1"
-    android:versionName="1.0.1" >
-=======
-    android:versionCode="1001"
-    android:versionName="1.0.0" >
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
+    android:versionCode="1028"
+    android:versionName="1.1.4" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -15,10 +10,6 @@
 
     <uses-feature android:glEsVersion="0x00020000" />
 
-<<<<<<< HEAD
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-=======
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -30,26 +21,13 @@
 
     <application
         android:allowBackup="true"
-<<<<<<< HEAD
-=======
         android:allowClearUserData="true"
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
         android:hardwareAccelerated="true"
         android:icon="@drawable/icon"
         android:installLocation="auto"
         android:label="@string/app_name" >
-<<<<<<< HEAD
         <activity
             android:name="com.tooflya.nuclearpizzawar.Game"
-=======
-        
-        <meta-data
-            android:name="com.google.android.gms.games.APP_ID"
-            android:value="@string/app_id" />
-
-        <activity
-            android:name="com.tooflya.nuclearpizzawar.Intro"
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
@@ -60,16 +38,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-=======
-        <activity
-            android:name="com.tooflya.nuclearpizzawar.Game"
-            android:configChanges="keyboard|keyboardHidden|orientation"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
+
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/app_id" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="4030500" />
 
         <!-- AdMobActivity definition -->
         <activity

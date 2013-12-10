@@ -1,92 +1,95 @@
 obj/local/armeabi/objs/cocos2dx_static/tilemap_parallax_nodes/CCTMXObjectGroup.o: \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/tilemap_parallax_nodes/CCTMXObjectGroup.cpp \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/tilemap_parallax_nodes/CCTMXObjectGroup.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCGeometry.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformMacros.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccConfig.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/android/CCPlatformDefine.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/log.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCObject.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCString.h \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/string \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/functional \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCArray.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/support/data_support/ccCArray.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccMacros.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCCommon.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformMacros.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/android/CCStdC.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/math.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdio.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccConfig.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCObject.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCDictionary.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/support/data_support/uthash.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCArray.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCString.h
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/tilemap_parallax_nodes/CCTMXObjectGroup.cpp \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/tilemap_parallax_nodes/CCTMXObjectGroup.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCGeometry.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformMacros.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccConfig.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCPlatformDefine.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/log.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCObject.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCDataVisitor.h \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/string \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/math.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCString.h \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/functional \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCArray.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/support/data_support/ccCArray.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccMacros.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCCommon.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformMacros.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCStdC.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccConfig.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCObject.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCDictionary.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/support/data_support/uthash.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/inttypes.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCArray.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCString.h
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/tilemap_parallax_nodes/CCTMXObjectGroup.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/tilemap_parallax_nodes/CCTMXObjectGroup.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCGeometry.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCGeometry.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformMacros.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformMacros.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccConfig.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccConfig.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/android/CCPlatformDefine.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCPlatformDefine.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/log.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/log.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCObject.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCObject.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCString.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCDataVisitor.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/string:
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/string:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/functional:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/math.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCArray.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCString.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/support/data_support/ccCArray.h:
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/functional:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccMacros.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCArray.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCCommon.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/support/data_support/ccCArray.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformMacros.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccMacros.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/android/CCStdC.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCCommon.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/math.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformMacros.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdio.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCStdC.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccConfig.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccConfig.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCObject.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCObject.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCDictionary.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCDictionary.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/support/data_support/uthash.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/support/data_support/uthash.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCArray.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/inttypes.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCString.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCArray.h:
+
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCString.h:

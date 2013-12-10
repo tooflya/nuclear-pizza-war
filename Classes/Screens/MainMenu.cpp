@@ -18,19 +18,14 @@ class PlayButton : public Entity
 
 			void onTouch(CCTouch* touch, CCEvent* event)
 			{
-<<<<<<< HEAD
-=======
                 AppDelegate::MULTIPLAYER = false;
 
                 ((Level*) AppDelegate::screens->mScreens[0])->configure();
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				AppDelegate::screens->set(1.0f, 0, 0);
 			}
 };
 
-<<<<<<< HEAD
-=======
 class PlayBattleButton : public Entity
 {
     private:
@@ -121,13 +116,10 @@ class LeaderBoardButton : public Entity
             }
 };
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 // ===========================================================
 // Constants
 // ===========================================================
 
-<<<<<<< HEAD
-=======
 MainMenu* MainMenu::mObj = NULL;
 
 const char* MainMenu::MULTIPLAYER_CONNECTION_TEXT0 = "Waiting for connections";
@@ -135,7 +127,6 @@ const char* MainMenu::MULTIPLAYER_CONNECTION_TEXT1 = "Waiting for connections.";
 const char* MainMenu::MULTIPLAYER_CONNECTION_TEXT2 = "Waiting for connections..";
 const char* MainMenu::MULTIPLAYER_CONNECTION_TEXT3 = "Waiting for connections...";
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 // ===========================================================
 // Fields
 // ===========================================================
@@ -148,16 +139,6 @@ MainMenu::MainMenu()
 {
 	new BackgroundStarsManager(this);
 
-<<<<<<< HEAD
-	this->mBackground = new Entity("gui/splash.png");
-	this->mPlayButton = new PlayButton("gui/button_start.png");
-
-	this->mBackground->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y);
-	this->mPlayButton->create()->setCenterPosition(Options::CAMERA_CENTER_X, Options::CAMERA_CENTER_Y - Utils::coord(150));
-
-	this->addChild(this->mBackground);
-	this->addChild(this->mPlayButton);
-=======
 	const char* str;
     const char* str2;
 	ccLanguageType currentLanguageType = CCApplication::sharedApplication()->getCurrentLanguage();
@@ -206,7 +187,7 @@ MainMenu::MainMenu()
 
 	CCLabelTTF* mVersionLabel1 = CCLabelTTF::create("Nuclear Pizza War", "Arial",  Utils::coord(16));
 	CCLabelTTF* mVersionLabel2 = CCLabelTTF::create("Mojang Inc., Tooflya Inc. - 2013", "Arial",  Utils::coord(16));
-	CCLabelTTF* mVersionLabel3 = CCLabelTTF::create("Current version: 1.1.3 (Alpha)", "Arial",  Utils::coord(16));
+	CCLabelTTF* mVersionLabel3 = CCLabelTTF::create("Current version: 1.1.4 (Alpha)", "Arial",  Utils::coord(16));
 
 	mVersionLabel1->setPosition(ccp(Utils::coord(10) + mVersionLabel1->getContentSize().width / 2, Utils::coord(55)));
 	mVersionLabel2->setPosition(ccp(Utils::coord(10) + mVersionLabel2->getContentSize().width / 2, Utils::coord(35)));
@@ -224,15 +205,12 @@ MainMenu::MainMenu()
     this->mWaitingForConnectionsTicks = 1;
 
     MainMenu::mObj = this;
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 // ===========================================================
 // Methods
 // ===========================================================
 
-<<<<<<< HEAD
-=======
 void MainMenu::startWaitingForBattle()
 {
     this->mPlayButton->runAction(CCFadeOut::create(0.3f));
@@ -261,13 +239,10 @@ void MainMenu::nativeOnGooglePlusConnedctedToRoom()
     AppDelegate::screens->set(1.0f, 0, 0);
 }
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 // ===========================================================
 // Virtual Methods
 // ===========================================================
 
-<<<<<<< HEAD
-=======
 void MainMenu::update(float pDeltaTime)
 {
     Screen::update(pDeltaTime);
@@ -324,14 +299,10 @@ void MainMenu::update(float pDeltaTime)
     }
 }
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 void MainMenu::onEnter()
 {
 	Screen::onEnter();
 	
-<<<<<<< HEAD
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Music/mus_fast02.ogg", true); 
-=======
 	SimpleAudioEngine::sharedEngine()->playBackgroundMusic(Options::SOUND_MAIN_MUSIC, true);
 }
 
@@ -344,7 +315,6 @@ void MainMenu::onEnterTransitionDidFinish()
     onMainMenuStarted();
     
     #endif
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 #endif

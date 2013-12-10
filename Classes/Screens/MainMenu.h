@@ -45,8 +45,6 @@ class MainMenu : public Screen
 		// Constants
 		// ===========================================================
 
-<<<<<<< HEAD
-=======
 		static MainMenu* mObj;
 
 		static const char* MULTIPLAYER_CONNECTION_TEXT0;
@@ -54,13 +52,10 @@ class MainMenu : public Screen
 		static const char* MULTIPLAYER_CONNECTION_TEXT2;
 		static const char* MULTIPLAYER_CONNECTION_TEXT3;
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		// ===========================================================
 		// Fields
 		// ===========================================================
 
-<<<<<<< HEAD
-=======
 		int mWaitingForConnectionsTicks;
 
 		float mWaitingForConnectionsTimeElapsed;
@@ -68,7 +63,6 @@ class MainMenu : public Screen
 
 		bool mWaitingForConnections;
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		Entity* mBackground;
 		Entity* mPlayButton;
 
@@ -96,15 +90,12 @@ class MainMenu : public Screen
 		// ===========================================================
 		// Fields
 		// ===========================================================
-<<<<<<< HEAD
-=======
 		
 		Entity* mPlayBattleButton;
 		Entity* mAchievementsButton;
 		Entity* mLeaderBoardButton;
 
 		CCLabelTTF* mWaitForBattleCapture;
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		// ===========================================================
 		// Constructors
@@ -115,24 +106,18 @@ class MainMenu : public Screen
 		// ===========================================================
 		// Methods
 		// ===========================================================
-<<<<<<< HEAD
-=======
 
 		static void nativeOnGooglePlusSignInSucceeded();
 		static void nativeOnGooglePlusConnedctedToRoom();
 
 		void startWaitingForBattle();
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		
 		// ===========================================================
 		// Virtual Methods
 		// ===========================================================
 
 		virtual void onEnter();
-<<<<<<< HEAD
-};
 
-=======
 		virtual void onEnterTransitionDidFinish();
 
 		virtual void update(float pDeltaTime);
@@ -149,5 +134,4 @@ extern "C"
     extern void onMainMenuStarted();
 }
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 #endif

@@ -85,8 +85,6 @@ class UpgradeManager : public CCLayer
 		// Constants
 		// ===========================================================
 
-<<<<<<< HEAD
-=======
 		static const char* FIRE_DAMAGE_TEXT1;
 		static const char* FIRE_DAMAGE_TEXT2;
 		static const char* FIRE_DAMAGE_TEXT3;
@@ -135,7 +133,6 @@ class UpgradeManager : public CCLayer
 		static const char* DEFENCE_SPIDERS_TEXT2;
 		static const char* DEFENCE_SPIDERS_TEXT3;
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		// ===========================================================
 		// Fields
 		// ===========================================================

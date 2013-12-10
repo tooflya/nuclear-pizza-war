@@ -3,8 +3,6 @@
 
 #include "Screen.h"
 
-<<<<<<< HEAD
-=======
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
 #include "platform/android/jni/JniHelper.h"
@@ -212,7 +210,6 @@ extern "C"
 
 #endif
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 // ===========================================================
 // Inner Classes
 // ===========================================================
@@ -243,7 +240,6 @@ extern "C"
 
 Screen::Screen()
 {
-	this->scheduleUpdate();
 }
 
 // ===========================================================
@@ -269,6 +265,8 @@ bool Screen::containsTouchLocation(CCTouch* touch)
 
 void Screen::onEnter()
 {
+	this->scheduleUpdate();
+
 	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 	CCScene::onEnter();
 }

@@ -171,12 +171,9 @@ class Entity : public CCSprite, public Touchable
 		virtual bool destroy();
 		virtual bool destroy(bool pManage);
 
-<<<<<<< HEAD
-=======
 		virtual void onCreate();
 		virtual void onDestroy();
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		void setEntityManager(EntityManager* pEntityManager);
 		void setEntityManager(BatchEntityManager* pBatchEntityManager);
 
@@ -215,11 +212,8 @@ class Entity : public CCSprite, public Touchable
 		void setFinishFrame(int pFinishFrame);
 
 		void setAnimationStartTimeout(float pSecodsTimeout);
-<<<<<<< HEAD
-=======
     
         void setAnimationReverse(bool pReverse);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		virtual void onAnimationStart();
 		virtual void onAnimationEnd();
@@ -247,11 +241,8 @@ class Entity : public CCSprite, public Touchable
 
 		virtual void draw();
 
-<<<<<<< HEAD
-=======
 		void setRegisterAsTouchable(bool pTouchable);
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		/**
 		 *
 		 * Let's take care about object copy

@@ -11,11 +11,8 @@
 // Constants
 // ===========================================================
 
-<<<<<<< HEAD
-=======
 bool AppDelegate::MULTIPLAYER = false;
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 ScreenManager* AppDelegate::screens = NULL;
 
 // ===========================================================
@@ -39,20 +36,16 @@ bool AppDelegate::applicationDidFinishLaunching()
 	CCDirector* director 	= CCDirector::sharedDirector();
 	CCEGLView*  EGLView 	= CCEGLView::sharedOpenGLView();
 	CCSize 	screenSize 		= EGLView->getFrameSize();
-<<<<<<< HEAD
 
-=======
+    float x = 1.0;
     
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
+    if(screenSize.width == 2048) x = 1.2;
+
 	director->setOpenGLView(EGLView);
-	director->setContentScaleFactor(designResolutionSize.height / screenSize.height);
+	director->setContentScaleFactor(designResolutionSize.height / screenSize.height * x);
 
 	vector <string> searchPath;
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	searchPath.push_back(resources800x600.directory);
 
 	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPath);
@@ -69,13 +62,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 	Options::CAMERA_CENTER_X  = screenSize.width / 2;
 	Options::CAMERA_CENTER_Y = screenSize.height / 2;
 
-	director->setAlphaBlending(false);
-	director->setDepthTest(false);
-<<<<<<< HEAD
+	director->setAlphaBlending(true);
+	director->setDepthTest(true);
 	director->setDisplayStats(false);
-=======
-	director->setDisplayStats(true);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	director->setProjection(kCCDirectorProjection2D);
 
@@ -92,17 +81,13 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 void AppDelegate::applicationDidEnterBackground()
 {
-<<<<<<< HEAD
-=======
     CCDirector::sharedDirector()->stopAnimation();
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	CCDirector::sharedDirector()->pause();
 
 	SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
 
-<<<<<<< HEAD
 	((Level*) AppDelegate::screens->mScreens[0])->mPauseButton->onTouch(NULL, NULL); // TODO: Make sure that level scene is currently running.
-=======
+
 	#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
 	if(screens->mCurrentScreenIndex == 0)
@@ -114,18 +99,15 @@ void AppDelegate::applicationDidEnterBackground()
 	}
 
 	#endif
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 void AppDelegate::applicationWillEnterForeground()
 {
-<<<<<<< HEAD
 	CCDirector::sharedDirector()->resume();
-=======
+
     CCDirector::sharedDirector()->stopAnimation();
     CCDirector::sharedDirector()->resume();
     CCDirector::sharedDirector()->startAnimation();
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 }

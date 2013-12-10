@@ -5,20 +5,13 @@
 #include "BaseBullet.h"
 #include "BaseEnemy.h"
 
-<<<<<<< HEAD
-Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizontalFramesCount, int pVerticalFramesCount) :
-=======
 Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizontalFramesCount, int pVerticalFramesCount, bool pBroadcaster) :
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	BarEntity(pszFileName, pHorizontalFramesCount, pVerticalFramesCount)
 	{
 		this->setAsCollidable();
 
-<<<<<<< HEAD
-=======
 		this->mBroadcaster = pBroadcaster;
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		this->mAnimationTime = 0.1f;
 		this->mAnimationTimeElapsed = 0;
 
@@ -27,17 +20,11 @@ Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizon
 
 		this->mAnimationFrameSide = 0;
 
-<<<<<<< HEAD
-		this->mShockwave = new Entity("actors/shockwave.png");
-		this->mShockwave->setScale(0);
-
-		this->mShadow = new Entity("actors/shadow.png");
-=======
 		this->mShockwave = new Entity("shockwave.png");
 		this->mShockwave->setScale(0);
 
 		this->mShadow = new Entity("shadow.png");
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
+
 		this->mShadow->setIsShadow();
 
 		this->mEngineParticlesAnimationTime = 0.3f;
@@ -47,17 +34,10 @@ Hero::Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizon
 
 		this->mEngineParticles = new EntityManager(5, new EngineParticle());
 
-<<<<<<< HEAD
-		this->mBulletsTexture0 = new Texture("actors/bullet.png", 1, 1);
-		this->mBulletsTexture1 = new Texture("actors/bullet1.png", 1, 1);
-		this->mBulletsTexture2 = new Texture("actors/bullet2.png", 1, 1); 
-		this->mBulletsTexture3 = new Texture("actors/bullet3.png", 1, 1); 
-=======
 		this->mBulletsTexture0 = new Texture("bullet.png", 1, 1);
 		this->mBulletsTexture1 = new Texture("bullet1.png", 1, 1);
 		this->mBulletsTexture2 = new Texture("bullet2.png", 1, 1); 
-		this->mBulletsTexture3 = new Texture("bullet3.png", 1, 1); 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
+		this->mBulletsTexture3 = new Texture("bullet3.png", 1, 1);
 
 		this->reset();
 	}
@@ -119,14 +99,11 @@ void Hero::reset()
 	this->mShockwaveScale = 1.5f;
 	
 	this->mBulletsManager->changeTexture(this->mBulletsTexture0);
-<<<<<<< HEAD
-=======
 
 	this->mIsOutOfTop = false;
 	this->mFall = false;
 
 	this->setZOrder(5);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 void Hero::laser()
@@ -139,16 +116,11 @@ void Hero::laser()
 
 void Hero::startFly()
 {
-<<<<<<< HEAD
-	this->mIsFly = true;
-	
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/player_accelerating.ogg");
-=======
 	if(this->mIsFly) return;
 
 	this->mIsFly = true;
 	
-	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_PLAYER_ACCELERATING);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_PLAYER_ACCELERATING);
 
     #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
@@ -158,7 +130,6 @@ void Hero::startFly()
 	}
     
     #endif
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 void Hero::endFly()
@@ -167,8 +138,6 @@ void Hero::endFly()
 
 	this->mIsFly = false;
 	this->mFlyDownSpeed = 0;
-<<<<<<< HEAD
-=======
 
     #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
@@ -178,7 +147,6 @@ void Hero::endFly()
 	}
     
     #endif
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 }
 
 bool Hero::isCanFly()
@@ -195,8 +163,6 @@ bool Hero::startFlyDamage()
 	this->mIsFly = false;
 	this->mFlyDownSpeed = 20;
 
-<<<<<<< HEAD
-=======
     #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
 	if(AppDelegate::MULTIPLAYER && this->mBroadcaster)
@@ -206,7 +172,6 @@ bool Hero::startFlyDamage()
     
     #endif
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	return true;
 }
 
@@ -239,13 +204,8 @@ void Hero::follow(float pDeltaTime)
 		float x = this->mFollowCoordinateX / this->getSpeed(1);
 		float y = this->mFollowCoordinateY / this->getSpeed(1);
 
-<<<<<<< HEAD
-		x = this->getCenterX() - x * 0.015f;
-		y = this->getCenterY() - y * 0.015f;
-=======
-		x = this->getCenterX() - x * pDeltaTime;
-		y = this->getCenterY() - y * pDeltaTime;
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
+		x = this->getCenterX() - x * pDeltaTime / CCDirector::sharedDirector()->getContentScaleFactor();
+		y = this->getCenterY() - y * pDeltaTime / CCDirector::sharedDirector()->getContentScaleFactor();
 
 		this->setCenterPosition(x, y);
 	}
@@ -324,19 +284,11 @@ void Hero::fire(float pVectorX, float pVectorY)
 
 		if(this->mBulletsPower < 30)
 		{
-<<<<<<< HEAD
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/shot.ogg");
-		}
-		else
-		{
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/shot2.ogg");
-=======
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_SHOT);
 		}
 		else
 		{
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_SHOT2);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		}
 	}
 }
@@ -382,11 +334,7 @@ bool Hero::destroy()
 
 	this->mShadow->destroy();
 	
-<<<<<<< HEAD
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/player_death.ogg");
-=======
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_PLAYER_DEATH);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 	return false;
 }
@@ -494,8 +442,8 @@ void Hero::update(float pDeltaTime)
 		float speedX = x / sqrt(x * x + y * y) * this->mShootPadding;
 		float speedY = y / sqrt(x * x + y * y) * this->mShootPadding;
 
-		x = this->getCenterX() + speedX;
-		y = this->getCenterY() + speedY;
+		x = this->getCenterX() + speedX / CCDirector::sharedDirector()->getContentScaleFactor();
+		y = this->getCenterY() + speedY / CCDirector::sharedDirector()->getContentScaleFactor();
 
 		this->setCenterPosition(x, y);
 
@@ -554,7 +502,9 @@ void Hero::update(float pDeltaTime)
 
 	if(this->mIsFly)
 	{
-		this->addZ(120.0f * pDeltaTime);
+        Options::MAX_Z = 160.0f / CCDirector::sharedDirector()->getContentScaleFactor();
+        
+		this->addZ(120.0f * pDeltaTime / CCDirector::sharedDirector()->getContentScaleFactor());
 
 		this->mEngineParticlesAnimationTime = 0.1f;
 		this->mJetPackPower = this->mJetPackPower > 0 ? this->mJetPackPower - 1.0f : 0;
@@ -571,7 +521,7 @@ void Hero::update(float pDeltaTime)
 			this->mEngineParticlesAnimationTime = 1000.0f;
 
 			this->mFlyDownSpeed += 0.04f;
-			this->removeZ((this->mFlyDownSpeed * 60.0f) * pDeltaTime);
+			this->removeZ((this->mFlyDownSpeed * 60.0f) * pDeltaTime / CCDirector::sharedDirector()->getContentScaleFactor());
 		}
 		else
 		{
@@ -587,11 +537,7 @@ void Hero::update(float pDeltaTime)
 				this->mFlyDownSpeed = 0;
 				this->mShockwaveTimeElapsed = 0;
 			
-<<<<<<< HEAD
-				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Sound/jetpack_fail.ogg");
-=======
 				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(Options::SOUND_JETPACK_FAIL);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 			}
 		}
 	}
@@ -619,19 +565,11 @@ void Hero::update(int type, int level)
 				break;
 				case 2:
 					this->mBulletsManager->changeTexture(this->mBulletsTexture2);
-<<<<<<< HEAD
-					this->mBulletsPower = 30;
-				break;
-				case 3:
-					this->mBulletsManager->changeTexture(this->mBulletsTexture3);
-					this->mBulletsPower = 35;
-=======
 					this->mBulletsPower = 28;
 				break;
 				case 3:
 					this->mBulletsManager->changeTexture(this->mBulletsTexture3);
 					this->mBulletsPower = 31;
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				break;
 			}
 		break;
@@ -645,10 +583,6 @@ void Hero::update(int type, int level)
 				case 2:
 					this->mIsDoubleFire = true;
 					this->setMaxFireTime(0.35f);
-<<<<<<< HEAD
-					this->mBulletsPower -= 10;
-=======
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				break;
 				case 3:
 					this->setMaxFireTime(0.30f);
@@ -656,18 +590,10 @@ void Hero::update(int type, int level)
 				case 4:
 					this->mIsTripleFire = true;
 					this->setMaxFireTime(0.25f);
-<<<<<<< HEAD
-					this->mBulletsPower -= 10;
-=======
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				break;
 				case 5:
 					this->mIsQuadrupleFire = true;
 					this->setMaxFireTime(0.20f);
-<<<<<<< HEAD
-					this->mBulletsPower -= 10;
-=======
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 				break;
 			}
 		break;
@@ -765,11 +691,7 @@ void Hero::update(int type, int level)
 			}
 		break;
 
-<<<<<<< HEAD
-		case 7:
-=======
 		case 7: // Beam Ammo
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 			switch(level)
 			{
 				case 1:

@@ -1,11 +1,3 @@
-//
-//  NuclearPizzaWarAppController.h
-//  NuclearPizzaWar
-//
-//  Created by Igor Mats on 5/2/13.
-//  Copyright __MyCompanyName__ 2013. All rights reserved.
-//
-
 #import "RootViewController.h"
 
 
@@ -43,11 +35,16 @@
 // For ios6, use supportedInterfaceOrientations & shouldAutorotate instead
 - (NSUInteger) supportedInterfaceOrientations{
 #ifdef __IPHONE_6_0
-    return UIInterfaceOrientationMaskLandscape;
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 #endif
 }
 
 - (BOOL) shouldAutorotate {
+    return YES;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
     return YES;
 }
 

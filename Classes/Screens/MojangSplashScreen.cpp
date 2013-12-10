@@ -30,7 +30,7 @@ MojangSplashScreen::MojangSplashScreen()
 
 	// this->setRegisterAsTouchable(true);
 
-	this->mShowtime = 1.0f;
+	this->mShowtime = 2.0f;
 	this->mShowtimeElapsed = 0;
 }
 
@@ -54,7 +54,7 @@ void MojangSplashScreen::update(float pDeltaTime)
 	{
 		this->mShowtimeElapsed = 0;
 
-		AppDelegate::screens->set(1.0f, 0, 3);
+		AppDelegate::screens->set(1.0f, 0, 5);
 	}
 }
 

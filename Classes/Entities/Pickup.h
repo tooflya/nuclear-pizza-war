@@ -78,11 +78,9 @@ class Pickup : public Entity
 		// Methods
 		// ===========================================================
 
-<<<<<<< HEAD
 		void follow(float pVectorX, float pVectorY);
-=======
+
 		void follow(float pVectorX, float pVectorY, float pDeltaTime);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		void reset();
 

@@ -39,12 +39,10 @@
 #include "SpiderExplosion.cpp"
 #include "Spider.cpp"
 #include "LongExplosion.cpp"
-<<<<<<< HEAD
-=======
 #include "Diamond.cpp"
 #include "MineEnemy.cpp"
 #include "MojangSplashScreen.cpp"
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
+#include "TooflyaSplashScreen.cpp"
 #include "platform/android/jni/JniHelper.h"
 #include <jni.h>
 #include <android/log.h>
@@ -81,7 +79,7 @@ void Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeInit(JNIEnv*  env, jobject thi
         
         CCShaderCache::sharedShaderCache()->reloadDefaultShaders();
         CCTextureCache::reloadAllTextures();
-        CCNotificationCenter::sharedNotificationCenter()->postNotification(EVNET_COME_TO_FOREGROUND, NULL);
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_COME_TO_FOREGROUND, NULL);
         CCDirector::sharedDirector()->setGLDefaultValues(); 
     }
 }

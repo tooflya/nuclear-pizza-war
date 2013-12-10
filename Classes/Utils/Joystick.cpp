@@ -20,15 +20,10 @@
 // ===========================================================
 
 Joystick::Joystick() :
-<<<<<<< HEAD
-	Entity("gui/onscreen_control_base.png")
-	{
-		this->mButton = new Entity("gui/onscreen_control_knob.png");
-=======
 	Entity("onscreen_control_base.png")
 	{
 		this->mButton = new Entity("onscreen_control_knob.png");
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
+
 		this->mButton->create()->setCenterPosition(this->getWidth() / 2, this->getHeight() / 2);
 
 		this->addChild(this->mButton);

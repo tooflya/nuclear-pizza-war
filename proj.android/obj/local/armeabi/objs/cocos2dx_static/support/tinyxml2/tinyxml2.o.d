@@ -1,32 +1,47 @@
 obj/local/armeabi/objs/cocos2dx_static/support/tinyxml2/tinyxml2.o: \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/support/tinyxml2/tinyxml2.cpp \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/support/tinyxml2/tinyxml2.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cctype \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/climits \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cstdio \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cstdlib \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cstring \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cstdarg \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/new \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cstddef
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/support/tinyxml2/tinyxml2.cpp \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/support/tinyxml2/tinyxml2.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformMacros.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccConfig.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCPlatformDefine.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/log.h \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cctype \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/climits \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdio \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdlib \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstring \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdarg \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/new \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstddef
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/support/tinyxml2/tinyxml2.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/support/tinyxml2/tinyxml2.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cctype:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformMacros.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/climits:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccConfig.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cstdio:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cstdlib:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCPlatformDefine.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cstring:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/log.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cstdarg:
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cctype:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/new:
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/climits:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/cstddef:
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdio:
+
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdlib:
+
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstring:
+
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdarg:
+
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/new:
+
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstddef:

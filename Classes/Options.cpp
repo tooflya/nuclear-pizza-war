@@ -37,8 +37,6 @@ bool Options::SOUND_ENABLE = false;
 
 bool Options::UNPUCKING = true;
 
-<<<<<<< HEAD
-=======
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
 const char* Options::SPECIAL_FONT = "Franchise";
@@ -117,7 +115,6 @@ const char* Options::SOUND_UPGRADE = "Sound/upgrade.ogg";
 
 #endif
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 // ===========================================================
 // Fields
 // ===========================================================

@@ -14,10 +14,7 @@
 #include "SpiderExplosion.h"
 #include "FollowEnemy.h"
 #include "FiredEnemy.h"
-<<<<<<< HEAD
-=======
 #include "MineEnemy.h"
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 #include "CastleEnemy.h"
 #include "BigEnemy.h"
 #include "Pickup.h"
@@ -35,10 +32,7 @@
 #include "WealthManager.h"
 #include "Joystick.h"
 #include "Spider.h"
-<<<<<<< HEAD
-=======
 #include "Diamond.h"
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 class UpgradeManager;
 
@@ -82,8 +76,6 @@ class Level : public Screen
 		// Constants
 		// ===========================================================
 
-<<<<<<< HEAD
-=======
 		static const char* LABELS_FONT;
 
 		static const char* PREPARE_FOR_BATTLE_TEXT;
@@ -102,7 +94,6 @@ class Level : public Screen
 		static const char* DEATH_TEXT;
 		static const char* ALTERLIFE_TEXT;
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		// ===========================================================
 		// Fields
 		// ===========================================================
@@ -160,16 +151,7 @@ class Level : public Screen
 		int mCurrentLevel;
 		int mMaxSpidersCount;
 
-<<<<<<< HEAD
 		int mTextSeconds;
-
-		EntityManager* mEnemies1;
-		EntityManager* mEnemies2;
-		EntityManager* mEnemies3;
-		EntityManager* mEnemies4;
-
-=======
-        int mTextSeconds;
 
 		EntityManager* mEnemies1;
 		EntityManager* mEnemies2;
@@ -177,7 +159,6 @@ class Level : public Screen
         EntityManager* mEnemies4;
         EntityManager* mEnemies5;
     
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		EntityManager* mEnemyBullets;
 
 		EntityManager* mSlices;
@@ -191,14 +172,10 @@ class Level : public Screen
 		CCLabelTTF* mPrepareToBattle;
 		CCLabelTTF* mLevelName;
 		CCLabelTTF* mWealthText;
-<<<<<<< HEAD
-		CCLabelTTF* mLowHealthText;
-		CCLabelTTF* mLevelStartText;
-=======
+
         CCLabelTTF* mLowHealthText;
         CCLabelTTF* mLevelStartText;
         CCLabelTTF* mDiamondCounterText;
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		Entity* mBackground;
 		Entity* mLaser1;
@@ -258,11 +235,10 @@ class Level : public Screen
 
 		static int* COINS;
 
-<<<<<<< HEAD
 		// ===========================================================
 		// Fields
 		// ===========================================================
-=======
+
 		float t;
 
 		// ===========================================================
@@ -270,7 +246,6 @@ class Level : public Screen
         // ===========================================================
     
         EntityManager* mDiamonds;
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		Entity* mPauseButton;
 
@@ -287,10 +262,7 @@ class Level : public Screen
 		WealthManager* mWealth;
 
 		Hero* mHero;
-<<<<<<< HEAD
-=======
 		Hero* mHero2;
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		bool mPause;
 
@@ -304,18 +276,14 @@ class Level : public Screen
 		// Methods
 		// ===========================================================
 
-<<<<<<< HEAD
 		void updateSpiders();
-=======
+
 		static Level* mObj;
 		
 		static void nativeOnGooglePlusRealtimeMessageReceived(int param1, int param2, int param3, int param4);
 		void onGooglePlusRealtimeMessageReceived(int param1, int param2, int param3, int param4);
 
-		void updateSpiders();
-
 		void configure();
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		
 		// ===========================================================
 		// Virtual Methods
@@ -325,14 +293,11 @@ class Level : public Screen
 		void ccTouchMoved(CCTouch* touch, CCEvent* event);
 		void ccTouchEnded(CCTouch* touch, CCEvent* event);
 
-<<<<<<< HEAD
-   		void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
+   		/*void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
    		void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
    		void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-    	void ccTouchesCancelled(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
+    	void ccTouchesCancelled(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);*/
 
-=======
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 		virtual	void update(float pDeltaTime);
 		virtual void draw();
 

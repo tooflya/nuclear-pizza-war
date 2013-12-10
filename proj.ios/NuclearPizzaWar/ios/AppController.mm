@@ -13,6 +13,9 @@
 
 #import "RootViewController.h"
 
+//#import <MPMoviePlayerViewController.h>
+#import <MediaPlayer/MediaPlayer.h>
+
 @implementation AppController
 
 @synthesize window;
@@ -25,9 +28,9 @@
 static AppDelegate s_sharedApplication;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+    
     // Override point for customization after application launch.
-
+    
     // Add the view controller's view to the window and display.
     window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     EAGLView *__glView = [EAGLView viewWithFrame: [window bounds]
@@ -36,13 +39,16 @@ static AppDelegate s_sharedApplication;
                               preserveBackbuffer: NO
                                       sharegroup: nil
                                    multiSampling: NO
-                                 numberOfSamples:0 ];
-
+                                 numberOfSamples: 0 ];
+    
+    UIApplication* app = [UIApplication sharedApplication];
+    app.idleTimerDisabled = YES;
+    
     // Use RootViewController manage EAGLView
     viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
     viewController.wantsFullScreenLayout = YES;
     viewController.view = __glView;
-
+    
     // Set RootViewController to window
     if ( [[UIDevice currentDevice].systemVersion floatValue] < 6.0)
     {
@@ -56,11 +62,12 @@ static AppDelegate s_sharedApplication;
     }
     
     [window makeKeyAndVisible];
-
+    
     [[UIApplication sharedApplication] setStatusBarHidden: YES];
-
+    
     [__glView setMultipleTouchEnabled:YES];
     
+    //[self PlayVideo:0 fullscreen:1 file:@"a" fileExtension:@"m4v"];
     cocos2d::CCApplication::sharedApplication()->run();
     return YES;
 }
@@ -111,7 +118,7 @@ static AppDelegate s_sharedApplication;
     /*
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
-     cocos2d::CCDirector::sharedDirector()->purgeCachedData();
+    cocos2d::CCDirector::sharedDirector()->purgeCachedData();
 }
 
 
@@ -119,6 +126,107 @@ static AppDelegate s_sharedApplication;
     [super dealloc];
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+MPMoviePlayerViewController *playerViewController=NULL;
+int g_iPlayVideoState=0;
+
+- (void)PlayVideo:(int)iStateAfterPlay fullscreen:(int)iFullScreen file:(NSString*)strFilennameNoExtension fileExtension:(NSString*)strExtension
+{
+    NSLog(@"PlayVideo start");
+    
+    NSString *url = [[NSBundle mainBundle]
+                     pathForResource:@"intro2"
+                     ofType:@"mp4"];
+    
+    MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:url]];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(movieFinishedCallback:)
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
+    
+    [player setFullscreen:YES animated:YES];
+    [player setControlStyle:MPMovieControlStyleNone];
+    [player setScalingMode:MPMovieScalingModeAspectFill];
+    [window addSubview:player.view];
+    [window bringSubviewToFront:player.view];
+    [player setFullscreen:YES animated:YES];
+    [player setControlStyle:MPMovieControlStyleNone];
+    
+    player.view.userInteractionEnabled = NO;
+    
+    [player play];
+    
+    g_iPlayVideoState = 1;
+    
+    NSLog(@"PlayVideo done");
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) movieFinishedCallback:(NSNotification*) aNotification
+{
+    NSLog(@"movieFinishedCallback");
+    MPMoviePlayerController *player = [aNotification object];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doneButtonClicked) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:player];
+    
+    //[player.view removeFromSuperview];
+    [player autorelease];
+    g_iPlayVideoState = 0;
+    
+    [window setRootViewController:viewController];
+    
+    NSLog(@"movieFinishedCallback done");
+    
+    // Override point for customization after application launch.
+    
+    // Add the view controller's view to the window and display.
+    window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
+    EAGLView *__glView = [EAGLView viewWithFrame: [window bounds]
+                                     pixelFormat: kEAGLColorFormatRGBA8
+                                     depthFormat: GL_DEPTH_COMPONENT16
+                              preserveBackbuffer: NO
+                                      sharegroup: nil
+                                   multiSampling: NO
+                                 numberOfSamples:0 ];
+    
+    // Use RootViewController manage EAGLView
+    viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
+    viewController.wantsFullScreenLayout = YES;
+    viewController.view = __glView;
+    
+    // Set RootViewController to window
+    if ( [[UIDevice currentDevice].systemVersion floatValue] < 6.0)
+    {
+        // warning: addSubView doesn't work on iOS6
+        [window addSubview: viewController.view];
+    }
+    else
+    {
+        // use this method on ios6
+        [window setRootViewController:viewController];
+    }
+    
+    [window makeKeyAndVisible];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden: YES];
+    
+    [__glView setMultipleTouchEnabled:NO];
+    
+    cocos2d::CCApplication::sharedApplication()->run();
+    
+}
+
+#import <sys/utsname.h>
+
+NSString* machineName()
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+}
 
 @end
 

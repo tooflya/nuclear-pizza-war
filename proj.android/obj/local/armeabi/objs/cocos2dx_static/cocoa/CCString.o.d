@@ -1,113 +1,116 @@
 obj/local/armeabi/objs/cocos2dx_static/cocoa/CCString.o: \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCString.cpp \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCString.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/string.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/malloc.h \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/string \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/functional \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCObject.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformMacros.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccConfig.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/android/CCPlatformDefine.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/log.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCFileUtils.h \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/vector \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/map \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformMacros.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccTypes.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCGeometry.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/android/CCGL.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccTypeInfo.h \
- /home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/typeinfo \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccMacros.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCCommon.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/android/CCStdC.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/math.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdio.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccConfig.h
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCString.cpp \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCString.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/string.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/api-level.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/malloc.h \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/string \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/functional \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCObject.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCDataVisitor.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformMacros.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccConfig.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCPlatformDefine.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/log.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCFileUtils.h \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/vector \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/map \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformMacros.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccTypes.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCGeometry.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/math.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCGL.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccTypeInfo.h \
+ /Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/typeinfo \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccMacros.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCCommon.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCStdC.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccConfig.h
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCString.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCString.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/string.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/string.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/malloc.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/api-level.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/string:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/malloc.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/functional:
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/string:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCObject.h:
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/functional:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformMacros.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCObject.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccConfig.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCDataVisitor.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformMacros.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccConfig.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/android/CCPlatformDefine.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/log.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCFileUtils.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCPlatformDefine.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/vector:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/log.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/map:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCFileUtils.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformMacros.h:
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/vector:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccTypes.h:
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/map:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/cocoa/CCGeometry.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformMacros.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/android/CCGL.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccTypes.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/cocoa/CCGeometry.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/math.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCGL.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccTypeInfo.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h:
 
-/home/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/include/4.6.3/typeinfo:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccMacros.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCCommon.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccTypeInfo.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/android/CCStdC.h:
+/Users/igor/.android/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/typeinfo:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/math.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccMacros.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdio.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCCommon.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/android/CCStdC.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/include/ccConfig.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h:
+
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/include/ccConfig.h:

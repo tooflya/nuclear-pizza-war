@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tooflya.nuclearpizzawar"
-    android:versionCode="1"
-    android:versionName="1.0.1" >
+    android:versionCode="1028"
+    android:versionName="1.1.4" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -10,7 +10,6 @@
 
     <uses-feature android:glEsVersion="0x00020000" />
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -22,6 +21,7 @@
 
     <application
         android:allowBackup="true"
+        android:allowClearUserData="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/icon"
         android:installLocation="auto"
@@ -38,6 +38,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/app_id" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="4030500" />
 
         <!-- AdMobActivity definition -->
         <activity

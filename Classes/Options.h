@@ -87,8 +87,6 @@ class Options
 		static bool SOUND_ENABLE;
 
 		static bool UNPUCKING;
-<<<<<<< HEAD
-=======
     
         static const char* SPECIAL_FONT;
     
@@ -122,7 +120,6 @@ class Options
         static const char* SOUND_SPIDER_TALK;
         static const char* SOUND_START_LEVEL;
         static const char* SOUND_UPGRADE;
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		// ===========================================================
 		// Fields

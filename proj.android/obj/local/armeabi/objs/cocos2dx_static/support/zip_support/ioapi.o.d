@@ -1,77 +1,80 @@
 obj/local/armeabi/objs/cocos2dx_static/support/zip_support/ioapi.o: \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/support/zip_support/ioapi.cpp \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/support/zip_support/ioapi.h \
- /home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdio.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/_types.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/machine/_types.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/types.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdint.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/posix_types.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/stddef.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/compiler.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/asm/posix_types.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/asm/types.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/types.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/machine/kernel.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/string.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/malloc.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/zlib.h \
- /home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/zconf.h
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/support/zip_support/ioapi.cpp \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/support/zip_support/ioapi.h \
+ /Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdio.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/api-level.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/types.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdint.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/_types.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/machine/_types.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/posix_types.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/stddef.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/compiler.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/asm/posix_types.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/asm/types.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/types.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/machine/kernel.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/string.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/malloc.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/zlib.h \
+ /Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/zconf.h
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/support/zip_support/ioapi.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/support/zip_support/ioapi.h:
 
-/home/igor/Development/nuclear-pizza-war/proj.android/../../cocos2dx/platform/CCPlatformConfig.h:
+/Users/igor/Development/cocos2d-x-2.1.4/projects/nuclear-pizza-war/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdio.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdio.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/_types.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/android/api-level.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/machine/_types.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/types.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/types.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdint.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdint.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/_types.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/posix_types.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/machine/_types.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/stddef.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/posix_types.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/compiler.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/stddef.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/asm/posix_types.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/compiler.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/asm/types.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/asm/posix_types.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/types.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/asm/types.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/machine/kernel.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/linux/types.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/machine/kernel.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/string.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/stdlib.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/malloc.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/string.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/malloc.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/alloca.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/strings.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/zlib.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/memory.h:
 
-/home/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/zconf.h:
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/zlib.h:
+
+/Users/igor/.android/ndk/platforms/android-14/arch-arm/usr/include/zconf.h:

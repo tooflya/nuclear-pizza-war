@@ -20,11 +20,7 @@ class Hero : public BarEntity
 	{
 		public:
 		EngineParticle() :
-<<<<<<< HEAD
-			Entity("particles/engine.png", 4, 1)
-=======
 			Entity("engine.png", 4, 1)
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 			{
 			}
 
@@ -102,11 +98,8 @@ class Hero : public BarEntity
 		Texture* mBulletsTexture2;
 		Texture* mBulletsTexture3;
 
-<<<<<<< HEAD
-=======
 		bool mBroadcaster;
 
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 	public:
 		float mShootVectorX;
 		float mShootVectorY;
@@ -131,11 +124,8 @@ class Hero : public BarEntity
 
 		bool mIsShouldFire;
 
-<<<<<<< HEAD
 		Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizontalFramesCount, int pVerticalFramesCount);
-=======
 		Hero(const char* pszFileName, EntityManager* pBulletsManager, int pHorizontalFramesCount, int pVerticalFramesCount, bool pBeroadcaster);
->>>>>>> f9f27125dceb14026510c91133d98969d0d7d29b
 
 		void reset();
 
